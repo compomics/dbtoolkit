@@ -1,0 +1,212 @@
+>Test Protein. (1-3)
+KLM
+>Test Protein. (1-4)
+KLMI
+>Test Protein. (1-5)
+KLMIR
+>Test Protein. (2-3)
+LM
+>Test Protein. (2-4)
+LMI
+>Test Protein. (2-5)
+LMIR
+>Test Protein. (3-3)
+M
+>Test Protein. (3-4)
+MI
+>Test Protein. (3-5)
+MIR
+>Test Protein 2. (1-5)
+GHKLM
+>Test Protein 2. (1-6)
+GHKLMI
+>Test Protein 2. (1-7)
+GHKLMIR
+>Test Protein 2. (1-8)
+GHKLMIRT
+>Test Protein 2. (1-9)
+GHKLMIRTV
+>Test Protein 2. (1-10)
+GHKLMIRTVF
+>Test Protein 2. (1-11)
+GHKLMIRTVFH
+>Test Protein 2. (2-5)
+HKLM
+>Test Protein 2. (2-6)
+HKLMI
+>Test Protein 2. (2-7)
+HKLMIR
+>Test Protein 2. (2-8)
+HKLMIRT
+>Test Protein 2. (2-9)
+HKLMIRTV
+>Test Protein 2. (2-10)
+HKLMIRTVF
+>Test Protein 2. (2-11)
+HKLMIRTVFH
+>Test Protein 2. (3-5)
+KLM
+>Test Protein 2. (3-6)
+KLMI
+>Test Protein 2. (3-7)
+KLMIR
+>Test Protein 2. (3-8)
+KLMIRT
+>Test Protein 2. (3-9)
+KLMIRTV
+>Test Protein 2. (3-10)
+KLMIRTVF
+>Test Protein 2. (3-11)
+KLMIRTVFH
+>Test Protein 2. (4-5)
+LM
+>Test Protein 2. (4-6)
+LMI
+>Test Protein 2. (4-7)
+LMIR
+>Test Protein 2. (4-8)
+LMIRT
+>Test Protein 2. (4-9)
+LMIRTV
+>Test Protein 2. (4-10)
+LMIRTVF
+>Test Protein 2. (4-11)
+LMIRTVFH
+>Test Protein 2. (5-5)
+M
+>Test Protein 2. (5-6)
+MI
+>Test Protein 2. (5-7)
+MIR
+>Test Protein 2. (5-8)
+MIRT
+>Test Protein 2. (5-9)
+MIRTV
+>Test Protein 2. (5-10)
+MIRTVF
+>Test Protein 2. (5-11)
+MIRTVFH
+>Test Protein 3. (4-5)
+LM
+>Test Protein 3. (5-6)
+MI
+>(*NE*) Test protein 4 (1-8)
+LENNARTM
+>(*NE*) Test protein 4 (1-9)
+LENNARTMA
+>(*FE*) Test protein 4 (1-10)
+LENNARTMAR
+>(*NE*) Test protein 4 (1-11)
+LENNARTMART
+>(*NE*) Test protein 4 (1-12)
+LENNARTMARTE
+>(*NE*) Test protein 4 (1-13)
+LENNARTMARTEN
+>(*FE*) Test protein 4 (1-14)
+LENNARTMARTENS
+>(*EE*) Test protein 4 (2-8)
+ENNARTM
+>(*EE*) Test protein 4 (2-9)
+ENNARTMA
+>(*CE*) Test protein 4 (2-10)
+ENNARTMAR
+>(*EE*) Test protein 4 (2-11)
+ENNARTMART
+>(*EE*) Test protein 4 (2-12)
+ENNARTMARTE
+>(*EE*) Test protein 4 (2-13)
+ENNARTMARTEN
+>(*CE*) Test protein 4 (2-14)
+ENNARTMARTENS
+>(*EE*) Test protein 4 (3-8)
+NNARTM
+>(*EE*) Test protein 4 (3-9)
+NNARTMA
+>(*CE*) Test protein 4 (3-10)
+NNARTMAR
+>(*EE*) Test protein 4 (3-11)
+NNARTMART
+>(*EE*) Test protein 4 (3-12)
+NNARTMARTE
+>(*EE*) Test protein 4 (3-13)
+NNARTMARTEN
+>(*CE*) Test protein 4 (3-14)
+NNARTMARTENS
+>(*EE*) Test protein 4 (4-8)
+NARTM
+>(*EE*) Test protein 4 (4-9)
+NARTMA
+>(*CE*) Test protein 4 (4-10)
+NARTMAR
+>(*EE*) Test protein 4 (4-11)
+NARTMART
+>(*EE*) Test protein 4 (4-12)
+NARTMARTE
+>(*EE*) Test protein 4 (4-13)
+NARTMARTEN
+>(*CE*) Test protein 4 (4-14)
+NARTMARTENS
+>(*EE*) Test protein 4 (5-8)
+ARTM
+>(*EE*) Test protein 4 (5-9)
+ARTMA
+>(*CE*) Test protein 4 (5-10)
+ARTMAR
+>(*EE*) Test protein 4 (5-11)
+ARTMART
+>(*EE*) Test protein 4 (5-12)
+ARTMARTE
+>(*EE*) Test protein 4 (5-13)
+ARTMARTEN
+>(*CE*) Test protein 4 (5-14)
+ARTMARTENS
+>(*EE*) Test protein 4 (6-8)
+RTM
+>(*EE*) Test protein 4 (6-9)
+RTMA
+>(*CE*) Test protein 4 (6-10)
+RTMAR
+>(*EE*) Test protein 4 (6-11)
+RTMART
+>(*EE*) Test protein 4 (6-12)
+RTMARTE
+>(*EE*) Test protein 4 (6-13)
+RTMARTEN
+>(*CE*) Test protein 4 (6-14)
+RTMARTENS
+>(*NE*) Test protein 4 (7-8)
+TM
+>(*NE*) Test protein 4 (7-9)
+TMA
+>(*FE*) Test protein 4 (7-10)
+TMAR
+>(*NE*) Test protein 4 (7-11)
+TMART
+>(*NE*) Test protein 4 (7-12)
+TMARTE
+>(*NE*) Test protein 4 (7-13)
+TMARTEN
+>(*FE*) Test protein 4 (7-14)
+TMARTENS
+>(*EE*) Test protein 4 (8-8)
+M
+>(*EE*) Test protein 4 (8-9)
+MA
+>(*CE*) Test protein 4 (8-10)
+MAR
+>(*EE*) Test protein 4 (8-11)
+MART
+>(*EE*) Test protein 4 (8-12)
+MARTE
+>(*EE*) Test protein 4 (8-13)
+MARTEN
+>(*CE*) Test protein 4 (8-14)
+MARTENS
+>(*NE*) Test protein 5 (7-8)
+TM
+>(*NE*) Test protein 5 (7-9)
+TMA
+>(*EE*) Test protein 5 (8-9)
+MA
+>(*CE*) Test protein 5 (8-10)
+MAR

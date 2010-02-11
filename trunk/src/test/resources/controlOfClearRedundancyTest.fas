@@ -1,0 +1,6 @@
+>sw|O54692|TestEntry SwissProt (we should see, two affixes).^Agi|55437623^Agi|6767867
+LENNARTMA
+>gi|55437623|sw|O54692|ZW10_MOUSE TestEntry NCBI + SwissProt (we should see, one affix)^Agi|O54692
+KRISGEVAERT
+>gi|67678678678|ref|XXXXXX| Something completely different (we should see, no affix).
+LENNARTGEVAERT
