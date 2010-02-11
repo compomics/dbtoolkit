@@ -1,0 +1,12 @@
+>sw|O54692|TestEntry SwissProt (we should see, two affixes).
+L2NGA1TMA
+>gi|55437623|sp|O54692|ZW10_MOUSE TestEntry NCBI + SwissProt (we shouldn't see).
+L2NGA1TMA
+>gi|6767867|ref|6567565| Something completely different (we shouldn't see).
+L2NGA1TMA
+>gi|55437623|sw|O54692|ZW10_MOUSE TestEntry NCBI + SwissProt (we should see, one affix)
+K1ISG2VA21T
+>gi|O54692|gb|565467567|ZW10_MOUSE Something completely different (we shouldn't see).
+K1ISG2VA21T
+>gi|67678678678|ref|XXXXXX| Something completely different (we should see, no affix).
+L2NGA1TG2VA21T

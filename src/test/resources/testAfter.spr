@@ -1,0 +1,465 @@
+ID   ZW10_MOUSE     STANDARD;      PRT;   258 AA.
+AC   O54692;
+DT   16-OCT-2001 (Rel. 40, Created)
+DT   16-OCT-2001 (Rel. 40, Last sequence update)
+DT   16-OCT-2001 (Rel. 40, Last annotation update)
+DE   Centromere/kinetochore protein zw10 homolog (Fragment).
+GN   ZW10.
+OS   Mus musculus (Mouse).
+OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+OC   Mammalia; Eutheria; Rodentia; Sciurognathi; Muridae; Murinae; Mus.
+OX   NCBI_TaxID=10090;
+RN   [1]
+RP   SEQUENCE FROM N.A.
+RX   MEDLINE=97444363; PubMed=9298984;
+RA   Starr D.A., Williams B.C., Li Z., Etemad-Moghadam B., Dawe R.K.,
+RA   Goldberg M.L.;
+RT   "Conservation of the centromere/kinetochore protein ZW10.";
+RL   J. Cell Biol. 138:1289-1301(1997).
+CC   -!- FUNCTION: MAY BE REQUIRED FOR ACCURATE CHROMOSOME SEGREGATION.
+CC   -!- SUBCELLULAR LOCATION: IN PROMETAPHASE, ASSOCIATED WITH THE
+CC       KINETOCHORE. AT METAPHASE, MOSTLY ASSOCIATED WITH THE SPINDLE. IN
+CC       EARLY ANAPHASE, FOUND IN THE VICINITY OF THE CENTROMERE. AS
+CC       ANAPHASE PROGRESSES, DISPERSED IN THE CYTOPLASM (BY SIMILARITY).
+CC   -!- SIMILARITY: BELONGS TO THE ZW10 FAMILY.
+CC   --------------------------------------------------------------------------
+CC   This SWISS-PROT entry is copyright. It is produced through a collaboration
+CC   between  the Swiss Institute of Bioinformatics  and the  EMBL outstation -
+CC   the European Bioinformatics Institute.  There are no  restrictions on  its
+CC   use  by  non-profit  institutions as long  as its content  is  in  no  way
+CC   modified and this statement is not removed.  Usage  by  and for commercial
+CC   entities requires a license agreement (See http://www.isb-sib.ch/announce/
+CC   or send an email to license@isb-sib.ch).
+CC   --------------------------------------------------------------------------
+DR   EMBL; AF003951; AAB88256.1; -.
+DR   MGD; MGI:1349478; Zw10.
+PE   4: Predicted;
+KW   Mitosis; Meiosis; Cell cycle; Nuclear protein.
+FT   NON_TER       1      1
+SQ   SEQUENCE   258 AA;  29149 MW;  1C498DA50E145D51 CRC64;
+     VVPTYHKENL RKLPQLAAIH HNNCMYIAHH LLTLGHQFRL RLAPILCDGT TTFVDLVPGF
+     RRLGTECFLA QMQAQKGELL ERLSSARSFA NMDDEENYSA ASKAVRQVLH QLRRLGIVWQ
+     DVLPVNIYCK AMGTLLNTAI AEMMSRITAL EDISTEDGDR LYSLCKTVMD EGPQVFAPLS
+     DENKNKKYQE EVPVYVSKWM PFKELMIMLQ ASLQEIGDRW ADGKGPLATA FPSSEVKALI
+     RALFQNTERR AAALAKIK
+]]
+ID   ZXDA_HUMAN     STANDARD;      PRT;   799 AA.
+AC   P98168; Q9UJP7;
+DT   01-OCT-1996 (Rel. 34, Created)
+DT   16-OCT-2001 (Rel. 40, Last sequence update)
+DT   16-OCT-2001 (Rel. 40, Last annotation update)
+DE   Zinc finger X-linked protein ZXDA.
+GN   ZXDA.
+OS   Homo sapiens (Human).
+OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+OC   Mammalia; Eutheria; Primates; Catarrhini; Hominidae; Homo.
+OX   NCBI_TaxID=9606;
+RN   [1]
+RP   SEQUENCE FROM N.A.
+RA   Bird C.;
+RL   Submitted (JUN-1999) to the EMBL/GenBank/DDBJ databases.
+RN   [2]
+RP   SEQUENCE OF 303-759 FROM N.A.
+RC   TISSUE=Brain;
+RX   MEDLINE=94093547; PubMed=8268913;
+RA   Greig G.M., Sharp C.B., Carrel L., Willard H.F.;
+RT   "Duplicated zinc finger protein genes on the proximal short arm of
+RT   the human X chromosome: isolation, characterization and
+RT   X-inactivation studies.";
+RL   Hum. Mol. Genet. 2:1611-1618(1993).
+CC   -!- SUBCELLULAR LOCATION: NUCLEAR (POTENTIAL).
+CC   -!- TISSUE SPECIFICITY: UBIQUITOUS.
+CC   --------------------------------------------------------------------------
+CC   This SWISS-PROT entry is copyright. It is produced through a collaboration
+CC   between  the Swiss Institute of Bioinformatics  and the  EMBL outstation -
+CC   the European Bioinformatics Institute.  There are no  restrictions on  its
+CC   use  by  non-profit  institutions as long  as its content  is  in  no  way
+CC   modified and this statement is not removed.  Usage  by  and for commercial
+CC   entities requires a license agreement (See http://www.isb-sib.ch/announce/
+CC   or send an email to license@isb-sib.ch).
+CC   --------------------------------------------------------------------------
+DR   EMBL; AL034396; CAB46717.1; -.
+DR   EMBL; L14787; AAC37521.1; -.
+DR   HSSP; P08047; 1SP2.
+DR   MIM; 300235; -.
+DR   InterPro; IPR000822; Znf-C2H2.
+DR   Pfam; PF00096; zf-C2H2; 9.
+DR   SMART; SM00355; ZnF_C2H2; 10.
+DR   PROSITE; PS00028; ZINC_FINGER_C2H2_1; 10.
+DR   PROSITE; PS50157; ZINC_FINGER_C2H2_2; 10.
+KW   Zinc-finger; Metal-binding; DNA-binding; Repeat; Nuclear protein.
+FT   DOMAIN       15     20       POLY-GLY.
+FT   DOMAIN      267    568       ZINC FINGERS.
+FT   ZN_FING     267    291       C2H2-TYPE.
+FT   ZN_FING     300    324       C2H2-TYPE.
+FT   ZN_FING     330    354       C2H2-TYPE.
+FT   ZN_FING     360    382       C2H2-TYPE.
+FT   ZN_FING     389    413       C2H2-TYPE.
+FT   ZN_FING     420    444       C2H2-TYPE.
+FT   ZN_FING     450    474       C2H2-TYPE.
+FT   ZN_FING     480    504       C2H2-TYPE.
+FT   ZN_FING     510    534       C2H2-TYPE.
+FT   ZN_FING     543    568       C2H2-TYPE.
+FT   CONFLICT    753    759       AEWSVHP -> SGVERTS (IN REF. 2).
+SQ   SEQUENCE   799 AA;  84770 MW;  112BF6C6D0CAA670 CRC64;
+     MEIPKLLPAR GTLQGGGGGG IPAGGGRVHR GPDSPAGQVP TRRLLLPRGP QDGGPGRRRE
+     EASTASRGPG PSLFAPRPHQ PSGGGDDFFL VLLDPVGGDV ETAGSGQAAG PVLREEAKAG
+     PGLQGDESGA NPAGCSAQGP HCLSAVPTPA PISAPGPAAA FAGTVTIHNQ DLLLRFENGV
+     LTLATPPPHA WEPGAAPAQQ PRCLIAPQAG FPQAAHPGDC PELRSDLLLA EPAEPAPAPA
+     PQEEAEGLAA ALGPRGLLGS GPGVVLYLCP EALCGQTFAK KHQLKMHLLT HSSSQGQRPF
+     KCPLGGCGWT FTTSYKLKRH LQSHDKLRPF GCPAEGCGKS FTTVYNLKAH MKGHEQENSF
+     KCEVCEESFP TQAKLGAHQR SHFEPERPYQ CAFSGCKKTF ITVSALFSHN RAHFREQELF
+     SCSFPGCSKQ YDKACRLKIH LRSHTGERPF LCDFDGCGWN FTSMSKLLRH KRKHDDDRRF
+     MCPVEGCGKS FTRAEHLKGH SITHLGTKPF VCPVAGCCAR FSARSSLYIH SKKHLQDVDT
+     WKSRCPISSC NKLFTSKHSM KTHMVKRHKV GQDLLAQLEA ANSLTPSSEL TSQRQNDLSD
+     AEIVSLFSDV PDSTSAALLD TALVNSGILT IDVASVSSTL AGHLPANNNN SVGQAVDPPS
+     LMATSDPPQS LDTSLFFGTA ATGFQQSSLN MDEVSSVSVG PLGSLDSLAM KNSSPEPQAL
+     TPSSKLTVDT DTLTPSSTLC ENSVSELLTP AKAEWSVHPN SDFFGQEGET QFGFPNAAGN
+     HGSQKERNLI TVTGSSFLV
+]]
+ID   ZXDB_HUMAN     STANDARD;      PRT;   803 AA.
+AC   P98169; Q9UBB3;
+DT   01-OCT-1996 (Rel. 34, Created)
+DT   16-OCT-2001 (Rel. 40, Last sequence update)
+DT   16-OCT-2001 (Rel. 40, Last annotation update)
+DE   Zinc finger X-linked protein ZXDB.
+GN   ZXDB.
+OS   Homo sapiens (Human).
+OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+OC   Mammalia; Eutheria; Primates; Catarrhini; Hominidae; Homo.
+OX   NCBI_TaxID=9606;
+RN   [1]
+RP   SEQUENCE FROM N.A.
+RA   Wray P.;
+RL   Submitted (MAR-1999) to the EMBL/GenBank/DDBJ databases.
+RN   [2]
+RP   SEQUENCE OF 307-709 FROM N.A.
+RC   TISSUE=Brain;
+RX   MEDLINE=94093547; PubMed=8268913;
+RA   Greig G.M., Sharp C.B., Carrel L., Willard H.F.;
+RT   "Duplicated zinc finger protein genes on the proximal short arm of
+RT   the human X chromosome: isolation, characterization and
+RT   X-inactivation studies.";
+RL   Hum. Mol. Genet. 2:1611-1618(1993).
+CC   -!- SUBCELLULAR LOCATION: NUCLEAR (POTENTIAL).
+CC   -!- TISSUE SPECIFICITY: UBIQUITOUS.
+CC   --------------------------------------------------------------------------
+CC   This SWISS-PROT entry is copyright. It is produced through a collaboration
+CC   between  the Swiss Institute of Bioinformatics  and the  EMBL outstation -
+CC   the European Bioinformatics Institute.  There are no  restrictions on  its
+CC   use  by  non-profit  institutions as long  as its content  is  in  no  way
+CC   modified and this statement is not removed.  Usage  by  and for commercial
+CC   entities requires a license agreement (See http://www.isb-sib.ch/announce/
+CC   or send an email to license@isb-sib.ch).
+CC   --------------------------------------------------------------------------
+DR   EMBL; AL031115; CAB36858.1; -.
+DR   EMBL; Z99130; CAB16205.1; -.
+DR   EMBL; L14788; AAC37522.1; -.
+DR   HSSP; P08047; 1SP2.
+DR   MIM; 300236; -.
+DR   InterPro; IPR000822; Znf-C2H2.
+DR   Pfam; PF00096; zf-C2H2; 9.
+DR   SMART; SM00355; ZnF_C2H2; 10.
+DR   PROSITE; PS00028; ZINC_FINGER_C2H2_1; 10.
+DR   PROSITE; PS50157; ZINC_FINGER_C2H2_2; 10.
+KW   Zinc-finger; Metal-binding; DNA-binding; Repeat; Nuclear protein.
+FT   DOMAIN       15     20       POLY-GLY.
+FT   DOMAIN       83     89       POLY-GLY.
+FT   DOMAIN      271    572       ZINC FINGERS.
+FT   ZN_FING     271    295       C2H2-TYPE.
+FT   ZN_FING     304    328       C2H2-TYPE.
+FT   ZN_FING     334    358       C2H2-TYPE.
+FT   ZN_FING     364    386       C2H2-TYPE.
+FT   ZN_FING     393    417       C2H2-TYPE.
+FT   ZN_FING     424    448       C2H2-TYPE.
+FT   ZN_FING     454    478       C2H2-TYPE.
+FT   ZN_FING     484    508       C2H2-TYPE.
+FT   ZN_FING     514    538       C2H2-TYPE.
+FT   ZN_FING     547    572       C2H2-TYPE.
+SQ   SEQUENCE   803 AA;  84792 MW;  FD5A6D326FF5A5D4 CRC64;
+     MEIPKLLPAR GTLQGGGGGG IPAGGGRVHR GPDSPAGQVP TRRLLLLRGP QDGGPGRRRE
+     EASTASRGPG PSLLAPRTDQ PSGGGGGGGD DFFLVLLDPV GGDVETAGSG QAAGPVLREE
+     AEEGPGLQGG ESGANPAGPT ALGPRCLSAV PTPAPISAPG PAAAFAGTVT IHNQDLLLRF
+     ENGVLTLATP PPHAWEPGAA PAQQPGCLIA PQAGFPHAAH PGDCPELPPD LLLAEPAEPA
+     PAPAPEEEAE GPAAALGPRG PLGSGPGVVL YLCPEAQCGQ TFAKKHQLKV HLLTHSSSQG
+     QRPFKCPLGG CGWTFTTSYK LKRHLQSHDK LRPFGCPAEG CGKSFTTVYN LKAHMKGHEQ
+     ENSFKCEVCE ESFPTQAKLS AHQRSHFEPE RPYQCAFSGC KKTFITVSAL FSHNRAHFRE
+     QELFSCSFPG CSKQYDKACR LKIHLRSHTG ERPFLCDFDG CGWNFTSMSK LLRHKRKHDD
+     DRRFMCPVEG CGKSFTRAEH LKGHSITHLG TKPFVCPVAG CCARFSARSS LYIHSKKHLQ
+     DVDTWKSRCP ISSCNKLFTS KHSMKTHMVK RHKVGQDLLA QLEAANSLTP SSELTSQRQN
+     DLSDAEIVSL FSDVPDSTSA ALLDTALVNS GILTIDVASV SSTLAGHLPA NNNNSVGQAV
+     DPPSLMATSD PPQSLDTSLF FGTAATGFQQ SSLNMDEVSS VSVGPLGSLD SLAMKNSSPE
+     PQALTPSSKL TVDTDALTPS STLCENSVSE LLTPTKAEWN VHPDSDFFGQ EGETQFGFPN
+     AAGNHGSQKE TDLITVTGSS FLV
+]]
+ID   ZY11_CAEEL     STANDARD;      PRT;   799 AA.
+AC   P21541;
+DT   01-MAY-1991 (Rel. 18, Created)
+DT   01-MAY-1991 (Rel. 18, Last sequence update)
+DT   01-NOV-1995 (Rel. 32, Last annotation update)
+DE   Early embryogenesis ZYG-11 protein.
+GN   ZYG-11 OR C08B11.1.
+OS   Caenorhabditis elegans.
+OC   Eukaryota; Metazoa; Nematoda; Chromadorea; Rhabditida; Rhabditoidea;
+OC   Rhabditidae; Peloderinae; Caenorhabditis.
+OX   NCBI_TaxID=6239;
+RN   [1]
+RP   SEQUENCE FROM N.A.
+RC   STRAIN=BRISTOL N2;
+RX   MEDLINE=90220522; PubMed=2325632;
+RA   Carter P.W., Roos J.M., Kemphues K.J.;
+RT   "Molecular analysis of zyg-11, a maternal-effect gene required for
+RT   early embryogenesis of Caenorhabditis elegans.";
+RL   Mol. Gen. Genet. 221:72-80(1990).
+RN   [2]
+RP   SEQUENCE FROM N.A.
+RC   STRAIN=BRISTOL N2;
+RA   Simms M.;
+RL   Submitted (NOV-1994) to the EMBL/GenBank/DDBJ databases.
+CC   -!- FUNCTION: MAY PLAY AN ESSENTIAL ROLE IN EARLY EMBRYOGENESIS.
+CC   -!- DEVELOPMENTAL STAGE: MATERNALLY EXPRESSED BUT ITS TRANSCRIPTION IS
+CC       NOT LIMITED TO THE FEMALE GERM-LINE.
+CC   --------------------------------------------------------------------------
+CC   This SWISS-PROT entry is copyright. It is produced through a collaboration
+CC   between  the Swiss Institute of Bioinformatics  and the  EMBL outstation -
+CC   the European Bioinformatics Institute.  There are no  restrictions on  its
+CC   use  by  non-profit  institutions as long  as its content  is  in  no  way
+CC   modified and this statement is not removed.  Usage  by  and for commercial
+CC   entities requires a license agreement (See http://www.isb-sib.ch/announce/
+CC   or send an email to license@isb-sib.ch).
+CC   --------------------------------------------------------------------------
+DR   EMBL; X16473; CAA34493.1; -.
+DR   EMBL; Z46676; CAA86661.1; -.
+DR   PIR; S14908; BVKWZ1.
+DR   WormPep; C08B11.1; CE01471.
+KW   Developmental protein; Glycoprotein; Phosphorylation.
+FT   CARBOHYD    127    127       N-LINKED (GLCNAC...) (POTENTIAL).
+FT   CARBOHYD    167    167       N-LINKED (GLCNAC...) (POTENTIAL).
+FT   CARBOHYD    172    172       N-LINKED (GLCNAC...) (POTENTIAL).
+FT   CARBOHYD    228    228       N-LINKED (GLCNAC...) (POTENTIAL).
+FT   CARBOHYD    263    263       N-LINKED (GLCNAC...) (POTENTIAL).
+FT   CARBOHYD    561    561       N-LINKED (GLCNAC...) (POTENTIAL).
+FT   MOD_RES     791    791       PHOSPHORYLATION (POTENTIAL).
+SQ   SEQUENCE   799 AA;  90779 MW;  B216E54C8F6374BD CRC64;
+     MDHNAALTTC STSAIPRLAR LATERIAELI ENDALPEFDH KVIASCSNDI FEVLRQKKKL
+     NHQTLQTMCS TSRFQINKID LMGNKVELQD LELCSNQNLV SFRLGDIDYF PNTNKIQVAD
+     VLDTALNRTS RQQLRHLDLS GRHRITSNWP TYVARKLPRL ESLAFANRST ANETLSQIGA
+     SLLNLRFLDI SSTCVTDISC ISSLRNLEVL IMYNLNILKG DVTETLSNLT KLRVLDISRK
+     VNTDYLQETS QDAHLDLALG IYNRSVEAIE SGTATPWAEL RAIDMSGLSI VQFGTDRALA
+     FVEKIIEAHP KLEQISLLAT PLDSSLIEIP NRNLQVINTV SRRSIIFALS HYANLDRPAF
+     ITHALHSVYY QLQSGYDKFS QEELKECLRL VCISMQQGLN TLPVQIAGSA CLYHLCKMKR
+     IKRLSVKEVN NCIERSLDAA EQYRSMTQLQ KNVWLTICND YLLHLDEIDF YRTCKVALDT
+     MLLNRDASVE RMTIAIVSIV TPKMRPSEAK ILTTETKYVY HLVKIMNDYL EAYTREHRVG
+     HERDNENALY TLKFTLSALW NLTDECPATC KAFLDAGGVQ IAFRILKAFD YHGNVQTKVL
+     GILNNLAEVE ELHLGQLCKN EYISVLISCL DGSFNEVDSK GRYREVERSY FAAGILANLL
+     TNTDGWESEN QRDEACEKLL ELIEQYPTLP SAMVSYKSFI PFSRIVRESN SNGAIMWCLW
+     GVHHVLQHRE KNKAPTYEKG YIEMFMDSGL SPIVEDMSHG HSKHIHNLDI RVVHLAREII
+     DIVSCHSLSS SPVRLVRRV
+]]
+ID   ZYX_CHICK      STANDARD;      PRT;   542 AA.
+AC   Q04584;
+DT   01-OCT-1993 (Rel. 27, Created)
+DT   01-OCT-1993 (Rel. 27, Last sequence update)
+DT   16-OCT-2001 (Rel. 40, Last annotation update)
+DE   Zyxin.
+GN   ZYX.
+OS   Gallus gallus (Chicken).
+OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+OC   Archosauria; Aves; Neognathae; Galliformes; Phasianidae; Phasianinae;
+OC   Gallus.
+OX   NCBI_TaxID=9031;
+RN   [1]
+RP   SEQUENCE FROM N.A.
+RX   MEDLINE=93107157; PubMed=1469049;
+RA   Sadler I., Crawford A.W., Michelsen J.W., Beckerle M.C.;
+RT   "Zyxin and cCRP: two interactive LIM domain proteins associated with
+RT   the cytoskeleton.";
+RL   J. Cell Biol. 119:1573-1587(1992).
+CC   -!- FUNCTION: ADHESION PLAQUE PROTEIN. BINDS ALPHA-ACTININ AND THE CRP
+CC       PROTEIN. MAY BE A COMPONENT OF A SIGNAL TRANSDUCTION PATHWAY THAT
+CC       MEDIATES ADHESION-STIMULATED CHANGES IN GENE EXPRESSION.
+CC   -!- SUBCELLULAR LOCATION: CYTOPLASMIC; ASSOCIATES WITH THE ACTIN
+CC       CYTOSKELETON NEAR THE ADHESION PLAQUES.
+CC   -!- SIMILARITY: CONTAINS 3 LIM DOMAINS. THE LIM DOMAIN BINDS 2
+CC       ZINC IONS.
+CC   --------------------------------------------------------------------------
+CC   This SWISS-PROT entry is copyright. It is produced through a collaboration
+CC   between  the Swiss Institute of Bioinformatics  and the  EMBL outstation -
+CC   the European Bioinformatics Institute.  There are no  restrictions on  its
+CC   use  by  non-profit  institutions as long  as its content  is  in  no  way
+CC   modified and this statement is not removed.  Usage  by  and for commercial
+CC   entities requires a license agreement (See http://www.isb-sib.ch/announce/
+CC   or send an email to license@isb-sib.ch).
+CC   --------------------------------------------------------------------------
+DR   EMBL; X69190; CAA48936.1; -.
+DR   PIR; A44358; A44358.
+DR   InterPro; IPR001781; LIM.
+DR   InterPro; IPR001841; Znf_ring.
+DR   Pfam; PF00412; LIM; 3.
+DR   ProDom; PD000094; LIM; 3.
+DR   SMART; SM00132; LIM; 3.
+DR   SMART; SM00184; RING; 1.
+DR   PROSITE; PS00478; LIM_DOMAIN_1; 2.
+DR   PROSITE; PS50023; LIM_DOMAIN_2; 3.
+KW   Repeat; LIM domain; Metal-binding; Zinc; Cell adhesion.
+FT   DOMAIN       83     90       PRO-RICH.
+FT   DOMAIN      103    130       PRO-RICH.
+FT   DOMAIN      352    411       LIM 1.
+FT   DOMAIN      412    471       LIM 2.
+FT   DOMAIN      472    538       LIM 3.
+FT   VARIANT     463    463       D -> V.
+SQ   SEQUENCE   542 AA;  58537 MW;  9D898AC180C680FC CRC64;
+     MASPGTPGTR MTTTVSINIS TPSFYNPQKK FAPVVAPKPK VNPFKTGGTS ESSQPQPPGT
+     GAQRAQIGRV GEIPVSVTAE ELPLPPPPPP GEELSFSSNC AFPPPPPPFE EPFPPAPDEA
+     FPSPPPPPPP MFDEGPALQI PPGSTGSVEK PLAPKAHVEI SSAPRDPTPP FPSKFTPKPS
+     GTLSSKPPGL DSTPAPAPWA APQQRKEPLA SVPPPPSLPS QPTAKFTPPP VASSPGSKPG
+     ATVPMAPSNS TRYPTSLQTQ FTAPSPSGPL SRPQPPNFTY AQQWERPQVQ EKPVPTEKSA
+     AVKDMRRPTA DPPKGNSPLT MKEVEELELL TQKLMKDMDH PPPVEAATSE LCGFCRKPLS
+     RTQPAVRALD CLFHVECFTC FKCEKQLQGQ QFYNVDEKPF CEDCYAGTLE KCSVCKQTIT
+     DRMLKATGNS YHPQCFTCVM CHTPLEGASF IVDQANQPHC VDDYHRKYAP RCSVCSEPIM
+     PEPGKDETVR VVALEKNFHM KCYKCEDCGR PLSIEADENG CFPLDGHVLC MKCHTVRAKT
+     AC
+]]
+ID   ZYX_HUMAN      STANDARD;      PRT;   572 AA.
+AC   Q15942;
+DT   01-NOV-1997 (Rel. 35, Created)
+DT   01-NOV-1997 (Rel. 35, Last sequence update)
+DT   16-OCT-2001 (Rel. 40, Last annotation update)
+DE   Zyxin (Zyxin 2).
+GN   ZYX.
+OS   Homo sapiens (Human).
+OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+OC   Mammalia; Eutheria; Primates; Catarrhini; Hominidae; Homo.
+OX   NCBI_TaxID=9606;
+RN   [1]
+RP   SEQUENCE FROM N.A.
+RC   TISSUE=Umbilical vein;
+RX   MEDLINE=97094926; PubMed=8940160;
+RA   Macalma T., Otte J., Hensler M.E., Bockholt S.M., Louis H.A.,
+RA   Kalff-Suske M., Grzeschik K.H., von der Ahe D., Beckerle M.C.;
+RT   "Molecular characterization of human zyxin.";
+RL   J. Biol. Chem. 271:31470-31478(1996).
+RN   [2]
+RP   SEQUENCE FROM N.A.
+RC   TISSUE=Placenta;
+RX   MEDLINE=97075042; PubMed=8917469;
+RA   Zumbrunn J., Trueb B.;
+RT   "A zyxin-related protein whose synthesis is reduced in virally
+RT   transformed fibroblasts.";
+RL   Eur. J. Biochem. 241:657-663(1996).
+CC   -!- FUNCTION: ADHESION PLAQUE PROTEIN. BINDS ALPHA-ACTININ AND THE CRP
+CC       PROTEIN. MAY BE A COMPONENT OF A SIGNAL TRANSDUCTION PATHWAY THAT
+CC       MEDIATES ADHESION-STIMULATED CHANGES IN GENE EXPRESSION (BY
+CC       SIMILARITY).
+CC   -!- SUBCELLULAR LOCATION: CYTOPLASMIC; ASSOCIATES WITH THE ACTIN
+CC       CYTOSKELETON NEAR THE ADHESION PLAQUES.
+CC   -!- SIMILARITY: CONTAINS 3 LIM DOMAINS. THE LIM DOMAIN BINDS 2
+CC       ZINC IONS.
+CC   --------------------------------------------------------------------------
+CC   This SWISS-PROT entry is copyright. It is produced through a collaboration
+CC   between  the Swiss Institute of Bioinformatics  and the  EMBL outstation -
+CC   the European Bioinformatics Institute.  There are no  restrictions on  its
+CC   use  by  non-profit  institutions as long  as its content  is  in  no  way
+CC   modified and this statement is not removed.  Usage  by  and for commercial
+CC   entities requires a license agreement (See http://www.isb-sib.ch/announce/
+CC   or send an email to license@isb-sib.ch).
+CC   --------------------------------------------------------------------------
+DR   EMBL; X94991; CAA64447.1; -.
+DR   EMBL; X95735; CAA65050.1; -.
+DR   HSSP; Q05158; 1QLI.
+DR   MIM; 602002; -.
+DR   InterPro; IPR001781; LIM.
+DR   Pfam; PF00412; LIM; 3.
+DR   ProDom; PD000094; LIM; 3.
+DR   SMART; SM00132; LIM; 3.
+DR   PROSITE; PS00478; LIM_DOMAIN_1; 2.
+DR   PROSITE; PS50023; LIM_DOMAIN_2; 3.
+KW   Repeat; LIM domain; Metal-binding; Zinc; Cell adhesion.
+FT   DOMAIN       64     77       PRO-RICH.
+FT   DOMAIN       94    137       PRO-RICH.
+FT   DOMAIN      384    443       LIM 1.
+FT   DOMAIN      444    503       LIM 2.
+FT   DOMAIN      504    570       LIM 3.
+SQ   SEQUENCE   572 AA;  61277 MW;  2833B1EFA260B762 CRC64;
+     MAAPRPSPAI SVSVSAPAFY APQKKFGPVV APKPKVNPFR PGDSEPPPAP GAQRAQMGRV
+     GEIPPPPPED FPLPPPPLAG DGDDAEGALG GAFPPPPPPI EESFPPAPLE EEIFPSPPPP
+     PEEEGGPEAP IPPPPQPREK VSSIDLEIDS LSSLLDDMTK NDPFKARVSS GYVPPPVATP
+     FSSKSSTKPA AGGTAPLPPW KSPSSSQPLP QVPAPAQSQT QFHVQPQPQP KPQVQLHVQS
+     QTQPVSLANT QPRGPPASSP APAPKFSPVT PKFTPVASKF SPGAPGGSGS QPNQKLGHPE
+     ALSAGTGSPQ PPSFTYAQQR EKPRVQEKQH PVPPPAQNQN QVRSPGAPGP LTLKEVEELE
+     QLTQQLMQDM EHPQRQNVAV NELCGRCHQP LARAQPAVRA LGQLFHIACF TCHQCAQQLQ
+     GQQFYSLEGA PYCEGCYTDT LEKCNTCGEP ITDRMLRATG KAYHPHCFTC VVCARPLEGT
+     SFIVDQANRP HCVPDYHKQY APRCSVCSEP IMPEPGRDET VRVVALDKNF HMKCYKCEDC
+     GKPLSIEADD NGCFPLDGHV LCRKCHTARA QT
+]]
+ID   ZYX_MOUSE      STANDARD;      PRT;   564 AA.
+AC   Q62523; P70461;
+DT   01-NOV-1997 (Rel. 35, Created)
+DT   01-NOV-1997 (Rel. 35, Last sequence update)
+DT   16-OCT-2001 (Rel. 40, Last annotation update)
+DE   Zyxin.
+GN   ZYX.
+OS   Mus musculus (Mouse).
+OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+OC   Mammalia; Eutheria; Rodentia; Sciurognathi; Muridae; Murinae; Mus.
+OX   NCBI_TaxID=10090;
+RN   [1]
+RP   SEQUENCE FROM N.A.
+RC   STRAIN=ICR X SWISS WEBSTER;
+RX   MEDLINE=97094926; PubMed=8940160;
+RA   Macalma T., Otte J., Hensler M.E., Bockholt S.M., Louis H.A.,
+RA   Kalff-Suske M., Grzeschik K.H., von der Ahe D., Beckerle M.C.;
+RT   "Molecular characterization of human zyxin.";
+RL   J. Biol. Chem. 271:31470-31478(1996).
+RN   [2]
+RP   SEQUENCE FROM N.A.
+RC   TISSUE=Brain;
+RA   Otte J., Heischmann A., Breier G., Beckerle M.C., von der Ahe D.;
+RL   Submitted (JUL-1996) to the EMBL/GenBank/DDBJ databases.
+CC   -!- FUNCTION: ADHESION PLAQUE PROTEIN. BINDS ALPHA-ACTININ AND THE CRP
+CC       PROTEIN. MAY BE A COMPONENT OF A SIGNAL TRANSDUCTION PATHWAY THAT
+CC       MEDIATES ADHESION-STIMULATED CHANGES IN GENE EXPRESSION (BY
+CC       SIMILARITY).
+CC   -!- SUBCELLULAR LOCATION: CYTOPLASMIC; ASSOCIATES WITH THE ACTIN
+CC       CYTOSKELETON NEAR THE ADHESION PLAQUES.
+CC   -!- SIMILARITY: CONTAINS 3 LIM DOMAINS. THE LIM DOMAIN BINDS 2
+CC       ZINC IONS.
+CC   --------------------------------------------------------------------------
+CC   This SWISS-PROT entry is copyright. It is produced through a collaboration
+CC   between  the Swiss Institute of Bioinformatics  and the  EMBL outstation -
+CC   the European Bioinformatics Institute.  There are no  restrictions on  its
+CC   use  by  non-profit  institutions as long  as its content  is  in  no  way
+CC   modified and this statement is not removed.  Usage  by  and for commercial
+CC   entities requires a license agreement (See http://www.isb-sib.ch/announce/
+CC   or send an email to license@isb-sib.ch).
+CC   --------------------------------------------------------------------------
+DR   EMBL; Y07711; CAA68984.1; -.
+DR   EMBL; X99063; CAA67510.1; -.
+DR   MGD; MGI:103072; Zyx.
+DR   InterPro; IPR001781; LIM.
+DR   Pfam; PF00412; LIM; 3.
+DR   ProDom; PD000094; LIM; 3.
+DR   SMART; SM00132; LIM; 3.
+DR   PROSITE; PS00478; LIM_DOMAIN_1; 2.
+DR   PROSITE; PS50023; LIM_DOMAIN_2; 3.
+KW   Repeat; LIM domain; Metal-binding; Zinc; Cell adhesion.
+FT   DOMAIN       64     77       PRO-RICH.
+FT   DOMAIN       94    138       PRO-RICH.
+FT   DOMAIN      376    435       LIM 1.
+FT   DOMAIN      436    495       LIM 2.
+FT   DOMAIN      496    562       LIM 3.
+FT   CONFLICT    215    215       R -> A (IN REF. 1).
+FT   CONFLICT    284    292       IKKWCLRMP -> NQKMVPPDA (IN REF. 1).
+FT   CONFLICT    484    484       S -> C (IN REF. 1).
+SQ   SEQUENCE   564 AA;  60790 MW;  001E1B3C82ADA1EB CRC64;
+     MAAPRPPPAI SVSVSAPAFY APQKKFAPVV APKPKVNPFR PGDSEPPVAA GAQRAQMGRV
+     GEIPPPPPED FPLPPPPLIG EGDDSEGALG GAFPPPPPPM IEEPFPPAPL EEDIFPSPPP
+     PLEEEGGPEA PTQLPPQPRE KVCSIDLEID SLSSLLDDMT KNDPFKARVS SGYVPPPVAT
+     PFVPKPSTKP APGGTAPLPP WKTPSSSQPP PQPQRKPQVQ LHVQPQAKPH VQPQPVSSAN
+     TQPRGPLSQA PTPAPKFAPV APKFTPVVSK FSPGAPSGPG PQPIKKWCLR MPPSSVSTGS
+     PQPPSFTYAQ QKEKPLVQEK QHPQPPPAQN QNQVRSPGGP GPLTLKEVEE LEQLTQQLMQ
+     DMEHPQRQSV AVNESCGKCN QPLARAQPAV RALGQLFHIT CFTCHQCQQQ LQGQQFYSLE
+     GAPYCEGCYT DTLEKCNTCG QPITDRMLRA TGKAYHPQCF TCVVCACPLE GTSFIVDQAN
+     QPHSVPDYHK QYAPRCSVCS EPIMPEPGRD ETVRVVALDK NFHMKCYKCE DCGKPLSIEA
+     DDNGCFPLDG HVLCRKCHSA RAQT
+]]

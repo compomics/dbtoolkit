@@ -1,0 +1,78 @@
+ID   PYRG_ACIBL              Reviewed;         558 AA.
+AC   Q1IKC9;
+DT   12-DEC-2006, integrated into UniProtKB/Swiss-Prot.
+DT   13-JUN-2006, sequence version 1.
+DT   22-JUL-2008, entry version 18.
+DE   RecName: Full=CTP synthase;
+DE            EC=6.3.4.2;
+DE   AltName: Full=UTP--ammonia ligase;
+DE   AltName: Full=CTP synthetase;
+GN   Name=pyrG; OrderedLocusNames=Acid345_3670;
+OS   Acidobacteria bacterium (strain Ellin345).
+OC   Bacteria; Acidobacteria; Acidobacteriales; Acidobacteriaceae.
+OX   NCBI_TaxID=204669;
+RN   [1]
+RP   NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA].
+RA   Copeland A., Lucas S., Lapidus A., Barry K., Detter J.C.,
+RA   Glavina del Rio T., Hammon N., Israni S., Dalin E., Tice H.,
+RA   Pitluck S., Brettin T., Bruce D., Han C., Tapia R., Kiss H., Gilna P.,
+RA   Schmutz J., Larimer F., Land M., Hauser L., Kyrpides N., Lykidis A.,
+RA   Kuske C., Janssen P.H., Richardson P.;
+RT   "Complete sequence of Acidobacteria bacterium Ellin345.";
+RL   Submitted (APR-2006) to the EMBL/GenBank/DDBJ databases.
+CC   -!- FUNCTION: Catalyzes the ATP-dependent amination of UTP to CTP with
+CC       either L-glutamine or ammonia as the source of nitrogen (By
+CC       similarity).
+CC   -!- CATALYTIC ACTIVITY: ATP + UTP + NH(3) = ADP + phosphate + CTP.
+CC   -!- ENZYME REGULATION: Allosterically activated by GTP, when glutamine
+CC       is the substrate. Inhibited by CTP (By similarity).
+CC   -!- PATHWAY: Pyrimidine metabolism; CTP biosynthesis via de novo
+CC       pathway; CTP from UDP: step 2/2.
+CC   -!- SUBUNIT: Homotetramer (By similarity).
+CC   -!- SIMILARITY: Belongs to the CTP synthase family.
+CC   -!- SIMILARITY: Contains 1 glutamine amidotransferase type-1 domain.
+CC   -----------------------------------------------------------------------
+CC   Copyrighted by the UniProt Consortium, see http://www.uniprot.org/terms
+CC   Distributed under the Creative Commons Attribution-NoDerivs License
+CC   -----------------------------------------------------------------------
+DR   EMBL; CP000360; ABF42671.1; -; Genomic_DNA.
+DR   RefSeq; YP_592745.1; -.
+DR   GeneID; 4072273; -.
+DR   GenomeReviews; CP000360_GR; Acid345_3670.
+DR   KEGG; aba:Acid345_3670; -.
+DR   NMPDR; fig|204669.6.peg.3676; -.
+DR   HOGENOM; Q1IKC9; -.
+DR   GO; GO:0003883; F:CTP synthase activity; IEA:HAMAP.
+DR   GO; GO:0006221; P:pyrimidine nucleotide biosynthetic process; IEA:HAMAP.
+DR   HAMAP; MF_01227; -; 1.
+DR   InterPro; IPR004468; CTP_synthase.
+DR   InterPro; IPR017456; CTP_synthase_N.
+DR   InterPro; IPR012998; GATase_1_AS.
+DR   InterPro; IPR000991; GATase_class1_C.
+DR   PANTHER; PTHR11550; PyrG_synth; 1.
+DR   Pfam; PF06418; CTP_synth_N; 1.
+DR   Pfam; PF00117; GATase; 1.
+DR   TIGRFAMs; TIGR00337; PyrG; 1.
+DR   PROSITE; PS51273; GATASE_TYPE_1; 1.
+PE   3: Inferred from homology;
+KW   Complete proteome; Glutamine amidotransferase; Ligase;
+KW   Pyrimidine biosynthesis.
+FT   CHAIN         1    558       CTP synthase.
+FT                                /FTId=PRO_0000266048.
+FT   DOMAIN      291    537       Glutamine amidotransferase type-1.
+FT   REGION        1    253       Aminator domain.
+FT   ACT_SITE    382    382       Nucleophile (By similarity).
+FT   ACT_SITE    510    510       By similarity.
+FT   ACT_SITE    512    512       By similarity.
+SQ   SEQUENCE   558 AA;  62958 MW;  327F4DDC7D309357 CRC64;
+     MSAKYIFVTG GVVSSLGKGL AAASIGCLLE MRGLKVNMQK FDPYLNVDPG TMSPFQHGEV
+     FVTDDGAETD LDLGHYERYT HSKLTRENNW TTGRIYEQII TKERRGDYLG KTVQVIPHVT
+     NEIKAAMKRA AVDVDVAIVE IGGTVGDIES LPFIEAIRQM RQELGRDNTL FVHLTLVPYI
+     AAAGELKTKP TQHSVKELLS IGIQPDILLC RTDRFLSKDI KGKIALFCNV EDEAVITAKD
+     VASIYEVPLG FHHEGVDRLV MKYLRLDAKE PDLTRWQDIV HRVYNPKDEV IIGIIGKYVE
+     YEDSYKSLKE ALVHGSLAHN LKLNVTWIEA EGLETKDESY YEQLRHVDGI LVPGGFGKRG
+     IAGMLNGIRF AREHKVPYFG ICLGMQTASI EFARNVCGLE DANSSEFDPA TPHRVIYKLR
+     ELRGVEELGG TMRLGAWACK LEPGSHAAKA YGTTEISERH RHRYEFNQEY REQMAAAGLK
+     FTGTTPDGTY IEIVELDQNE HPYFLGCQFH PEFKSKPLEP HPLFKAFIGA SYEHRMKRTH
+     TKEREEESVF LRPERVGK
+//
