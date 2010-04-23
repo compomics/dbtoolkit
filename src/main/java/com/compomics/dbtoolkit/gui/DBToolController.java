@@ -125,6 +125,21 @@ public class DBToolController implements GUIDataReceiver {
 
     /**
      * In this method, we will check for a DBLoader that's present, and
+     * run though all the entries, filtering for a given regular expression.
+     * If the Loader is not set, we display a warning and return.
+     */
+    public void processRegExpFilterTriggered() {
+        if(iModel.getLoader() != null) {
+            RegularExpressionFilterDialog refd = new RegularExpressionFilterDialog(iView, "Regular expression subset selection", iModel.getLoader(), iModel.getLoader().getDBName());
+            refd.setLocation(iView.getPoint(4, 4));
+            refd.setVisible(true);
+        } else {
+            showError("You need to load a database first!", "No DB file loaded!");
+        }
+    }
+
+    /**
+     * In this method, we will check for a DBLoader that's present, and
      * run though all the entries, mapping the peptides.
      * If the Loader is not set, we display a warning and return.
      */

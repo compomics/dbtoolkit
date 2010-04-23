@@ -3,136 +3,834 @@
 
  0. Table of contents
 
- 1. About
+ 1. Introduction
 
- 2. About the author
+ 2. Using the program
+    2.a. Loading a database
+    2.b. Processing a database
+        1) Filtering for entries
+        2) Ragging a database
+        3) Retrieving only a sequence-based subset
+        4) Enzymatic digest only
+        5) Filter database only
+        6) Optional processing
+           - enzymatic cleavage
+           - mass limits
+    2.c. Setting the look and feel
+    2.d. Changing the number of entries shown in the preview pane
+    2.e. Using the tools menu
+        1) Counting the number of database entries
+        2) Outputting the database in FASTA format
+        3) Outputting the database in FASTA format, while replacing specified residues
+        4) Filtering the database using a regular expression, output in FASTA format
+        5) Outputting the database as a reversed database in FASTA format
+        6) Outputting the database as a shuffled database in FASTA format
+        7) Concatenating databases or copying a file
+        8) Mapping peptide sequences to the database
+        9) Clearing the redundancy in a database
+    2.f. Command-line tools for batch scripting
 
- 3. Changelog
+ 3. Miscellaneous remarks
+
+ 4. Troubleshooting
+
+ 5. Writing custom extensions
+    5.a. Custom database loaders
+        1) Writing a custom loader
+        2) Integrating a custom loader with the AutoDBLoader
+    5.b. Writing custom filters for databases
+
+ 6. Built-in filters
+    6.a. FASTA filters
+        1) FASTAtaxonomy filter
+        2) header filter
+    6.b. SwissProt filters
+        1) keyword filter
+        2) SPtaxonomy filter
+        3) TaxID filter
+        4) Accession filter
+
+ 7. About the author
+
+ 8. Revision history
 
 
 
 
-1. About MascotDatfile
+1. Introduction.
 ----------------
-The MascotDatfile library allows the fast analysis of peptide identifications produced by Mascot (Matrix Science). It is a tool designed for the flexible and detailed analysis of raw data inside a large and complex project for all uses and purposes. The library was compiled using Sun's Java JDK 1.5. Working code is guaranteed by a complete JUnit 3.8 testing suite. The library's build process is automated by a Maven 1.0.2 pom. 
+This program is meant to be used as a convenient tool to process protein sequence databases for any suitable purpose.
 
-   
-2. About the author
-----------------
-Kenny Helsens (kenny.helsens AT UGent.be) is a PhD (or predoctoral as we say in Europe) student at the lab of Prof. Dr. Kris Gevaert and Prof. Dr. Joël Vandekerckhove in the VIB Department of Medical Protein Research, UGent - Proteome Analysis and Bioinformatics Unit (http://www.proteomics.be/).
+Functionalities include generating enzymatically cleaved databases, N- or C-terminal 'ragged' databases, isolating a
+subset of the entries based on a sequence query and clearing entry-sequence based redundancy, a.o.
 
-At the time of this writing he is supported by an IWT scholarship (the IWT is the Institue for encouraging innoation by Science and technology in Flanders, http://www.iwt.be/) and is specializing in bioinformatics with a focus on proteomics.
+The program is written by Lennart Martens (lennart.martens AT UGent.be) and any information or problem not covered can be
+posted to the author. Also feel free to contact me whenever you have suggestions/enhancements/comments to report.
 
-3. Changelog
+Notes about this text:
+
+    - Keys to be pressed are always capitalized and contained in brackets, eg.: (B) means pressing the 'b' character key on
+      the keyboard.
+
+
+2. Using the Program.
+---------------------
+    2.a. Loading a database.
+    ------------------------
+    On the main screen of the program (the one that pops up when you run it), the top panel is designed for loading a database.
+    Note that the loading of a database is only possible via this panel; it is NOT represented in the pull-down menu!
+    The textbox in the 'File Selection' panel can be used to directly specify the location of the file you wish to load. Pressing
+    (ENTER/CARRIAGE RETURN) will signal the program to load your database.
+    Note that the path separator character can both be '/' or '\'.
+    Another way to select a file is via the filechooser graphical component. You can access this component via the 'Browse' button,
+    next to the textfield in the 'File Selection' panel, or by pressing the (ALT) and (B) keys simultaneously.
+    Note that selecting a file in the filechooser automatically opens it.
+    Upon opening of the database, the program attempts to autodetect the format of the database. Two different formats are
+    recognized as is: SwissProt/EMBL/IPI format and FASTA format. Even though FASTA format is the de facto standard for sequence databases,
+    you might want to be able to load other database formats as well. This will unfortunately mean that you have to code a database
+    loader yourself. Luckily however, coding your own loader and integrating it with the automatic file recognition in DBToolkit
+    is a breeze! For more information, see section 5.a.
+    If the format cannot be autodetected, you are presented with the list of known database formats and are kindly asked to manually
+    select the appropriate format. If your format is not in the list, see the previous lines for a solution.
+    If all went well with loading the database, you should see a FASTA preview of the first 2 entries in the database in the preview pane
+    (which is the central part of the screen). The number of previewed entries can be changed if you so desire, see section 2.d.
+    Between brackets, DBToolkit can actually load databases directly from zipfiles! This functionality is also easy to inherit
+    in your own specific database readers! Consult section 5.a for more information.
+
+    2.b. Processing a database.
+    ---------------------------
+    You can access the database processing settings (and subsequently process a database) by first loading a database (see
+    section 2.a above for more information on database loading) and then using the 'Process' option in the 'File' menu.
+    This can be done using the mouse or by pressing (ALT) + (F) for the 'File' menu, and then (ALT) + (P) to access the process
+    screen.
+    The processing function is the main 'raison d'être' for the application, so we'll discuss the processing screen in some
+    more detail, starting top to bottom:
+
+        1) Filtering for entries:
+            Filtering concerns the 'Filter settings' panel on top of the process screen.
+            The first thing to notice about filtering is that the default setting is 'None', which means no filtering.
+            Another thing (which you might not notice immediately) is the fact that the filters available in the pull-down list
+            are linked to the specific format of the underlying database. This is necessary because different databases hold
+            different kinds of information and also store this information in very dissimilar ways.
+            Depending on the type of database you've loaded you'll either see some silly filters (FASTA formatted database) or
+            a SwissProt keyword and SwissProt taxonomy filter (SwissProt formatted database). Once you've selected a filter, you
+            can fill out any necessary parameters in the textbox on the right of the pull-down list.
+            The way to switch off a selected filter is to select 'None' in the pull-down list again.
+            If you want more filters or want to have access to filters for your own database readers (see section 5.a for information
+            on how to write your own database reader), you can actually do so with very little effort! See section 5.b for more details.
+            For more information on how the built-in filters work, see section 6.
+
+        2) Ragging a database:
+            One of the two main kinds of processing DBToolkit allows you to do on a database is N or C-terminal ragging.
+            To rag, you simply choose the 'Ragging' option (which happens to be the default) and specify the correct parameters.
+            You'll need to specify the terminal end to rag (C or N) and optionally you can first truncate each database sequence to
+            an arbitrary number of residues before starting enzymatic digestion and the ragging proces. The truncation option is on
+            by default, and the truncation size is smaller than 100 residues.
+            Truncation is applied AFTER enzymatic digest if a digest is requested.
+
+        3) Retrieving only a sequence based subset:
+            The second major kind of processing DBToolkit allows you to do is the selection of a sequence based subset.
+            By selecting the 'Sequence-based Subset' option, you enable the textbox in which you can enter your restriction query.
+            The query format will be discussed next.
+            Amino acid notation is the single-letter notation, extended with 'U' for methionine WITHOUT initiator methionine and
+            '.' for matching any residue. Note that using a '.' in a sequence match results in the usage of Java regular expression
+            matching and that this will silently enable you to use the full power of Java regular expressions.
+            DBToolkit uses a query format that supports boolean operators ('AND', 'OR' and '^' (NOT)) and is vaguely reminiscent
+            of regular expressions. It does not have the power of regular expressions, nor does it have exactly the same syntax,
+            but it is only fair to say that it has a strong resemblance to it. You can specify residues or sequence stretches and
+            combine these, eg.:
+
+              (K and R) or (S or T)    -> selects all entries having either a K and an R, or that have an S or a T
+              ((K and R) or S) and L   -> selects all entries having either an L or an S or K and R
+              ^R and ^K                -> selects all entries lacking R and lacking K
+              .SNK and L               -> selects all entries that contain the SNK motif, prefixed with at least
+                                          one amino acid of choice and that also contain an L
+
+            Another feature of the language concerns the counting of residues:
+
+              2K or 2R or (K and R)    -> selects all entries having either exactly 2 R's or 2 K's, or that have both R and K
+
+            Yet another addition of this is logical operations on counts:
+
+              >3K or <5P               -> selects all entries with strictly more than 3 K's or strictly less than 5 P's
+              >=2K and <=2L            -> selects all entries with 2 or more K's and 2 or less L's
+
+            Sequence based subset filtering is applied AFTER enzymatic digest if a digest is requested.
+
+        4) Enzymatic digest only:
+            A minor option, allowing you to simply produce an enzymatic digest of the database contents, possibly using mass filters.
+            Note that the optional 'Enzymatic digest' panel changes to represent a forced enzymatic digest (which is logical since
+            this is what you've requested in the first place).
+
+        5) Filter database only:
+            A minor option, allowing you to simply filter the entries in the database using the filter specified at the top of
+            this dialog. Note that all other options are disabled as it is a filtering only step. The format of the output
+            database will be FASTA.
+
+        6) Optional processing:
+            - Enzymatic digest
+               Allows you to specify an enzyme for digestion prior to any kind of processing (filtering of entries based on database
+               filters is applied BEFORE enzymatic digest, however). This option is active by default and specifies the first
+               alphabetically sorted enzyme in the list. Using the pull-down list you can select an enzyme from the list of known
+               enzymes. The number of miscleavages (default is '1') can be specified as well. Note that upon selection of an enzyme
+               the 'Cleave', 'Restrict' and 'Position' boxes change to indicate the specifics of the selected enzyme.
+               If the built-in list does not suffice for you, you can add your own enzymes by writing the following information in a
+               text file (format is the same as that used by Mascot - www.matrixscience.com):
+
+                       Title:(type the display name for your enzyme here, eg.: Trypsin)
+                       Cleavage:(type the residue(s) that are recognized for cleavage here, eg. KR; don't insert spaces or comma's!)
+                       Restrict:(type the residue(s) that inhibit cleavage here, eg. P; don't insert spaces or comma's!)
+                       Cterm (this is the position of cleavage; it can be either 'Cterm' or 'Nterm')
+                       * (separate enzymes by having a line with only an asterisk between them)
+                       Title:XXX
+                       etc.
+
+               For clarity I give a complete example for Trypsin:
+
+                       Title:Trypsin
+                       Cleavage:KR
+                       Restrict:P
+                       Cterm
+                       *
+                       Title:SomethingElse
+                       etc.
+
+               A new addition since version 1.0.6 are bifunctional enzymes. They produce peptides that have a C-terminus that
+               results from a different cleavage then their N-terminus. An example will illustrate:
+
+                        Title:dualArgC_Cathep
+                        Cleavage:DXR
+                        Restrict:P
+                        Cterm
+                        *
+
+               An enzyme is considered to have dual specificity whenever the name of the enzyme starts with 'dual'.
+               The duality is expressed through the use of 'X' (note that this precludes using 'X' as a cleavable residu
+               in these enzymes). The residu(s) before the X generate the peptide N-termini, the residu(s) after the X the
+               peptide C-termini. So in our dualArgC_Cathep example, we have:
+
+                        GHLKFDMTPNRS --> GHLKFD and MTPNR AND S
+
+               A new addition since version 3.7.0 are regular expression enzymes. They cleave peptides based on a regular
+               expression. NOTE that the restiction site DOES NOT allow the use of regular expression.
+               Some examples to illustrate:
+
+                        Title:regexTrypsin
+                        Cleavage:[KR]
+                        Restrict:P
+                        Cterm
+                        *
+                        Title:regexCaspase
+                        Cleavage:D..D
+                        CTerm
+                        *
+
+               An enzyme is considered to be a regular expression enzyme whenever the name of the enzyme starts with 'regex'.
+               The regular expression itself should be formed according to the Java specification for regular expressions.
+               C-terminal cleavage occurs directly after the matching sequence, N-terminal cleavage occurs before the last
+               residue in the matching sequence. For instance, the regexCaspase defined above will cleave:
+
+                        GHLKFDMTDNRS into GHLKFDMTD and NRS
+
+               Whereas the following, N-terminally cleaving enzyme:
+
+                        Title:regexNtermRegExEnzyme
+                        Cleavage:D..D
+                        NTerm
+                        *
+
+               Cleaves that same peptide in the following way:
+
+                        GHLKFDMTDNRS into GHLKFDMT and DNRS
+
+               If you are unsure about the exact workings, create one or more small test entries in a FASTA formatted
+               file and unleash the enzyme upon it using dbtoolkit. From studying the output, I'm sure you'll learn
+               what you needed to know.
+
+               The enzyme file used can be selected using the button marked '...' and then browsing for your file using the
+               filechooser component. If the file is recognized as an enzyme file, the program will report on the number of
+               enzymes read from the file. Java knowledgeable people will want to know that the default enzyme file used is the
+               'enzymes.txt' file that is first encountered in the classpath. So if you have a large list of self-defined enzymes
+               which you use very often, you can change the name of the file that holds them to 'enzymes.txt' and modify the
+               start-up script for the program to something like:
+
+                       java -cp /my_enzyme_file/location/:$CLASSPATH be.proteomics.dbtoolkit.gui.DBTool  (for most UNIX flavours)
+                       java -cp c:\my_enzyme_file\location\;%classpath% be.proteomics.dbtoolkit.gui.DBTool  (for Windows)
+
+            - Mass limits
+               Mass limits will be applied last in any processing step. So after database entry filtering, enzymatic digestion
+               and processing. You need to specify a lower and an upper mass limit (which are inclusive!) and which can be decimal
+               numbers.
+               Note that mass limits are on by default and set to 600 and 4000 Da for the lower and upper limit, respectively.
+
+    After specifying all options, you can confirm the processing settings by pressing the 'OK' button (or alternatively, through
+    the (ALT) + (O) key combination. In order to cancel the processing, press the 'Cancel' button or (ALT) + (C).
+    Confirming the processing will pop up a file chooser where you need to specify an output file to write to. After confirming this,
+    the processing will begin, showing a progress bar to inform you of the proceedings.
+
+    2.c. Setting the look and feel.
+    -------------------------------
+    This setting is located in the 'Settings' menu, under 'Look and feel...' (or (ALT) + (S) for the 'Settings' and (ALT) + (L) for the
+    'Look and feel...' menu.
+    A nice feature in any Java 1.2 and above is a graphical user interface (which is called 'Swing') which can take different forms.
+    Typically these are Metal (the default, platform independent look and feel), Windows (on Windows platforms) and the Methusaleh of
+    XWindows: Motif. You can specify any of these, and possible some other look & feel options (the program attempts to find out which
+    ones are installed for your platform). These settings should only affect the handling of the program, and never the effective
+    operations performed.
+
+    2.d. Changing the number of entries shown in the preview pane.
+    --------------------------------------------------------------
+    Changing the number of lines shown in the preview pane can be done in the 'Settings' menu, under 'Preview...', or (ALT) + (S) for
+    the settings and (ALT) + (P) for the preview menu. Any whole number can be entered, yet '0' or any negative number will result in
+    an empty preview pane (in essence: switching the preview off).
+    Note that a large number of preview entries can make the program react slowly to resizing operations (the clipping of the sequences
+    and headers to fit the window needs to be recalculated at each resizing).
+    The preview pane shows the first two entries in the database in FASTA format by default, but you can show more if you want to.
+    In this respect, the program can be used as a very primitive database viewing tool. In future version, I possibly might include
+    scrolling options to enhance this function. But this will only happen if you (the almighty users) ask me ;-).
+
+    2.e. Using the tools menu.
+    --------------------------
+    The tools included in the DBToolkit program allow you to perform a few useful operations on a sequence database.
+    These tools need not be combined with the processing nor are limited to a processed database.
+    We'll explain them one by one.
+
+        1) Counting the number of database entries:
+            This routine will only work if a database is currently loaded. It will count the number of entries in a database.
+            The count will be displayed in the status panel (lower part of the window). During the counting operation, a progress
+            bar will be displayed for large databases.
+
+        2) Outputting the database in FASTA format:
+            This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
+            format, so it will ask you for a filename and location for the output database.
+
+        3) Outputting the database in FASTA format, while replacing specified residues:
+            This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
+            format but filtered at the sequence level by the regular expression pattern you specify.
+            When you select this option, you will first be prompted for an optional database filter (e.g., filter by taxonomy),
+            and then you need specify the regular expression pattern you want to apply. There is also an optional 'test' text
+            box, in which you can type some text to try the regular expression on using the 'Test' button in the lower left
+            corner of the dialog. This wil allow you to make sure that your regular expression actually works as intended.
+            When you confirm the operation by clicking 'OK', you will be asked to specify an output file, at which point
+            the filtering starts.
+
+        4) Outputting the database in FASTA format, while replacing specified residues:
+            This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
+            format but with certain specified residues replaced by whatever text you specify.
+            When you select this option, you will first be prompted for the substitution(s) to perform.
+            Then you will be asked to specify an output file.
+
+        5) Outputting the database as a reversed database in FASTA format:
+            This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
+            format - but with all the individual sequences reversed. It will ask you for a filename and location for
+            the output database. The accession numbers of the reversed proteins will all be affixed with '_REVERSED' to enable
+            merging of the original and reversed databases to create a hybrid database, whilst retaining unique accession numbers
+            for each protein. For ultimate clarity for the user, the description of the reversed proteins will also be affixed with
+            ' - REVERSED'.
+
+        6) Outputting the database as a shuffled database in FASTA format:
+            This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
+            format - but with all the individual sequences shuffled randomly. It will ask you for a filename and location for
+            the output database. The accession numbers of the shuffled proteins will all be affixed with '_SHUFFLED' to enable
+            merging of the original and shuffled databases to create a hybrid database, whilst retaining unique accession numbers
+            for each protein. For ultimate clarity for the user, the description of the shuffled proteins will also be affixed with
+            ' - SHUFFLED'.
+
+        7) Concatenating databases or copying a file:
+            No database needs to be loaded for this routine. It can copy a file (whether this is a database or something else does
+            not really matter so much; in fact you could copy zip files or Word documents with it as well), or concatenate two files.
+            The latter is the most interesting feature, in that it allows you to combine two existing databases into a single file.
+            You will be presented with a dialog in which you need to fill out at least a source and destination file. If you only
+            specify these, the program will assume you want to copy (it will ask for confirmation anyhow), but if you want to
+            concatenate two files, you can specify a second input file AFTER you have specified a first one. DBToolkit will then assume
+            you want to concatenate the two input files into a new file (the output file).
+
+        8) Mapping peptide sequences to the database:
+            This routine will only work if a database is currently loaded.
+            It asks you to provide it with an optional database filter, and a set of peptide sequences.
+            The software expects one peptide sequence per line, and empty lines will be skipped.
+            When the 'OK' button is pressed, an output file needs to be specified. Note that the output file
+            will be silently overwritten if it already exists!
+            The output file is formatted as a TAB ('\t') separated file, with the following headers:
+
+            Accession number (TAB) start of peptide (TAB) stop of peptide (TAB) previous residue (if any) (TAB) peptide sequence (TAB) Protein description (TAB) All isoforms
+
+            The accession number, start and stop location, previous residue and description are all given for the primary accession number
+            (if more than one protein matches your peptide sequence). Primary accession numbers are chosen based on:
+              (i)   their score (score is related to 'level of annotation; so SwissProt headers have a higher score than TrEMBL or EnsEMBL entries)
+              (ii)  in the case of equal scores, their alphabetical sorting (and if this is equal, their location sorting; so a peptide
+                    that matches to two locations in only one protein is assigned its first occurrence in that protein as its primary).
+              (iii) whenever equally high scoring alternatives exist, the alphabetically or positionally sorted alternative that has
+                    already been assigned to another protein as primary, gets preference.
+            The 'isoforms' (all mapped proteins that are not the primary) are separated by '^A', and are given by accession number and start
+            and stop location between brackets.
+
+        9) Clearing the redundancy in a database:
+            This routine will only work if a database is currently loaded.
+            It asks you to specify a temporary folder and an output file. The output file will contain the cleared database, the temporary
+            folder will be used during operation, but will be indistinguishable after the procedure completes. It is however advised to
+            create a folder and make sure it is empty. This way, you're sure nothing will go wrong (the only conceivable problem with the
+            temporary folder is the creation of a temporary file by DBToolkit which has exactly the same name as a file already in the
+            temporary folder; which is quite unlikely: the temp files will be called 'xx.tmp', with xx being any positive whole number.
+            With large databases, it is worth noting that the temporary folder will need approximately the same amount of space as the
+            original database, and is worth the effort to consider the output DB to be just as big as well (typically, this is not the
+            case, but better safe, etc.). So make sure you have sufficient space available!
+            The feature allows you to clear redundancy in the database using the entry sequence as the discriminating part.
+            For instance:
+
+                >A first FASTA header.
+                LENNARTMARTENS
+                >A second FASTA header.
+                LENNARTMARTENS
+
+            will be considered redundant and merged into a single entry, while
+
+                >A recurring header.
+                LENNARTMARTENS
+                >A recurring header.
+                KRISGEVAERT
+
+            will NOT be considered redundant and will remain wo separate entries.
+            The algorithm keeps track of all of the merged entries and will keep the accession numbers associated with each entry
+            by appending them to the end of the header with '^A' as separator.
+            For instance:
+
+                >gi|65437|First header.
+                FNSVERPLAETSE
+                >gi|82325|Second header.
+                FNSVERPLAETSE
+                >gi|66766|Third header.
+
+            will become:
+
+                >gi|65437|First header.^Agi|82325^Agi|66766
+                FNSVERPLAETSE
+
+            A last issue concerns mixed headers. By this I mean headers that are present in databases such as the NCBI nonredundant
+            database. This database is already a merged juggernaut in which many different databases (such as SwissProt, PIR, genbank e.d.)
+            are represented. The entries typically have compound headers in which information about the source database is present next
+            to the newly assigned NCBI NR header.
+            In such a situation, the program values headers with a reference to SwissProt higher than any other header, and as such the
+            primary header will be the SwissProt header, and the others will be appended by their identifier and accession number.
+
+    2.f. Command-line tools for batch scripting.
+    --------------------------------------------
+    All the processing routines, as well as all the tools are accessible through the command line, and the CountEntries tool has even been
+    enhanced with the optional specification of database filters and/or residue restricting using the sequence query format (see section
+    2.b (3)).
+    I will just briefly summarize them here, since they operate in exactly the same way as their GUI counterparts, and running them without
+    parameters will cause them to output their operational parameters.
+
+        be.proteomics.dbtoolkit.toolkit.ClearRedundancy       --> clears sequence-based database redundancy.
+        be.proteomics.dbtoolkit.toolkit.Concatenate           --> concatenates two DB's or copies a file (better to use the OS or cat: it will be faster ;-)).
+        be.proteomics.dbtoolkit.toolkit.CountEntries          --> counts DB entries and allows specification of residue restricting queries and filters!
+        be.proteomics.dbtoolkit.toolkit.EnzymeDigest           --> conducts only an enzymatic digest with optional mass limits for the generated peptides.
+        be.proteomics.dbtoolkit.toolkit.FASTAOutput           --> outputs the database in FASTA format.
+        be.proteomics.dbtoolkit.toolkit.ReverseFASTADB        --> outputs the database in FASTA format, but with all individual sequences reversed.
+        be.proteomics.dbtoolkit.toolkit.MapPeptides           --> maps an input list of peptides against the specified (filtered) database and
+                                                                  outputs the result in a CSV file.
+        be.proteomics.dbtoolkit.toolkit.RandomizeFASTADB      --> outputs the database in FASTA format, but with all individual sequences shuffled.
+        be.proteomics.dbtoolkit.toolkit.IsolateSubset         --> isolates a sequence-based subset, using the queryformat etc. (see section 5.b (3)).
+        be.proteomics.dbtoolkit.toolkit.RagDB                 --> performs an N or C-terminal trimming on a database (see section 5.c (2)).
+
+    There are also some additional tools present:
+
+        be.proteomics.dbtoolkit.general.PeptideCoverage
+
+    This tool allows you to find out the coverage of proteins in the original database by the peptides in the generated peptide database.
+    You simply specify the master database (e.g. a SwissProt you downloaded) and a (peptide) database you generated from this (e.g. a
+    database with only tryptic peptides between 0.6 and 4 kDa and which must contain at least one methionine residue) and it will tell you
+    how many proteins are represented by 0 peptides (these are the ones you'll never find), 1 peptide and more than one peptide.
+
+        be.proteomics.dbtoolkit.toolkit.ContainsPeptide
+
+    This tool allows you to find all proteins in a given database that contain a given list of sequences. The report is a Map with
+    sequences for keys and a Collection of Protein instances as keys. 
+
+        be.proteomics.dbtoolkit.toolkit.ProteinMaturationDevice
+
+    This tool allows you to in silico 'mature' proteins in the UniProt database that contain chain or pre/propeptide information.
+    Run the tool without arguments to see the detailed functionality it offers.
+
+
+3. Miscellaneous remarks.
+-------------------------
+ - This program is provided 'as is'. No responsability will be taken by the author for accidental or other damage! The user utilizes the program
+   purely at her or his own risk! The author advises to make regular back-ups of all important data (and not because he does not have faith in
+   DBToolkit, but because he has little faith in computers at large).
+ - Whenever you use the program for basic research, please include an appropriate reference to the publication associated with DBToolkit.
+   The DBToolkit paper is available for free through Open Access at the Bioinformatics journal website.
+   Reference: Martens L, Vandekerckhove J and Gevaert K, 'DBToolkit: processing protein databases for peptide-centric proteomics', Bioinformatics.
+   You can download the DBTookit paper for free here:
+   http://bioinformatics.oxfordjournals.org/cgi/reprint/bti588?ijkey=1d1b7RussnjgEkC&keytype=ref
+ - If this program is used for commercial purposes, be so kind as to inform the author (lennart.martens AT UGent.be)
+ - If you have any questions/suggestions/whatever: lennart.martens AT UGent.be
+
+
+4. Troubleshooting.
+-------------------
+General remark: run the program with 'java' instead of with 'javaw' on windows platforms. This way, a dos box pops open which will display stack
+traces of all unexpected errors that occur deep within the routines. THese often tell you a lot about what went wrong.
+
+ - I get a strange error when I try to run the 'dbtoolkit.sh' shell script for Linux/UNIX, what's wrong?
+   There's a two-part answer for this, please read both parts before you try anything.
+   * First of all, it's a BASH (Bourne Again SHell) script, so if you're on another shell, you probably need to make some adjustements.
+   If you're unsure as to how to go about this, contact your system administrator for help.
+   * Secondly, due to different endline characters on Windows and Linux/*NIX operating systems, some of the latter seem to have some difficulty
+   in interpreting text files that have been created on the former. This might be your problem. Try to edit the script file using a text editor
+   like graphical VIM (gVIM) and to save it in 'UNIX' format. If you do not have access to such a text editor (which automatically converts the
+   endlines to the desired type) or you have no idea how to go about this, the plain vanilla solution is to print out the contents of the file
+   and re-type them in a new file that you then make executable.  
+
+ - My system seems to hang or exit unexpectedly while cleaning sequence-based redundancy!
+   This is typically due to a lack of sufficient memory; if your database is very big, you'll need a lot of memory to clear redundancy.
+   For databases up to one and a half gigabyte, 512 megabyte of RAM should suffice. Larger databases will need more RAM (1 gigabyte or more).
+   It could also be attributable to the lack of free space on your hard drive. The temporary storage folder uses a bit more than the size of
+   your original database and the output database is smaller than or equal to the input database.
+
+ - On my Linux/UNIX system, whenever I do large processing, the progress bar goes up to 99% and stays put, what is wrong?
+   Essentially nothing is wrong. You just need to exercise some patience ;).
+   The thing is that Linux/*NIX systems often use a very advanced caching system to access their file systems. It helps because it makes them fast!
+   The progress bar cannot compensate for this caching, so when the file is read in memory before being processed in full, the remainder of the
+   processing is done from memory instead of from file. The progress bar will seem to halt, but the messages will display the amount of data being
+   read from the cache. This si not very interesting, but it does show you the program is still running.
+
+ - I want to load a database formatted in a way that is not understood by the program!
+   Quite likely thing to happen. that's why I have gone to some length to make the DBToolkit program easily extendable.
+   Please consult section 5.a for more information on how to do this.
+
+ - I have a need for a filter that is not included with the program.
+   Quite likely as well, and again: the program is happy to accept your custom filters. May I refer you kindly to section 5.b for more information
+   about this subject?
+
+ - I can't get my custom class to work!
+   Have you followed all the steps delineated in sections 5.a and/or 5.b? Did you fill out each name respecting case? Are the edited properties
+   files before the original ones in the classpath or have you replaced the original ones? Have you done so respecting case on the files?
+   Have you restarted the program after writing and adding your stuff?
+
+ - I really like your program and I would like to buy it.
+   I appreciate your offer, but no thanks. I like to consider myself a scientist, and I don't like to consider myself as a businessman. Please use
+   the tool for free for the rest of your life, but a little E-mail telling me you liked it would be great (lennart.martens AT UGent.be).
+
+ - I have some trouble finding a Java Virtual Machine for my specific system/architecture.
+   Sorry, but all I can do is ask you to contact your system provider or search the internet for a solution: www.google.com is a good point to start.
+   Don't despair too quickly: many systems in fact support Java (Mac, Windows, Linux, Solaris, ...) and many architectures as well (Motorola(Apple),
+   Intel, Alpha, IBM mainframes, ...)
+
+ - Nobody can help me with my problem and the manual doesn't help a bit!
+   Maybe you could E-mail me whatever troubles you; together we'll work it out!
+   lennart.martens AT UGent.be
+
+
+5. Writing custom extensions.
+-----------------------------
+This section gives you some information about writing your own database loaders and database filters and integrating them seemlessly with the program.
+It assumes a beginner to moderate level of knowledge of the Java programming language and it's quirks. If you're unsure about htings like 'javac' and
+classpath, please consult www.java.sun.com for more information.
+
+    5.a. Custom database loaders.
+    -----------------------------
+    A custom database loader can be written easily and efficiently through inheriting a superclass. At a higher level, you could also implement an interface
+    and integrate your implementation class in the program. This latter option will force you to code a bit more, yet will allow for more flexibility.
+    While you're at it, it is also very simple to have DBToolkit detect your loader automatically upon opening a file.
+
+        1) Writing a custom loader:
+            The class to extend is the DefaultDBLoader (be.proteomics.dbtoolkit.io.implementations.DefaultDBLoader), which is an abstract class with some generic
+            implementations of the DBLoader (be.proteomics.dbtoolkit.io.interfaces.DBLoader) interface. See the javadoc for more information!
+            Don't forget to include your implementation in the classpath!
+
+        2) Writing a custom loader that can load from a zipfile:
+            The class to extend here is the ZippedDBLoader. This class takes care of differentiating between ZIPped files and GZIPped files.
+            Please note that there is a 'getReader' method on this class that presents the caller with a BufferedReader into the zipped file.
+            This can be extremely useful when attempting to determine whether a DB format is recognized. In fact, the bottom line is that your
+            subclass will never even know how to handle zipfiles!
+
+        3) Integrating a custom loader with the AutoDBLoader:
+            The 'canReadFile(File aFile)' method in the DBLoader class is used for automatic DB loader detection. But apart from implementing this method
+            you need also tell the AutoDBLoader class that your loader exists and where it is located.
+            Have a look at the 'DBLoaders.properties' file (it is located in the 'dbtools_props.jar' file). Add a name for your loader and its
+            fully qualified class name as an entry, be sure that the edited 'DBLoaders.properties' file replaces the existing one or is located
+            earlier in the classpath and all should go well!
+            Note that zipped loaders can use the ZippedDBLoader's 'getReader' method to read from the zipfile. Using this method, you can read
+            zipfiles even easier than regular files and you don't have to worry about ZIP or GZIP differences etc.
+
+    5.b. Writing custom filters for databases.
+    ------------------------------------------
+    A custom filter for a database can be programmed by implementing the Filter interface (be.proteomics.dbtoolkit.io.interfaces.Filter). Next, you need to specify the
+    fully qualified classname and the associated DBLoader in the 'filters.properties' file (located in the 'dbtools_props.jar' file). The database name
+    is the name returned by the DBLoader (SwissProt and FASTA respectively for the built-in types).
+
+
+6. Built-in filters.
 --------------------
+This section is meant to be a tiny 'manual-in-the-manual' for the built-in filters.
+It's not that they're that hard, it's just that some people require a little helping hand.
 
-- Version	1
-	This is the initial release with the core functionalities of the MascotDatfile library.
+    6.a. FASTA filters.
+    -------------------
+    FASTA files are often quite different in the formatting of their headers. Therefore, don't rely on
+    the FASTA taxonomy filter unless you are using an NCBI-derived FASTA file, and be cauteous even then!
 
+        1) FASTAtaxonomy filter:
+            The argument specified is enclosed with '[]' and then matched against the full FASTA header, ignoring case.
+            For instance, typing 'Mus musculus' in the parameter field will select all entries that have
+            '[Mus musculus]' in their header.
+            As you will notice, this is just an extension of the 'header' filter described next.
 
-- Version	1.1
-	This release features the first version of SpectrumViewer capable of loading a single peptidehit in an annotated spectrum from mutliple sources. Solved a severe bug in the peak annotation functionality!
+        2) header filter:
+            The argument specified is bluntly matched against the full header line, ignoring case.
+            For instance, typing 'globulin' in the parameter field will select all entries that have
+            'globulin' in their header.
 
+    6.b. SwissProt filters.
+    -----------------------
+    SwissProt formatted databases carry a lot more information, and can be filtered efficiently and accurately.
+    Two commonly used filter mechanisms are provided with dbtoolkit. Feel free to extend these, however (see section
+    5.b for more info).
 
-- Version	1.2
-	This release features an new SpectrumViewer capable of displaying Queries and PeptideHits in a Tree structure.
+        1) keyword filter:
+            The argument specified is matched against the keyword lines (lines starting with 'KW' in the SwissProt
+            format), ignoring case.
+            For instance, typing 'lyase' in the parameter field will select all entries that have
+            'lyase' as one of their keywords.
 
+        2) SPtaxonomy filter
+            The argument specified is matched against the species and taxonomy lines (lines starting with either
+            'OS' or 'OC' in the SwissProt format), ignoring case.
+            For instance, typing 'Homo sapiens' in the parameter field will select all entries that have
+            'Homo sapiens' included in their organism or taxonomy.
 
-- Version	1.3
-	In this minor release a new object is added. A ProteinMap is now accessible on the main MascotDatfile instance. Protein descriptions or ProteinID objects can returned when a PeptideHit's accession is passed to the ProteinMap's interface. A cleanup of the UnitTest code was also performed.
+        3) TaxID filter
+            The argument specified is matched against the TaxID lines (lines starting with
+            'OX' in the SwissProt format), ignoring case.
+            For instance, typing '9606' in the parameter field will select all entries that have
+            'TaxID=9606' included in their TaxID field.
+            *Note* that this filter can take multiple taxonomy ID's simultaneously, separated by
+            comma, space or semicolon. For example, typing '9606, 9602' will select all entries that
+            have either 9606 OR 9602 as taxonomy ID.
 
-
-- Version	1.4
-	This release Created two new methods on PeptideHitAnnotation. SequenceCoverage for Mascot matched fragmentions and Fused matched fragmentions can be requested by signatures getMascotIonCoverage() and getFusedIonCoverage(). The code is re-used from the SequenceCoverage script.
-
-
-- Version	1.5
-	This release is a major release. MascotDatfile is now independent from ms_lims. Ms_lims classes that were doing the raw parsing of raw result files were moved into MascotDatfile. SpectrumPanel has been moved to Utilities so their are no linkages left from mascotdatfile to ms_lims. Some classes from the research package that enabled MascotDatfile to interact with ms_lims were removed as well. Second, a new GUI component that draws relational intensity based fragmention information along the modified sequence was created.
-
-
-- Version	1.2.1 
-	This release features a minor requested update for improved handling of short modification descriptions that are not included in ModificationConversion.txt.
-
-
-- Version	1.2.2 
-	This is a minor release wherein a bugfix is done when one has to load a datfile without any peptidehits.
-
-
-- Version	1.2.3 
-	In this minor release a bugfix is done in a switch statement causing disfunctionality of the URL dialog.
-
-
-- Version	1.3.1 
-	In this minor release some new features are added. EnumerateMascotDatfile can return an identity for the datfile in memory.
-
-
-- Version	1.3.2 
-	In this minor release some bugs are fixed. The ProteinID object was using an "enum" as a name for a variable. This was fine for jdk 1.4, though it crashed more recent versions of Java. Forward compatibility problem .. :) Parsing of the ProteinHit String from the datfile used a StringTokenizer on a locon sign, this caused errors with IPI accessions.
-
-
-- Version	1.3.3 
-	In this minor release the Spectrum interface signature was broadened with new methods.
-
-
-- Version	1.3.4 
-	In this minor release output functionality is added. This requires a new dependency from the iText library. In the Tools menu, there is a new option "pdf output" that allows you to output the active spectrum that is shown at that time.
-
-
-- Version	1.3.5 
-	This minor release is a bugfix that caused a StringIndexOutofBoundsException if a variable modification did not have a location in 'Mascot format' in the title (e.g.: (N-term)).
+        4) Accession filter
+            The argument specified should consist of one or more accession numbers. If there is more than
+            one accession number specified, they need to be separated by commas.
+            The accession number(s) are matched against the 'AC' lines in the SwissProt format.
 
 
-- Version	1.3.6 
-	This minor release adds a new method getFileName() on MascotDatfile. If a MascotDatfile instance is created from an InputStream, this FileName can be passed with the constructor, though it's not necessairy for backwards compatibility.
+7. About the author.
+--------------------
+Lennart Martens (lennart.martens AT UGent.be) is a PhD (or predoctoral as we say in Europe) student at the lab of Prof. Dr. Joël Vandekerckhove in the
+University of Ghent, Ghent, Belgium.
+At the time of this writing he is supported by an FWO scholarship (the FWO is the National Fund for Scientific Research in Flanders, www.fwo.be) and is
+specializing in bioinformatics with a focus on proteomics.
+http://www.proteomics.be/people/lennartmartens/index.html
 
 
-- Version	1.3.7 
-	This minor release adds a new (previously overlooked) method getHomologyThreshold() on MascotDatfile. This value is directly usable from the .dat file as the QPlugHole value in the summary section.
+8. Revision history.
+--------------------
+ - Version 1.0
+        * Initial release.
 
+ - Version 1.1
+        * Implemented transparent zipped file loading (only standard zip implemented).
 
-- Version	1.3.8 
-	This release made all objects beyond a PeptideHit serializable.
+ - Version 1.0.2
+        * GUI bug fixes & progress bar optimization for zipped files.
 
+ - Version 1.0.3
+        * Status and error messages are now logged in textareas with a timestamp rather than being single-line replacements.
 
-- Version	1.3.9 
-	This release Created two new methods on MascotDatfile. Both are related to the decoy search features of Mascot since version 2.2. If a "decoy_petides" section is availlable, it can be parsed into a QueryToPeptideMap through the MascotDatfile interface.
+ - Version 1.0.4
+        * GZIP interpretation added. Differentiation between ZIP and GZIP is automatic.
+        * All functions support decent monitoring of non-zipped files larger than 2GB. Zipfiles do NOT allow this yet.
+        * ZippedDBLoader now sports a 'getReader()' method, which allows the caller to read directly from the file
+          which is useful when implementing the 'canRead' method on a subclass. A developer need no longer know about
+          zipfiles or libraries now.
 
+ - Version 1.0.5
+        * Corrected problem with JDK 1.4.x that resulted in the absence of a progressbar while processing non-zipped
+          files.
+        * Added IPI database format support.
 
-- Version	1.4.1 
-	getPrecursorAndImmoniumIons() is now a public method.
+ - Version 1.0.6
+        * Added support for dual specificity enzymes through inclusion of new utilities package.
 
+ - Version 2.0
+        * Mavenized the whole project structure.
+        * Changed packages to 'be.proteomics.dbtoolkit' and downward.
+        * Included GNU GPL license in the root as well as reference it in every single source file.
+        * Lost revision history in CVS and binaries as a result of new project structure.
 
-- Version	1.4.2 
-	This release added a new method to a PeptideHit. getModifiedSequenceComponents() returns a String[] with distinct components of the modified primary sequence. Request for mslims6.
+- Version 2.1
+        * Met without 'init-Met' has been renamed to 'U' because of character typeset problems with 'µ'.
+        * Cumulative minor bugfixes grouped into this release.
 
+- Version 2.2
+        * ContainsPeptide tool added.
 
-- Version	1.4.3 
-	This release is a bugfix. The modified sequence displayed fixed modification incorrect on NTerminal modidifcations. Reorganized modified sequence methods in PeptideHit as well.
+- Version 2.3
+        * Dependency to utilities package 2.5.5 updated.
 
+- Version 3.0
+        * Added functionality to reverse or shuffle sequences in the database (in the 'Tools' menu).
+        * Paper describing DBToolkit has been accepted for publication in Bioinformatics. The paper will
+          be freely available from the Bioinformatics journal web site. Please do include the appropriate
+          reference when you use DBToolkit (see section 3 in this manual).
 
-- Version	1.5.1 
-	During the parsing of the ModifiedSequence, the location of the '-' char for the N and C terminal ends is crucial. When MascotDatfile however returns full name mods if no short name is availlable. (example) #AcetylHeavy (N-term)#-AKKEF-COOH appears instead of AceD3-AKKEF-COOH. The parsing of the ModifiedSequence therefore looks now for the '#' chars as an indiciation for the Nterminal modfication.
+- Version 3.1
+        * Splitting behaviour in the preview pane updated to split bluntly at maximum line length whenever
+          no space can be found to split nicely on.
 
+- Version 3.1.1
+        * Moved dependency to utilities version 2.5.6 which allows parsing of C. trachomatis FASTA headers.
 
-- Version	1.5.2 
-	The SequenceFragmentationPanel now also looks for double charged b++ and y++ ions. Introduced illegal characters for short names in the ModificationConversion. If these are encountered, ModificationConversion.java will throw an RunTimeException and stop parsing.
+- Version 3.1.2
+        * Moved dependency to utilities version 2.5.7 which allows parsing of M. tuberculosis FASTA headers.
 
+- Version 3.1.3
+        * Moved dependency to utilities version 2.5.8 which allows parsing of alternative C. trachomatis
+          FASTA headers (Sanger).
 
-- Version	1.5.3 
-	Serious bug concerning the calculation of fragmentions has been solved. When a peptide was identified with a fixed modification on the C-terminus or N-terminus, the calculation of the y and b ions was erronous. Fixed and new tests and test files included.
+- Version 3.1.4
+        * Moved dependency to utilities version 2.7.1 which allows parsing of Drosophila protein
+          FASTA headers.
 
+- Version 3.1.5
+        * Allowed the use of '.' in sequence-based subset query format (the parsing then switches to
+          Java regexp matching, silently allowing the full Java regexp syntax).
 
-- Version	1.5.4 
-	This minor release fixes a bug if the fixed modifications does not provide a location in the parameters section of the raw file. Second, the Mascot TOL parameter was incorrectly used as iErrorMargin field on a FragmentIon instance. The fragmention matching methods did however not suffer from this since ITOL was correctly used at the matching level. When the FragmentIon instances were however drawn onto a spectrumPanel, TOL was incorrectly used instead of ITOL. This has also been fixed in this release.
+- Version 3.1.6
+        * Fixed a bug that prevented users from loading their custom 'enzymes.txt' in the process dialog.
 
+- Version 3.2
+        * Added the ability to output a FASTA version of the loaded database, in which the specified
+          residue(s) are replaced by the specified destination residues. You can find it in the 'Tools...'
+          menu.
+        * Added a file browser dialog for the 'Output as...' items in the 'Tools' menu instead of the
+          rather clumsy input dialog.
 
-- Version	1.5.5 
-	This minor release adds a new method to the ProteinMap. getProteinIDIterator() returns an iterator on the keyset of the hashmap containing all the ProteinID's. This iterator can then be used to iterate over the datfile by Protein Accession instead of Querynumber.
+ - Version 3.2.1
+        * Adapted UniProt/SWISS-PROT parsing to accommodate for the new 'OH' field
+          (host organism; applies to virusses).
 
+ - Version 3.3
+        * Added TaxID ('OX' fields in SWISS-PROT) filter for SwissProt-formatted databases
+          This filter can handle multiple TaxIDs in one go, and will select any entry that
+          matches any of the taxonomy ID's specified.
 
-- Version	1.5.6 
-	This minor release catches an OutOfBounds Exception that was thrown upon parsing a ProteinHit that has no accession. Such a file example was encoutered in the template file that comes with the PrideWizard.
+- Version 3.3.1
+        * Moved dependency to utilities version 2.7.2 which allows parsing of SGD
+          FASTA headers.
 
-- Version	2.1.2
-	This minor release adds parsing for the 'rtinseconds' query header attribute when present.
+- Version 3.3.2
+        * Moved dependency to utilities version 2.7.3 which allows parsing of the new
+          (version 9.0 and above) SWISS-PROT FASTA headers.
 
+- Version 3.3.3
+        * Moved dependency to utilities version 2.7.5 which allows parsing of
+          UniProtKB/Swiss-Prot accession numbers that start with an 'A'.
+
+- Version 3.3.4
+        * Solved a bug that allowed the NCBI Taxonomy ID filter to pick up (for instance)
+          '19606' when '9606' was the filter parameter. Now this is no longer the case.
+
+- Version 3.4
+        * Enabled 'Filter database only' option in the 'File' --> 'Process' dialog.
+
+- Version 3.5
+        * Added a peptide mapping option to the 'Tools' menu.
+
+- Version 3.5.1
+        * Revised peptide mapping to take into account accession number scoring and
+          alphabetical sorting.
+        * Added informative 'starting (task)' message at start of task to the status panel
+          for each workerthread (also allows accurate duration calculation for the user
+          after completion).
+
+- Version 3.5.2
+        * Added the command-line tool for the peptide mapping added in version 3.5, and
+          refined in 3.5.1. Also updated the documentation accordingly.
+        * Shuffled and reversed output now appends the accession number with '_SHUFFLED'
+          and '_REVERSED', respectively, as well as appending ' - SHUFFLED' and ' - REVERSED'
+          to the description. This should enable the merging of forward and decoy databases,
+          while ensuring unique accession numbers throughout the resulting hybrid database.
+          Also updated the documentation accordingly.
+        * All tools now default their output folder to the root of the current drive.
+        * Moved dependency to utilities version 2.7.6 which allows parsing of
+          TAIR (Arabidopsis thaliana) FASTA formatted databases.
+
+- Version 3.5.3
+        * Allowed resizing on the Process Dialog since it caused problems on 1024 by 786
+          displays after adding the 'filter only' radiobutton.
+        * Updated dependency to utilities version 2.7.7, which is the Apache2 licensed version.
+        * Changed the license to Apache2 rather than GNU GPL - mostly because of personal issues
+          with the enhanced restrictions built into the new GPL v3.
+
+- Version 3.5.4
+        * Exposed some advanced functions (used to be 'friendly' or 'private') in
+          SwissProtDBLoader and ZippedSwissProtDBLoader. Also created an extension to
+          DBLoader called SwissProtLoader that adds the newly published functionality
+          in the two implementations.
+
+- Version 3.5.5
+        * Upated the SwissProtDBLoader configuration to work with the new 'PE' line.
+
+- Version 3.5.6
+        * Moved dependency to utilities version 2.8.1 which allows parsing of the
+          Human Invitational database (H-Inv DB; http://www.h-invitational.jp/).
+
+- Version 3.5.7
+        * Moved dependency to utilities version 2.8.2 which allows parsing of the
+          PSB Arabidopsis thaliana database.
+
+- Version 3.5.8
+        * Moved dependency to utilities version 2.8.3 which allows parsing of the
+          MSDB FASTA database.
+
+- Version 3.5.9
+        * Moved dependency to utilities version 2.8.4 which allows parsing of the
+          Listeria monocytogenes FASTA database.
+
+- Version 3.6.0
+        * Moved dependency to utilities version 2.8.5 which fixes a bug in the
+          Enzyme class that is responsible for enzymatic cleavage. Briefly, if more
+          than one missed cleavage was allowed, sequences in which the penultimate
+          C-terminal residue was cleavable, would omit the last residue in the output
+          sequences.
+
+- Version 3.6.1
+        * The output format for the peptide remapping now uses tab characters ('\t')
+          instead of semicolons (';') to separate the fields. This is done because databases
+          like IPI already use semicolons to separate certain fields in their description.
+
+- Version 3.6.2
+        * Moved dependency to utilities version 2.8.6 which allows parsing of the
+          latest (September 2008) UniprotKB FASTA formatted databases. Also updated
+          DBToolkit itself to read the new (September 2008) UniProtKB DAT format. In this
+          version of the DAT format, only the recommended name is retained in the FASTA
+          description line.
+
+- Version 3.7.0
+        * Moved dependency to utilities version 2.9 which allows the use of regular expression
+          based enzymes. Also added the ProteinMaturationDevice command-line tool and
+          the additional SwissProt accession number filter. The manual (this document) has
+          been updated accordingly.
+
+- Version 3.7.1
+        * Allowed to specify an external enzyme definition file from the EnzymeDigest command-line tool.
+
+- Version 3.7.2
+        * FASTAOutput now allows a filterSet to be specified, as well as a single filter. If a set is
+          specified, the individual filters can each optionally be provided with their own parameters.
+          The boolean combination logic in a filterSet is always 'AND'.
+
+- Version 3.7.3
+        * ProteinMaturationDevice has dropped the taxid parameter in favour of a filterSet, like the
+          one provided for FASTAOutput in the previous release. Running ProteinMaturationDevice without
+          arguments to see new usage information.
+
+ - Version 4.0
+        * Updated package names to com.compomics instead of be.proteomics.
+        * Migrated project structure to Maven2.
+        * Moved project hosting to Google Code.
+
+ - Version 4.1
+        * Added regular expression filtering to Tools menu.

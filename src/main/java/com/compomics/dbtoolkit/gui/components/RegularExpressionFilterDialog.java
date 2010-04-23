@@ -6,19 +6,25 @@
  */
 package com.compomics.dbtoolkit.gui.components;
 
+import com.compomics.dbtoolkit.gui.workerthreads.FASTAOutputThread;
+import com.compomics.dbtoolkit.gui.workerthreads.PeptideMappingThread;
+import com.compomics.dbtoolkit.gui.workerthreads.ProcessThread;
+import com.compomics.dbtoolkit.io.implementations.FilterCollection;
+import com.compomics.dbtoolkit.io.implementations.ProteinFilterCollection;
+import com.compomics.dbtoolkit.io.implementations.ProteinSequenceRegExpFilter;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
 import com.compomics.dbtoolkit.io.interfaces.Filter;
 import com.compomics.dbtoolkit.io.interfaces.ProteinFilter;
-import com.compomics.dbtoolkit.io.QueryParser;
-import com.compomics.dbtoolkit.gui.workerthreads.PeptideMappingThread;
 
 import javax.swing.*;
-import java.util.*;
-import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 import java.lang.reflect.Constructor;
-import java.text.ParseException;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 /*
  * CVS information:
  *
@@ -32,13 +38,15 @@ import java.text.ParseException;
  *
  * @author Lennart Martens
  */
-public class PeptideMappingDialog extends JDialog {
+public class RegularExpressionFilterDialog extends JDialog {
 
     private JFrame iParent = null;
     private JComboBox cmbPrimFilter = null;
     private JTextField txtPrimFilter = null;
-    private JTextArea txtPeptides = null;
+    private JTextArea txtRegularExpression = null;
+    private JTextArea txtTestString = null;
 
+    private JButton btnTest = null;
     private JButton btnOK = null;
     private JButton btnCancel = null;
 
@@ -67,7 +75,7 @@ public class PeptideMappingDialog extends JDialog {
      * @param   aLoader DBLoader with the loader for the database.
      * @param   aDBType String with the DB type.
      */
-    public PeptideMappingDialog(JFrame aParent, String aTitle, DBLoader aLoader, String aDBType) {
+    public RegularExpressionFilterDialog(JFrame aParent, String aTitle, DBLoader aLoader, String aDBType) {
         super(aParent, aTitle, true);
 
         this.iParent = aParent;
@@ -175,29 +183,47 @@ public class PeptideMappingDialog extends JDialog {
      */
     private JPanel getMainPanel() {
         // Components.
-        txtPeptides = new JTextArea(10, 40);
-        JLabel lblPeptides = new JLabel("Enter peptide list here");
-        lblPeptides.setFont(txtPeptides.getFont());
-        lblPeptides.setForeground(txtPeptides.getForeground());
+        txtRegularExpression = new JTextArea(10, 40);
+        JLabel lblRegularExpression = new JLabel("Specify regular expression pattern here");
+        lblRegularExpression.setFont(txtRegularExpression.getFont());
+        lblRegularExpression.setForeground(txtRegularExpression.getForeground());
+
+        txtTestString = new JTextArea(10, 40);
+        JLabel lblTestString = new JLabel("Enter test text here (optional, use 'Test' button to perform test)");
+        lblTestString.setFont(txtTestString.getFont());
+        lblTestString.setForeground(txtTestString.getForeground());
 
         // Maximum sizes.
-        txtPeptides.setMaximumSize(txtPeptides.getPreferredSize());
-        lblPeptides.setMaximumSize(lblPeptides.getPreferredSize());
+        txtRegularExpression.setMaximumSize(txtRegularExpression.getPreferredSize());
+        lblRegularExpression.setMaximumSize(lblRegularExpression.getPreferredSize());
+
+        txtTestString.setMaximumSize(txtTestString.getPreferredSize());
+        lblTestString.setMaximumSize(lblTestString.getPreferredSize());
 
         // Component lay-out.
         // Main panel.
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createTitledBorder("Peptide list"));
+        panel.setBorder(BorderFactory.createTitledBorder("Regular Expression"));
 
-        JPanel jpanPeptides = new JPanel();
-        JPanel jpanPeptidesLabel = new JPanel();
+        JPanel jpanRegularExpression = new JPanel();
+        JPanel jpanRegularExpressionLabel = new JPanel();
+        jpanRegularExpression.add(txtRegularExpression);
+        panel.add(Box.createRigidArea(new Dimension(txtRegularExpression.getWidth(), 15)));
+        jpanRegularExpressionLabel.add(lblRegularExpression);
 
-        jpanPeptides.add(txtPeptides);
-        panel.add(Box.createRigidArea(new Dimension(txtPeptides.getWidth(), 15)));
-        jpanPeptidesLabel.add(lblPeptides);
-        panel.add(jpanPeptidesLabel);
-        panel.add(new JScrollPane(jpanPeptides, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        JPanel jpanTestString = new JPanel();
+        JPanel jpanTestStringLabel = new JPanel();
+        jpanTestString.add(txtTestString);
+        panel.add(Box.createRigidArea(new Dimension(txtTestString.getWidth(), 15)));
+        jpanTestStringLabel.add(lblTestString);
+
+
+
+        panel.add(jpanRegularExpressionLabel);
+        panel.add(new JScrollPane(jpanRegularExpression, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        panel.add(jpanTestStringLabel);
+        panel.add(new JScrollPane(jpanTestString, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         panel.add(Box.createVerticalGlue());
 
 
@@ -212,6 +238,14 @@ public class PeptideMappingDialog extends JDialog {
      */
     private JPanel getOptionPanel() {
         // The Buttons.
+        btnTest = new JButton("Test");
+        btnTest.setMnemonic(KeyEvent.VK_T);
+        btnTest.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                testPressed();
+            }
+        });
+
         btnOK = new JButton("OK");
         btnOK.setMnemonic(KeyEvent.VK_O);
         btnOK.addActionListener(new ActionListener() {
@@ -235,6 +269,8 @@ public class PeptideMappingDialog extends JDialog {
         JPanel jpanButtons = new JPanel();
         jpanButtons.setLayout(new BoxLayout(jpanButtons, BoxLayout.X_AXIS));
 
+        jpanButtons.add(Box.createRigidArea(new Dimension(15, btnCancel.getHeight())));
+        jpanButtons.add(btnTest);
         jpanButtons.add(Box.createHorizontalGlue());
         jpanButtons.add(btnOK);
         jpanButtons.add(btnCancel);
@@ -310,6 +346,54 @@ public class PeptideMappingDialog extends JDialog {
             close();
         }
     }
+
+    /**
+     * This method is called when the Test button is pressed.
+     */
+    private void testPressed() {
+        // First check all the fields and their logic.
+        // If all of this complies,
+        // continue.
+        Pattern p = this.processPattern();
+        if(p != null) {
+            String testString = txtTestString.getText().trim();
+            if(testString.equals("")) {
+                JOptionPane.showMessageDialog(this, "You specified an empty test text!", "No test text specified!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Matcher matcher = p.matcher(testString);
+                if(matcher.find()) {
+                    JOptionPane.showMessageDialog(this, "Your regular expression matched the test text.", "Test text matches expression", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Your regular expression did not match the test text!", "Test text does not match expression!", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+
+
+    /**
+     * This method parses the specified string in a compiled regular expression pattern,
+     * or flags any error to the user, which also results in a 'null' return value.
+     *
+     * @return  Pattern with the compiled regular expression, or 'null' in case of an error.
+     */
+    private Pattern processPattern() {
+        Pattern result = null;
+
+        String regExp = txtRegularExpression.getText().trim();
+        if(regExp.equals("")) {
+            JOptionPane.showMessageDialog(this, "You need to specify a regular expression pattern!", "No regular expression pattern specified!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                result = Pattern.compile(regExp);
+            } catch(PatternSyntaxException pse) {
+                JOptionPane.showMessageDialog(this, new String[]{"The regular expression pattern could not be parsed.", "Error was:", pse.getMessage()}, "Regular expression pattern error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        return result;
+    }
+
 
     /**
      * This method will validate the user input and construct the correct kind of ProcessThread
@@ -402,31 +486,16 @@ public class PeptideMappingDialog extends JDialog {
         }
         // We need to create the peptide collection.
         // First get the input from the user (if any, of course).
-        String peptidesText = txtPeptides.getText();
-        if((peptidesText == null) || (peptidesText.trim().equals(""))) {
-            JOptionPane.showMessageDialog(this, "You need to specify a list of peptide sequences, one sequence per line!", "No peptide sequences found!", JOptionPane.ERROR_MESSAGE);
-            return null;
-        } else {
-            // We've got data. transfrom into list.
-            Collection peptides = new TreeSet();
-            try {
-                BufferedReader br = new BufferedReader(new StringReader(peptidesText));
-                String line = null;
-                while((line = br.readLine())!= null) {
-                    line = line.trim();
-                    // Skip empty lines.
-                    if(!line.equals("")) {
-                        peptides.add(line);
-                    }
-                }
-            } catch(IOException ioe) {
-                // Should never happen here.
-            }
+        Pattern pattern = this.processPattern();
+        if(pattern != null) {
             // Get the filename to output to.
             File file = this.getProcessOutputFile();
             if(file != null) {
+                // Create regexp filter
+                ProteinSequenceRegExpFilter regExpFilter = new ProteinSequenceRegExpFilter(pattern);
+
                 // Create a task.
-                pt = new PeptideMappingThread(this.iParent, this.iLoader, peptides, filter, file);
+                pt = ProcessThread.getSubsetTask(this.iLoader, file, this.iParent, filter, null, false, -1.0, -1.0, regExpFilter);
             }
         }
 

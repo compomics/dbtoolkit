@@ -234,6 +234,14 @@ public class DBTool extends CursorModifiableJFrameImpl implements StatusView {
                 iController.replacedOutputRequested();
             }
         });
+        // Regular expression filter menuitem.
+        JMenuItem regExpLimit = new JMenuItem("Filter proteins by regular expression...");
+        regExpLimit.setMnemonic(KeyEvent.VK_M);
+        regExpLimit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                iController.processRegExpFilterTriggered();
+            }
+        });
         // To reversed FASTA file menuitem.
         JMenuItem toReversedFasta = new JMenuItem("Output as reversed FASTA file...");
         toReversedFasta.setMnemonic(KeyEvent.VK_V);
@@ -278,6 +286,7 @@ public class DBTool extends CursorModifiableJFrameImpl implements StatusView {
         tools.add(tool1);
         tools.add(toFasta);
         tools.add(toReplacedFasta);
+        tools.add(regExpLimit);
         tools.add(toReversedFasta);
         tools.add(toShuffledFasta);
         tools.add(concat);
