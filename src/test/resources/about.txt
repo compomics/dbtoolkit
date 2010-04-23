@@ -21,12 +21,13 @@
     2.e. Using the tools menu
         1) Counting the number of database entries
         2) Outputting the database in FASTA format
-        3) Outputting the database in FASTA format, while replacing specified residues 
-        4) Outputting the database as a reversed database in FASTA format
-        5) Outputting the database as a shuffled database in FASTA format
-        6) Concatenating databases or copying a file
-        7) Mapping peptide sequences to the database
-        8) Clearing the redundancy in a database
+        3) Outputting the database in FASTA format, while replacing specified residues
+        4) Filtering the database using a regular expression, output in FASTA format
+        5) Outputting the database as a reversed database in FASTA format
+        6) Outputting the database as a shuffled database in FASTA format
+        7) Concatenating databases or copying a file
+        8) Mapping peptide sequences to the database
+        9) Clearing the redundancy in a database
     2.f. Command-line tools for batch scripting
 
  3. Miscellaneous remarks
@@ -305,11 +306,21 @@ Notes about this text:
 
         3) Outputting the database in FASTA format, while replacing specified residues:
             This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
+            format but filtered at the sequence level by the regular expression pattern you specify.
+            When you select this option, you will first be prompted for an optional database filter (e.g., filter by taxonomy),
+            and then you need specify the regular expression pattern you want to apply. There is also an optional 'test' text
+            box, in which you can type some text to try the regular expression on using the 'Test' button in the lower left
+            corner of the dialog. This wil allow you to make sure that your regular expression actually works as intended.
+            When you confirm the operation by clicking 'OK', you will be asked to specify an output file, at which point
+            the filtering starts.
+
+        4) Outputting the database in FASTA format, while replacing specified residues:
+            This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
             format but with certain specified residues replaced by whatever text you specify.
             When you select this option, you will first be prompted for the substitution(s) to perform.
             Then you will be asked to specify an output file.
 
-        4) Outputting the database as a reversed database in FASTA format:
+        5) Outputting the database as a reversed database in FASTA format:
             This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
             format - but with all the individual sequences reversed. It will ask you for a filename and location for
             the output database. The accession numbers of the reversed proteins will all be affixed with '_REVERSED' to enable
@@ -317,7 +328,7 @@ Notes about this text:
             for each protein. For ultimate clarity for the user, the description of the reversed proteins will also be affixed with
             ' - REVERSED'.
 
-        5) Outputting the database as a shuffled database in FASTA format:
+        6) Outputting the database as a shuffled database in FASTA format:
             This routine will only work if a database is currently loaded. It will output the currently loaded database in FASTA
             format - but with all the individual sequences shuffled randomly. It will ask you for a filename and location for
             the output database. The accession numbers of the shuffled proteins will all be affixed with '_SHUFFLED' to enable
@@ -325,7 +336,7 @@ Notes about this text:
             for each protein. For ultimate clarity for the user, the description of the shuffled proteins will also be affixed with
             ' - SHUFFLED'.
 
-        6) Concatenating databases or copying a file:
+        7) Concatenating databases or copying a file:
             No database needs to be loaded for this routine. It can copy a file (whether this is a database or something else does
             not really matter so much; in fact you could copy zip files or Word documents with it as well), or concatenate two files.
             The latter is the most interesting feature, in that it allows you to combine two existing databases into a single file.
@@ -334,7 +345,7 @@ Notes about this text:
             concatenate two files, you can specify a second input file AFTER you have specified a first one. DBToolkit will then assume
             you want to concatenate the two input files into a new file (the output file).
 
-        7) Mapping peptide sequences to the database:
+        8) Mapping peptide sequences to the database:
             This routine will only work if a database is currently loaded.
             It asks you to provide it with an optional database filter, and a set of peptide sequences.
             The software expects one peptide sequence per line, and empty lines will be skipped.
@@ -354,7 +365,7 @@ Notes about this text:
             The 'isoforms' (all mapped proteins that are not the primary) are separated by '^A', and are given by accession number and start
             and stop location between brackets.
 
-        8) Clearing the redundancy in a database:
+        9) Clearing the redundancy in a database:
             This routine will only work if a database is currently loaded.
             It asks you to specify a temporary folder and an output file. The output file will contain the cleared database, the temporary
             folder will be used during operation, but will be indistinguishable after the procedure completes. It is however advised to
