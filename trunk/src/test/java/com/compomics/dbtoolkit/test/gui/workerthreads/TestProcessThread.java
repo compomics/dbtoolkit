@@ -15,7 +15,9 @@ package com.compomics.dbtoolkit.test.gui.workerthreads;
 import com.compomics.dbtoolkit.gui.workerthreads.ProcessThread;
 import com.compomics.dbtoolkit.io.UnknownDBFormatException;
 import com.compomics.dbtoolkit.io.implementations.AutoDBLoader;
+import com.compomics.dbtoolkit.io.implementations.ProteinSequenceRegExpFilter;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
+import com.compomics.dbtoolkit.io.interfaces.ProteinFilter;
 import com.compomics.util.protein.Enzyme;
 import junit.TestCaseLM;
 import junit.framework.Assert;
@@ -24,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 /*
  * CVS information:
@@ -200,4 +203,87 @@ public class TestProcessThread extends TestCaseLM {
             }
         }
     }
+
+    /**
+     * This method test the factory-like creation of a subset selection
+     * task, as well as the subset selection process itself, both from
+     * a query string and a regular expression.
+     */
+    public void testSubsetSelection() {
+        File input = null;
+        File output = null;
+        File control = null;
+
+        // First String-based (own query style) subset selection.
+        try {
+            // Necessary variables.
+            input = new File(super.getFullFilePath("testFASTA.fas"));
+            control = new File(super.getFullFilePath("controlOfStringSubsetTest.fas"));
+            output = new File(input.getParent() + "/outputOfStringSubsetTest.fas");
+
+            AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
+            DBLoader loader = auto.getLoaderForFile(input.getAbsolutePath());
+
+            ProcessThread pt = ProcessThread.getSubsetTask(loader, output, null, null, null, false, -1.0, -1.0, ".SKQ and L");
+            pt.run();
+            loader = null;
+
+            BufferedReader brControle = new BufferedReader(new FileReader(control));
+            BufferedReader brOutput = new BufferedReader(new FileReader(output));
+
+            String line = null;
+            while((line = brControle.readLine()) != null) {
+                Assert.assertEquals(line, brOutput.readLine());
+            }
+            brControle.close();
+            brOutput.close();
+        } catch(IOException ioe) {
+            fail("IOException thrown when testing the creation of a subset selection ProcessThread using a query string: " + ioe.getMessage());
+        } catch(UnknownDBFormatException udfe) {
+
+            fail("UnknownDBFormatException thrown when testing the creation of a subset selection ProcessThread using a query string with a FASTA DB: " + udfe.getMessage());
+        }finally {
+            if(output != null && output.exists()) {
+                output.delete();
+            }
+        }
+
+
+        // Now regexp-based subset selection.
+        try {
+            // Necessary variables.
+            input = new File(super.getFullFilePath("testFASTA.fas"));
+            control = new File(super.getFullFilePath("controlOfRegExpSubsetTest.fas"));
+            output = new File(input.getParent() + "/outputOfRegExpSubsetTest.fas");
+
+            AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
+            DBLoader loader = auto.getLoaderForFile(input.getAbsolutePath());
+
+            ProteinFilter regExpFilter = new ProteinSequenceRegExpFilter(Pattern.compile("[QIS]{3}.LA.[PLDS]{4}"));
+            ProcessThread pt = ProcessThread.getSubsetTask(loader, output, null, null, null, false, -1.0, -1.0, regExpFilter);
+            pt.run();
+            loader = null;
+
+            BufferedReader brControle = new BufferedReader(new FileReader(control));
+            BufferedReader brOutput = new BufferedReader(new FileReader(output));
+
+            String line = null;
+            while((line = brControle.readLine()) != null) {
+                Assert.assertEquals(line, brOutput.readLine());
+            }
+            brControle.close();
+            brOutput.close();
+        } catch(IOException ioe) {
+            fail("IOException thrown when testing the creation of a subset selection ProcessThread using a query string: " + ioe.getMessage());
+        } catch(UnknownDBFormatException udfe) {
+
+            fail("UnknownDBFormatException thrown when testing the creation of a subset selection ProcessThread using a query string with a FASTA DB: " + udfe.getMessage());
+        }finally {
+            if(output != null && output.exists()) {
+                output.delete();
+            }
+        }
+    }
+
+
 }
