@@ -105,7 +105,7 @@ public class SwissProtTaxonomyFilter implements Filter {
             if(((String)os).toUpperCase().indexOf(iMatch) >= 0) {
                 passed = true;
             } else if(oc != null){
-                if(((String)os).toUpperCase().indexOf(iMatch) >= 0) {
+                if(((String)oc).toUpperCase().indexOf(iMatch) >= 0) {
                     passed = true;
                 }
             }
