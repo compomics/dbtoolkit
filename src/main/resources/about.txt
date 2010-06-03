@@ -834,3 +834,6 @@ http://www.proteomics.be/people/lennartmartens/index.html
 
  - Version 4.1
         * Added regular expression filtering to Tools menu.
+
+ - Version 4.1.1
+        * Fixed a nasty bug that failed to filter correctly for entire taxonomy tree filtering (the OC lines).

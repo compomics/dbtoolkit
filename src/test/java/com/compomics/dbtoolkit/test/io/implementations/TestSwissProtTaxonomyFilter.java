@@ -126,6 +126,44 @@ public class TestSwissProtTaxonomyFilter extends TestCaseLM {
             entry = db.nextRawEntry();
             Assert.assertFalse(filter.passesFilter(entry));
             db = null;
+
+            db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
+            // Test case insensitivity at the same time.
+            filter = new SwissProtTaxonomyFilter("Murinae");
+
+            db.load(inputFile);
+            entry = null;
+
+            // Test them.
+            // First one is mouse.
+            entry = db.nextRawEntry();
+            Assert.assertTrue(filter.passesFilter(entry));
+
+            // Second one is human.
+            entry = db.nextRawEntry();
+            Assert.assertFalse(filter.passesFilter(entry));
+
+            // Third one is human.
+            entry = db.nextRawEntry();
+            Assert.assertFalse(filter.passesFilter(entry));
+
+            // Fourth one is C. elegans.
+            entry = db.nextRawEntry();
+            Assert.assertFalse(filter.passesFilter(entry));
+
+            // Fifth one is chicken.
+            entry = db.nextRawEntry();
+            Assert.assertFalse(filter.passesFilter(entry));
+
+            // Sixth one is human.
+            entry = db.nextRawEntry();
+            Assert.assertFalse(filter.passesFilter(entry));
+
+            // Seventh one is mouse.
+            entry = db.nextRawEntry();
+            Assert.assertTrue(filter.passesFilter(entry));
+            db = null;
+
         } catch(UnknownDBFormatException udfe) {
             fail("Database SwissProt reported as being unknown: " + udfe.getMessage());
         } catch(IOException ioe) {
