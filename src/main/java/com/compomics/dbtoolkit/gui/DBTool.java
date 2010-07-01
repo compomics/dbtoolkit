@@ -90,7 +90,6 @@ public class DBTool extends CursorModifiableJFrameImpl implements StatusView {
             public void windowClosing(WindowEvent we) {
                 iController.exitTriggered();
             }
-
         });
 
         // RUG icon for the window.
@@ -105,8 +104,8 @@ public class DBTool extends CursorModifiableJFrameImpl implements StatusView {
 
         this.addComponentListener(new ComponentAdapter() {
             /**
-             * Invoked when the component's size changes.
-             */
+                 * Invoked when the component's size changes.
+                 */
             public void componentResized(ComponentEvent e) {
                 // We should inform the controller,
                 // so it can reformat the preview data and show it.
@@ -124,6 +123,7 @@ public class DBTool extends CursorModifiableJFrameImpl implements StatusView {
         this.setSize(this.getWidth()+5, this.getHeight()+5);
 
         // Show the frame.
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
@@ -396,10 +396,12 @@ public class DBTool extends CursorModifiableJFrameImpl implements StatusView {
     public static void main(String[] args) {
         DBTool tool = null;
         try {
-            tool = new DBTool("Database processing tool");
+            tool = new DBTool("Database Processing Tool");
             tool.openWindow();
         } catch(Throwable t) {
-            JOptionPane.showMessageDialog(tool, new String[]{"Fatal exception occurred in program!", "\n", "     " + t.getMessage() + "'!", "\n", "Please contact the author about this if the problem persists.", "\n", "\n"}, "Program unexpectedly terminated!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(tool, new String[]{"Fatal exception occurred in program!", "\n", "     " 
+                    + t.getMessage() + "'!", "\n", "Please contact the author about this if the problem persists.", "\n", "\n"},
+                    "Program unexpectedly terminated!", JOptionPane.ERROR_MESSAGE);
             t.printStackTrace();
             System.exit(1);
         }
