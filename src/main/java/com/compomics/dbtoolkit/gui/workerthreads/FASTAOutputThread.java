@@ -112,7 +112,7 @@ public class FASTAOutputThread implements Runnable {
      * @param aOutput   File with the pointer to the destination file.
      * @param aFilter   Filter to apply. Can be 'null' for no filter.
      * @param aMinMass  double with the minimal mass to pass the mass filter.
-     * @param aMinMass  double with the maximal mass to pass the mass filter.
+     * @param aMaxMass  double with the maximal mass to pass the mass filter.
      */
     public FASTAOutputThread(JFrame aParent, DBLoader aLoader, File aOutput, Filter aFilter, double aMinMass, double aMaxMass) {
         this(aParent, aLoader, aOutput, aFilter, null, aMinMass, aMaxMass);
@@ -144,7 +144,7 @@ public class FASTAOutputThread implements Runnable {
      * @param aSubstitutions    HashMap with the substitutions to perform. Can be 'null' for no
      *                         substitutions.
      * @param aMinMass  double with the minimal mass to pass the mass filter.
-     * @param aMinMass  double with the maximal mass to pass the mass filter.
+     * @param aMaxMass  double with the maximal mass to pass the mass filter.
 
      */
     public FASTAOutputThread(JFrame aParent, DBLoader aLoader, File aOutput, Filter aFilter, HashMap aSubstitutions, double aMinMass, double aMaxMass) {
