@@ -837,3 +837,6 @@ http://www.proteomics.be/people/lennartmartens/index.html
 
  - Version 4.1.1
         * Fixed a nasty bug that failed to filter correctly for entire taxonomy tree filtering (the OC lines).
+
+ - Version 4.1.2
+        * Updated to latest utilities (version 3.0.26) that now supports parsing of TrEMBL FASTA entries.
