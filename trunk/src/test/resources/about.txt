@@ -843,3 +843,6 @@ http://www.proteomics.be/people/lennartmartens/index.html
 
 - Version 4.1.3
         * Updated to latest utilities (version 3.0.27) that fixes parsing of Swiss-Prot FASTA headers.
+
+- Version 4.1.4
+        * Updated to latest utilities (version 3.0.28) that allows parsing of FlyBase FASTA headers.
