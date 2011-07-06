@@ -383,12 +383,12 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
     }
     
     /**
-     * Retuns the 
+     * Retuns the FASTA file as a String. With or without the header.
      * 
      * @param aRaw
      * @param aEndLines
-     * @param includeHeader
-     * @return
+     * @param includeHeader if true, the FASTA header is included
+     * @return the FASTA file as a String
      * @throws IOException 
      */
     public String toFASTAString(String aRaw, boolean aEndLines, boolean includeHeader) throws IOException {
