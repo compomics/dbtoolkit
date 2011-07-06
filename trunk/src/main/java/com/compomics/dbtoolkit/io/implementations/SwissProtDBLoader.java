@@ -377,58 +377,75 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
             System.err.println("\n* * * * * * * * * * * * * * * * * * * * *\nUnable to locate the 'SwissProtFromat.frmt' file in the classpath!\nNo reading will be possible!\n* * * * * * * * * * * * * * * * * * * * *\n");
         }
     }
-
+    
     public String toFASTAString(String aRaw, boolean aEndLines) throws IOException {
+        return toFASTAString(aRaw, aEndLines, true);
+    }
+    
+    /**
+     * Retuns the 
+     * 
+     * @param aRaw
+     * @param aEndLines
+     * @param includeHeader
+     * @return
+     * @throws IOException 
+     */
+    public String toFASTAString(String aRaw, boolean aEndLines, boolean includeHeader) throws IOException {
         // Make the raw data more easily accessible.
         HashMap lhmRaw = this.processRawData(aRaw);
         // We'll need some intermediate String storing.
         StringBuffer fastaString = new StringBuffer();
 
-        // First up is the 'sw' tag, followed by '|', the primary accession number,
-        // followed by '|' and the entry name + a whitespace (space).
-        fastaString.append(">sw|");
-        // Getting the Accessionnumber.
-        String temp = (String)lhmRaw.get("AC");
-        // Check for multiple Acc. numbers, and if so,
-        // take the first one.
-        int location = temp.indexOf(";");
-        if(location < 0) {
-            temp = temp.trim();
-        } else {
-            temp = temp.substring(0,location).trim();
-        }
-        fastaString.append(temp + "|");
-        // And the entry name...
-        temp = (String)lhmRaw.get("ID");
-        // Entry name is the first element in the ID field, and is
-        // separated from subsequent elements by a whitespace.
-        location = temp.indexOf(" ");
-        temp = temp.substring(0, location).trim();
-        fastaString.append(temp + " ");
+        if (includeHeader) {
+            
+            // First up is the 'sw' tag, followed by '|', the primary accession number,
+            // followed by '|' and the entry name + a whitespace (space).
+            fastaString.append(">sw|");
+            // Getting the Accessionnumber.
+            String temp = (String)lhmRaw.get("AC");
+            // Check for multiple Acc. numbers, and if so,
+            // take the first one.
+            int location = temp.indexOf(";");
+            if(location < 0) {
+                temp = temp.trim();
+            } else {
+                temp = temp.substring(0,location).trim();
+            }
+            fastaString.append(temp + "|");
+            // And the entry name...
+            temp = (String)lhmRaw.get("ID");
+            // Entry name is the first element in the ID field, and is
+            // separated from subsequent elements by a whitespace.
+            location = temp.indexOf(" ");
+            temp = temp.substring(0, location).trim();
+            fastaString.append(temp + " ");
 
-        // Next is de description, followed by an endline which marks the end of the header.
-        temp = (String)lhmRaw.get("DE");
-        // See if we have the post-2008 SwissProt DAT file's DE format (which differentiates
-        // between recommended and alternative names). If so, use only hte recommended name,
-        // otherwise, include everything.
-        if(temp.startsWith("RecName: Full=")) {
-            temp = temp.substring(14, temp.indexOf(";", 14)).trim();
+            // Next is de description, followed by an endline which marks the end of the header.
+            temp = (String)lhmRaw.get("DE");
+            // See if we have the post-2008 SwissProt DAT file's DE format (which differentiates
+            // between recommended and alternative names). If so, use only hte recommended name,
+            // otherwise, include everything.
+            if(temp.startsWith("RecName: Full=")) {
+                temp = temp.substring(14, temp.indexOf(";", 14)).trim();
+            }
+            // 'DE' element can contain multiple lines. Use a StringReader to get
+            // rid of them.
+            BufferedReader lBr = new BufferedReader(new StringReader(temp));
+            String line = null;
+            while((line = lBr.readLine()) != null) {
+                fastaString.append(line);
+            }
+            lBr.close();
+            fastaString.append("\n");
         }
-        // 'DE' element can contain multiple lines. Use a StringReader to get
-        // rid of them.
-        BufferedReader lBr = new BufferedReader(new StringReader(temp));
-        String line = null;
-        while((line = lBr.readLine()) != null) {
-            fastaString.append(line);
-        }
-        lBr.close();
-        fastaString.append("\n");
 
         // All that's left now is the sequence itself.
         // We'll need to clear the sequence up a little, 'though.
         // It contains endlines and whitespaces which we don't want!
-        lBr = new BufferedReader(new StringReader((String)lhmRaw.get("  ")));
+        BufferedReader lBr = new BufferedReader(new StringReader((String)lhmRaw.get("  ")));
         StringBuffer tempSequence = new StringBuffer();
+        String line = null;
         while((line = lBr.readLine()) != null) {
             StringTokenizer lst = new StringTokenizer(line.trim(), " ");
             while(lst.hasMoreTokens()) {

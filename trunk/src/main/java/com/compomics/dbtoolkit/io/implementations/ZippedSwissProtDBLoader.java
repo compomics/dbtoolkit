@@ -387,7 +387,7 @@ public class ZippedSwissProtDBLoader extends ZippedDBLoader implements SwissProt
             System.err.println("\n* * * * * * * * * * * * * * * * * * * * *\nUnable to locate the 'SwissProtFromat.frmt' file in the classpath!\nNo reading will be possible!\n* * * * * * * * * * * * * * * * * * * * *\n");
         }
     }
-
+    
     /**
      * This method converts a SwissProt raw String into a FASTA format String.
      *
