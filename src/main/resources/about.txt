@@ -103,7 +103,7 @@ Notes about this text:
     section 2.a above for more information on database loading) and then using the 'Process' option in the 'File' menu.
     This can be done using the mouse or by pressing (ALT) + (F) for the 'File' menu, and then (ALT) + (P) to access the process
     screen.
-    The processing function is the main 'raison d'être' for the application, so we'll discuss the processing screen in some
+    The processing function is the main 'raison d'ï¿½tre' for the application, so we'll discuss the processing screen in some
     more detail, starting top to bottom:
 
         1) Filtering for entries:
@@ -617,7 +617,7 @@ It's not that they're that hard, it's just that some people require a little hel
 
 7. About the author.
 --------------------
-Lennart Martens (lennart.martens AT UGent.be) is a PhD (or predoctoral as we say in Europe) student at the lab of Prof. Dr. Joël Vandekerckhove in the
+Lennart Martens (lennart.martens AT UGent.be) is a PhD (or predoctoral as we say in Europe) student at the lab of Prof. Dr. Joï¿½l Vandekerckhove in the
 University of Ghent, Ghent, Belgium.
 At the time of this writing he is supported by an FWO scholarship (the FWO is the National Fund for Scientific Research in Flanders, www.fwo.be) and is
 specializing in bioinformatics with a focus on proteomics.
@@ -660,7 +660,7 @@ http://www.proteomics.be/people/lennartmartens/index.html
         * Lost revision history in CVS and binaries as a result of new project structure.
 
 - Version 2.1
-        * Met without 'init-Met' has been renamed to 'U' because of character typeset problems with 'µ'.
+        * Met without 'init-Met' has been renamed to 'U' because of character typeset problems with 'ï¿½'.
         * Cumulative minor bugfixes grouped into this release.
 
 - Version 2.2
@@ -846,3 +846,6 @@ http://www.proteomics.be/people/lennartmartens/index.html
 
 - Version 4.1.4
         * Updated to latest utilities (version 3.0.28) that allows parsing of FlyBase FASTA headers.
+
+- Version 4.1.5
+        * Updated to latest utilities (version 3.3.37) that fixes parsing of TAIR FASTA headers.
