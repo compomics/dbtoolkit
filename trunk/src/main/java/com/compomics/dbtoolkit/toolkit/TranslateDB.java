@@ -64,7 +64,7 @@ public class TranslateDB {
         }
         File inputFile = new File(input);
         if(!inputFile.exists() || inputFile.isDirectory()) {
-            printError("Unabel to read the input file you specified ('" + input + "')!");
+            printError("Unable to read the input file you specified ('" + input + "')!");
         }
         String[] params = clp.getParameters();
         if(params == null || params.length != 1) {
