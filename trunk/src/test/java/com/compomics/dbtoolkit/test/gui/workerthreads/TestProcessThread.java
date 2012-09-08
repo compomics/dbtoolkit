@@ -18,9 +18,9 @@ import com.compomics.dbtoolkit.io.implementations.AutoDBLoader;
 import com.compomics.dbtoolkit.io.implementations.ProteinSequenceRegExpFilter;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
 import com.compomics.dbtoolkit.io.interfaces.ProteinFilter;
+import com.compomics.util.junit.TestCaseLM;
 import com.compomics.util.protein.Enzyme;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.gui.workerthreads.ProcessThread
  */
-public class TestProcessThread extends TestCaseLM {
+public class TestProcessThread extends TestCase {
 
     public TestProcessThread() {
         this("Test for the ProcessThread class - not in Threading mode, 'though!");
@@ -61,8 +61,8 @@ public class TestProcessThread extends TestCaseLM {
         File control = null;
         try {
             // Necessary variables.
-            input = new File(super.getFullFilePath("testFASTA.fas"));
-            control = new File(super.getFullFilePath("controlOfNTermRaggingTest.fas"));
+            input = new File(TestCaseLM.getFullFilePath("testFASTA.fas"));
+            control = new File(TestCaseLM.getFullFilePath("controlOfNTermRaggingTest.fas"));
             output = new File(input.getParent() + "/outputOfNTermRaggingTest.fas");
 
             AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
@@ -102,8 +102,8 @@ public class TestProcessThread extends TestCaseLM {
         File control = null;
         try {
             // Necessary variables.
-            input = new File(super.getFullFilePath("testFASTA.fas"));
-            control = new File(super.getFullFilePath("controlOfCTermRaggingTest.fas"));
+            input = new File(TestCaseLM.getFullFilePath("testFASTA.fas"));
+            control = new File(TestCaseLM.getFullFilePath("controlOfCTermRaggingTest.fas"));
             output = new File(input.getParent() + "/outputOfCTermRaggingTest.fas");
 
             AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
@@ -139,11 +139,11 @@ public class TestProcessThread extends TestCaseLM {
      */
     public void testWithoutMassLimits() {
         File output = null;
-        File input = new File(super.getFullFilePath("NoMassLimitsRagFile.fas"));
+        File input = new File(TestCaseLM.getFullFilePath("NoMassLimitsRagFile.fas"));
         File control = null;
         try {
             // Necessary variables.
-            control = new File(super.getFullFilePath("controlOfNTermRaggingTest_noMassLimits.fas"));
+            control = new File(TestCaseLM.getFullFilePath("controlOfNTermRaggingTest_noMassLimits.fas"));
             output = new File(input.getParent() + "/outputOfNTermRaggingTest_noMassLimits.fas");
 
             AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
@@ -174,7 +174,7 @@ public class TestProcessThread extends TestCaseLM {
 
         try {
             // Necessary variables.
-            control = new File(super.getFullFilePath("controlOfCTermRaggingTest_noMassLimits.fas"));
+            control = new File(TestCaseLM.getFullFilePath("controlOfCTermRaggingTest_noMassLimits.fas"));
             output = new File(input.getParent() + "/outputOfCTermRaggingTest_noMassLimits.fas");
 
             AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
@@ -217,8 +217,8 @@ public class TestProcessThread extends TestCaseLM {
         // First String-based (own query style) subset selection.
         try {
             // Necessary variables.
-            input = new File(super.getFullFilePath("testFASTA.fas"));
-            control = new File(super.getFullFilePath("controlOfStringSubsetTest.fas"));
+            input = new File(TestCaseLM.getFullFilePath("testFASTA.fas"));
+            control = new File(TestCaseLM.getFullFilePath("controlOfStringSubsetTest.fas"));
             output = new File(input.getParent() + "/outputOfStringSubsetTest.fas");
 
             AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
@@ -252,8 +252,8 @@ public class TestProcessThread extends TestCaseLM {
         // Now regexp-based subset selection.
         try {
             // Necessary variables.
-            input = new File(super.getFullFilePath("testFASTA.fas"));
-            control = new File(super.getFullFilePath("controlOfRegExpSubsetTest.fas"));
+            input = new File(TestCaseLM.getFullFilePath("testFASTA.fas"));
+            control = new File(TestCaseLM.getFullFilePath("controlOfRegExpSubsetTest.fas"));
             output = new File(input.getParent() + "/outputOfRegExpSubsetTest.fas");
 
             AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});

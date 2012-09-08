@@ -13,8 +13,7 @@
 package com.compomics.dbtoolkit.test.io.implementations;
 
 import com.compomics.dbtoolkit.io.implementations.SequenceRegion;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 /*
  * CVS information:
@@ -29,7 +28,7 @@ import junit.framework.Assert;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.implementations.SequenceRegion
  */
-public class TestSequenceRegion extends TestCaseLM {
+public class TestSequenceRegion extends TestCase {
 
     public TestSequenceRegion() {
         this("Test scenario for the SequenceRegion class.");

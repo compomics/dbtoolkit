@@ -14,9 +14,9 @@ package com.compomics.dbtoolkit.test.io.implementations;
 
 import com.compomics.dbtoolkit.io.implementations.FASTADBLoader;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
+import com.compomics.util.junit.TestCaseLM;
 import com.compomics.util.protein.Protein;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 import java.io.*;
 
@@ -33,7 +33,7 @@ import java.io.*;
  * @author Lennart
  * @see com.compomics.dbtoolkit.io.implementations.FASTADBLoader
  */
-public class TestFASTADBLoader extends TestCaseLM {
+public class TestFASTADBLoader extends TestCase {
 
     public TestFASTADBLoader() {
         this("Test for the FASTADBLoader class.");
@@ -72,7 +72,7 @@ public class TestFASTADBLoader extends TestCaseLM {
     public void testRawReadingBehaviour() {
         try {
             final String inputFile = "testFASTA.fas";
-            String input = super.getFullFilePath(inputFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
 
             DBLoader db = new FASTADBLoader();
             db.load(input);
@@ -95,8 +95,8 @@ public class TestFASTADBLoader extends TestCaseLM {
         try {
             final String inputFile = "testFASTA.fas";
             final String controlFile = "testFASTA_No_line_breaks.fas";
-            String input = super.getFullFilePath(inputFile);
-            String control = super.getFullFilePath(controlFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
+            String control = TestCaseLM.getFullFilePath(controlFile);
 
             DBLoader db = new FASTADBLoader();
             db.load(input);
@@ -126,7 +126,7 @@ public class TestFASTADBLoader extends TestCaseLM {
         try {
             final String inputFile = "testFASTA.fas";
             final String control = ">sw|P21541|ZY11_CAEEL Early embryogenesis ZYG-11 protein.";
-            String input = super.getFullFilePath(inputFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
 
             // First find out whether the correct amount of entries is found.
             DBLoader db = new FASTADBLoader();
@@ -147,8 +147,8 @@ public class TestFASTADBLoader extends TestCaseLM {
         final String inputFile = "testFASTA.fas";
         final String controlFile = "testFASTA_No_line_breaks.fas";
 
-        final String input = super.getFullFilePath(inputFile);
-        final String control = super.getFullFilePath(controlFile);
+        final String input = TestCaseLM.getFullFilePath(inputFile);
+        final String control = TestCaseLM.getFullFilePath(controlFile);
 
         try {
             DBLoader db = new FASTADBLoader();
@@ -173,7 +173,7 @@ public class TestFASTADBLoader extends TestCaseLM {
      */
     public void testReset() {
         final String inputFile = "testFASTA.fas";
-        final String input = super.getFullFilePath(inputFile);
+        final String input = TestCaseLM.getFullFilePath(inputFile);
 
         try {
             DBLoader db = new FASTADBLoader();

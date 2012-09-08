@@ -16,8 +16,8 @@ import com.compomics.dbtoolkit.io.DBLoaderLoader;
 import com.compomics.dbtoolkit.io.FilterLoader;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
 import com.compomics.dbtoolkit.io.interfaces.Filter;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +35,7 @@ import java.io.IOException;
  * @author Lennart Marte,s
  * @see com.compomics.dbtoolkit.io.FilterLoader
  */
-public class TestFilterLoader extends TestCaseLM {
+public class TestFilterLoader extends TestCase {
 
     public TestFilterLoader() {
         this("Test scenario for the FilterLoader class.");
@@ -51,14 +51,14 @@ public class TestFilterLoader extends TestCaseLM {
     public void testLoading() {
         DBLoader fastaLoader = null;
         try {
-            fastaLoader = DBLoaderLoader.loadDB(new File(super.getFullFilePath("testFASTA.fas")));
+            fastaLoader = DBLoaderLoader.loadDB(new File(TestCaseLM.getFullFilePath("testFASTA.fas")));
         } catch(IOException ioe) {
             fail("IOException thrown when creating the FASTA DBLoader: " + ioe.getMessage());
         }
 
         DBLoader spLoader = null;
         try {
-            spLoader = DBLoaderLoader.loadDB(new File(super.getFullFilePath("test.spr")));
+            spLoader = DBLoaderLoader.loadDB(new File(TestCaseLM.getFullFilePath("test.spr")));
         } catch(IOException ioe) {
             fail("IOException thrown when creating the SwissProt DBLoader: " + ioe.getMessage());
         }

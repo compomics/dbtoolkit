@@ -14,8 +14,7 @@ package com.compomics.dbtoolkit.test.io.implementations;
 
 import com.compomics.dbtoolkit.io.implementations.FASTAHeaderFilter;
 import com.compomics.dbtoolkit.io.interfaces.Filter;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 /*
  * CVS information:
@@ -30,7 +29,7 @@ import junit.framework.Assert;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.implementations.FASTATaxonomyFilter
  */
-public class TestFASTATaxonomyFilter extends TestCaseLM {
+public class TestFASTATaxonomyFilter extends TestCase {
 
     public TestFASTATaxonomyFilter() {
         this("Test scenario for the FASTATaxonomyFilter class.");

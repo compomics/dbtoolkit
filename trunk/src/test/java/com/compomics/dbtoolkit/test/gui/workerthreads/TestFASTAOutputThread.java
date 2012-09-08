@@ -6,19 +6,17 @@
  */
 package com.compomics.dbtoolkit.test.gui.workerthreads;
 
-import junit.TestCaseLM;
-import junit.framework.Assert;
-
-import java.util.HashMap;
-import java.text.ParseException;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 import com.compomics.dbtoolkit.gui.workerthreads.FASTAOutputThread;
-import com.compomics.dbtoolkit.io.interfaces.DBLoader;
 import com.compomics.dbtoolkit.io.DBLoaderLoader;
-import sun.applet.Main;
+import com.compomics.dbtoolkit.io.interfaces.DBLoader;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.text.ParseException;
+import java.util.HashMap;
 /*
  * CVS information:
  *
@@ -33,7 +31,7 @@ import sun.applet.Main;
  * @version $Id: TestFASTAOutputThread.java,v 1.1 2006/04/08 20:10:01 lennart Exp $
  * @see com.compomics.dbtoolkit.gui.workerthreads.FASTAOutputThread
  */
-public class TestFASTAOutputThread extends TestCaseLM {
+public class TestFASTAOutputThread extends TestCase {
 
     public TestFASTAOutputThread() {
         this("Test scenario for the FASTAOutputThread class.");
@@ -118,8 +116,8 @@ public class TestFASTAOutputThread extends TestCaseLM {
      * This method tests whether the substition function works.
      */
     public void testSubstitution1() {
-        File input = new File(super.getFullFilePath("redundantDB.fas"));
-        File control = new File(super.getFullFilePath("control_substitution.fas"));
+        File input = new File(TestCaseLM.getFullFilePath("redundantDB.fas"));
+        File control = new File(TestCaseLM.getFullFilePath("control_substitution.fas"));
         File output = new File(input.getParentFile(), "output_substitution.fas");
         try {
             DBLoader loader = DBLoaderLoader.loadDB(input);
@@ -150,8 +148,8 @@ public class TestFASTAOutputThread extends TestCaseLM {
      * This method tests whether the substition function works.
      */
     public void testSubstitution2() {
-        File input = new File(super.getFullFilePath("redundantDB.fas"));
-        File control = new File(super.getFullFilePath("control_substitution_2.fas"));
+        File input = new File(TestCaseLM.getFullFilePath("redundantDB.fas"));
+        File control = new File(TestCaseLM.getFullFilePath("control_substitution_2.fas"));
         File output = new File(input.getParentFile(), "output_substitution_2.fas");
         try {
             DBLoader loader = DBLoaderLoader.loadDB(input);
@@ -182,8 +180,8 @@ public class TestFASTAOutputThread extends TestCaseLM {
      * This method tests whether the substition function works.
      */
     public void testSubstitution3() {
-        File input = new File(super.getFullFilePath("redundantDB.fas"));
-        File control = new File(super.getFullFilePath("control_substitution_3.fas"));
+        File input = new File(TestCaseLM.getFullFilePath("redundantDB.fas"));
+        File control = new File(TestCaseLM.getFullFilePath("control_substitution_3.fas"));
         File output = new File(input.getParentFile(), "output_substitution_3.fas");
         try {
             DBLoader loader = DBLoaderLoader.loadDB(input);

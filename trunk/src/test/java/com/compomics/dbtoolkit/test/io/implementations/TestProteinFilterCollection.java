@@ -18,8 +18,7 @@ import com.compomics.dbtoolkit.io.implementations.ProteinResiduCountFilter;
 import com.compomics.dbtoolkit.io.implementations.ProteinSequenceFilter;
 import com.compomics.dbtoolkit.io.interfaces.ProteinFilter;
 import com.compomics.util.protein.Protein;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 /*
  * CVS information:
@@ -35,7 +34,7 @@ import junit.framework.Assert;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.implementations.ProteinFilterCollection
  */
-public class TestProteinFilterCollection extends TestCaseLM {
+public class TestProteinFilterCollection extends TestCase {
 
     public TestProteinFilterCollection() {
         this("Full test scenario for the ProteinFilterCollection class.");

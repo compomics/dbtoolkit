@@ -16,9 +16,9 @@ import com.compomics.dbtoolkit.io.implementations.SwissProtTaxonomyFilter;
 import com.compomics.dbtoolkit.io.implementations.ZippedSwissProtDBLoader;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
 import com.compomics.dbtoolkit.io.interfaces.Filter;
+import com.compomics.util.junit.TestCaseLM;
 import com.compomics.util.protein.Protein;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 import java.io.*;
 
@@ -35,7 +35,7 @@ import java.io.*;
  * @author Lennart
  * @see com.compomics.dbtoolkit.io.implementations.ZippedSwissProtDBLoader
  */
-public class TestZippedSwissProtDBLoader extends TestCaseLM {
+public class TestZippedSwissProtDBLoader extends TestCase {
 
     public TestZippedSwissProtDBLoader() {
         this("Test for the ZippedSwissProtDBLoader class.");
@@ -76,8 +76,8 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         try {
             final String inputFile = "test_SPFormat.zip";
             final String controlFile = "testAfter.spr";
-            String input = super.getFullFilePath(inputFile);
-            String control = super.getFullFilePath(controlFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
+            String control = TestCaseLM.getFullFilePath(controlFile);
 
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(input);
@@ -100,8 +100,8 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         try {
             final String inputFile = "test_SPFormat.spr.gz";
             final String controlFile = "testAfter.spr";
-            String input = super.getFullFilePath(inputFile);
-            String control = super.getFullFilePath(controlFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
+            String control = TestCaseLM.getFullFilePath(controlFile);
 
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(input);
@@ -130,8 +130,8 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         try {
             final String inputFile = "test_SPFormat.zip";
             final String controlFile = "testFASTA_NoLineBreaks.fas";
-            String input = super.getFullFilePath(inputFile);
-            String control = super.getFullFilePath(controlFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
+            String control = TestCaseLM.getFullFilePath(controlFile);
 
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(input);
@@ -154,8 +154,8 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         try {
             final String inputFile = "test_SPFormat.spr.gz";
             final String controlFile = "testFASTA_NoLineBreaks.fas";
-            String input = super.getFullFilePath(inputFile);
-            String control = super.getFullFilePath(controlFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
+            String control = TestCaseLM.getFullFilePath(controlFile);
 
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(input);
@@ -182,7 +182,7 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
     public void testFilter() {
         // ZIP format
         try {
-            final String inputFile = super.getFullFilePath("test_SPFormat.zip");
+            final String inputFile = TestCaseLM.getFullFilePath("test_SPFormat.zip");
             Filter f = new SwissProtTaxonomyFilter("Homo saPiens");
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(inputFile);
@@ -208,7 +208,7 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         }
         // GZIP format
         try {
-            final String inputFile = super.getFullFilePath("test_SPFormat.spr.gz");
+            final String inputFile = TestCaseLM.getFullFilePath("test_SPFormat.spr.gz");
             Filter f = new SwissProtTaxonomyFilter("Homo saPiens");
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(inputFile);
@@ -242,7 +242,7 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         try {
             final String inputFile = "test_SPFormat.zip";
             final String control = ">sw|P21541|ZY11_CAEEL Early embryogenesis ZYG-11 protein.";
-            String input = super.getFullFilePath(inputFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
 
             // First find out whether the correct amount of entries is found.
             DBLoader db = new ZippedSwissProtDBLoader();
@@ -257,7 +257,7 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         try {
             final String inputFile = "test_SPFormat.spr.gz";
             final String control = ">sw|P21541|ZY11_CAEEL Early embryogenesis ZYG-11 protein.";
-            String input = super.getFullFilePath(inputFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
 
             // First find out whether the correct amount of entries is found.
             DBLoader db = new ZippedSwissProtDBLoader();
@@ -277,8 +277,8 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
     public void testNextProtein() {
         // ZIP format
         try {
-            final String inputFile = super.getFullFilePath("test_SPFormat.zip");
-            final String controlFile = super.getFullFilePath("testFASTA_NoLineBreaks.fas");
+            final String inputFile = TestCaseLM.getFullFilePath("test_SPFormat.zip");
+            final String controlFile = TestCaseLM.getFullFilePath("testFASTA_NoLineBreaks.fas");
 
             DBLoader db = new ZippedSwissProtDBLoader();
             BufferedReader br = new BufferedReader(new FileReader(controlFile));
@@ -300,8 +300,8 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         }
         // GZIP format
         try {
-            final String inputFile = super.getFullFilePath("test_SPFormat.spr.gz");
-            final String controlFile = super.getFullFilePath("testFASTA_NoLineBreaks.fas");
+            final String inputFile = TestCaseLM.getFullFilePath("test_SPFormat.spr.gz");
+            final String controlFile = TestCaseLM.getFullFilePath("testFASTA_NoLineBreaks.fas");
 
             DBLoader db = new ZippedSwissProtDBLoader();
             BufferedReader br = new BufferedReader(new FileReader(controlFile));
@@ -333,7 +333,7 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
     public void testNextFilteredProtein() {
         // ZIP format
         try {
-            final String inputFile = super.getFullFilePath("test_SPFormat.zip");
+            final String inputFile = TestCaseLM.getFullFilePath("test_SPFormat.zip");
             Filter f = new SwissProtTaxonomyFilter("Homo saPiens");
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(inputFile);
@@ -350,7 +350,7 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         }
         // GZIP format
         try {
-            final String inputFile = super.getFullFilePath("test_SPFormat.spr.gz");
+            final String inputFile = TestCaseLM.getFullFilePath("test_SPFormat.spr.gz");
             Filter f = new SwissProtTaxonomyFilter("Homo saPiens");
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(inputFile);
@@ -374,7 +374,7 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
         // ZIP format
         try {
             final String inputFile = "test_SPFormat.zip";
-            String input = super.getFullFilePath(inputFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
 
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(input);
@@ -398,7 +398,7 @@ public class TestZippedSwissProtDBLoader extends TestCaseLM {
 
         try {
             final String inputFile = "test_SPFormat.spr.gz";
-            String input = super.getFullFilePath(inputFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
 
             DBLoader db = new ZippedSwissProtDBLoader();
             db.load(input);

@@ -12,15 +12,14 @@
  */
 package com.compomics.dbtoolkit.test.toolkit;
 
-import junit.TestCaseLM;
-import junit.framework.Assert;
-
-import java.io.IOException;
-import java.io.File;
-import java.util.*;
-
 import com.compomics.dbtoolkit.toolkit.ContainsPeptide;
+import com.compomics.util.junit.TestCaseLM;
 import com.compomics.util.protein.Protein;
+import junit.framework.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 /*
  * CVS information:
@@ -36,7 +35,7 @@ import com.compomics.util.protein.Protein;
  * @version $Id: TestContainsPeptide.java,v 1.3 2007/07/06 09:52:03 lennart Exp $
  * @see com.compomics.dbtoolkit.toolkit.ContainsPeptide
  */
-public class TestContainsPeptide extends TestCaseLM {
+public class TestContainsPeptide extends TestCase {
 
     public TestContainsPeptide() {
         this("This class tests the behaviour of the ContainsPeptide class.");
@@ -60,7 +59,7 @@ public class TestContainsPeptide extends TestCaseLM {
         }
         // Now try an empty sequence collection.
         try {
-            HashMap results = ContainsPeptide.processSequences(new File(super.getFullFilePath("testFASTA.fas")), new ArrayList());
+            HashMap results = ContainsPeptide.processSequences(new File(TestCaseLM.getFullFilePath("testFASTA.fas")), new ArrayList());
             Assert.assertEquals(0, results.size());
         } catch(IOException ioe) {
             fail("IOException thrown when processing empty sequence list: " + ioe.getMessage());
@@ -71,7 +70,7 @@ public class TestContainsPeptide extends TestCaseLM {
             seqs.add("GPG");
             seqs.add("PPHAWEPGAAPAQQPRCLIAPQAGFPQAAHPG");
             seqs.add("LENNARTMARTENS");
-            HashMap results = ContainsPeptide.processSequences(new File(super.getFullFilePath("testFASTA.fas")), seqs);
+            HashMap results = ContainsPeptide.processSequences(new File(TestCaseLM.getFullFilePath("testFASTA.fas")), seqs);
             Assert.assertEquals(3, results.size());
             // Now check each.
             // First sequence: GPG

@@ -17,8 +17,8 @@ import com.compomics.dbtoolkit.io.UnknownDBFormatException;
 import com.compomics.dbtoolkit.io.implementations.SwissProtTaxonomyFilter;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
 import com.compomics.dbtoolkit.io.interfaces.Filter;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.IOException;
 
@@ -35,7 +35,7 @@ import java.io.IOException;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.implementations.SwissProtTaxonomyFilter
  */
-public class TestSwissProtTaxonomyFilter extends TestCaseLM {
+public class TestSwissProtTaxonomyFilter extends TestCase {
 
     public TestSwissProtTaxonomyFilter() {
         this("Test for the SwissProtTaxonomyFilter class.");
@@ -52,7 +52,7 @@ public class TestSwissProtTaxonomyFilter extends TestCaseLM {
         try {
             final String input = "test.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
             // Test case insensitivity at the same time.
             Filter filter = new SwissProtTaxonomyFilter("HuMaN");
@@ -178,7 +178,7 @@ public class TestSwissProtTaxonomyFilter extends TestCaseLM {
         try {
             final String input = "test.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
             // Test case insensitivity at the same time.
             Filter filter = new SwissProtTaxonomyFilter("HuMaN", false);

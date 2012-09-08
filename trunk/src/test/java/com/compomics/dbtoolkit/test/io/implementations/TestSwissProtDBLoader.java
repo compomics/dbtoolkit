@@ -16,9 +16,9 @@ import com.compomics.dbtoolkit.io.implementations.SwissProtDBLoader;
 import com.compomics.dbtoolkit.io.implementations.SwissProtTaxonomyFilter;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
 import com.compomics.dbtoolkit.io.interfaces.Filter;
+import com.compomics.util.junit.TestCaseLM;
 import com.compomics.util.protein.Protein;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 import java.io.*;
 
@@ -35,7 +35,7 @@ import java.io.*;
  * @author Lennart
  * @see com.compomics.dbtoolkit.io.implementations.SwissProtDBLoader
  */
-public class TestSwissProtDBLoader extends TestCaseLM {
+public class TestSwissProtDBLoader extends TestCase {
 
     public TestSwissProtDBLoader() {
         this("Test for the SwissProtDBLoader class.");
@@ -75,8 +75,8 @@ public class TestSwissProtDBLoader extends TestCaseLM {
         try {
             final String inputFile = "test.spr";
             final String controlFile = "testAfter.spr";
-            String input = super.getFullFilePath(inputFile);
-            String control = super.getFullFilePath(controlFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
+            String control = TestCaseLM.getFullFilePath(controlFile);
 
             DBLoader db = new SwissProtDBLoader();
             db.load(input);
@@ -104,8 +104,8 @@ public class TestSwissProtDBLoader extends TestCaseLM {
         try {
             final String inputFile = "test.spr";
             final String controlFile = "testFASTA_NoLineBreaks.fas";
-            String input = super.getFullFilePath(inputFile);
-            String control = super.getFullFilePath(controlFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
+            String control = TestCaseLM.getFullFilePath(controlFile);
 
             DBLoader db = new SwissProtDBLoader();
             db.load(input);
@@ -123,7 +123,7 @@ public class TestSwissProtDBLoader extends TestCaseLM {
             Assert.assertEquals(check.toString(), received.toString());
 
             // Now test the post-September 2008 format conversion to FASTA.
-            input = super.getFullFilePath("test3.spr");
+            input = TestCaseLM.getFullFilePath("test3.spr");
 
             db = new SwissProtDBLoader();
             db.load(input);
@@ -143,7 +143,7 @@ public class TestSwissProtDBLoader extends TestCaseLM {
      */
     public void testFilter() {
         try {
-            final String inputFile = super.getFullFilePath("test.spr");
+            final String inputFile = TestCaseLM.getFullFilePath("test.spr");
             Filter f = new SwissProtTaxonomyFilter("Homo saPiens");
             DBLoader db = new SwissProtDBLoader();
             db.load(inputFile);
@@ -175,7 +175,7 @@ public class TestSwissProtDBLoader extends TestCaseLM {
     public void testCounter() {
         try {
             final String inputFile = "test.spr";
-            String input = super.getFullFilePath(inputFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
 
             // First find out whether the correct amount of entries is found.
             DBLoader db = new SwissProtDBLoader();
@@ -194,8 +194,8 @@ public class TestSwissProtDBLoader extends TestCaseLM {
      */
     public void testNextProtein() {
         try {
-            final String inputFile = super.getFullFilePath("test.spr");
-            final String controlFile = super.getFullFilePath("testFASTA_NoLineBreaks.fas");
+            final String inputFile = TestCaseLM.getFullFilePath("test.spr");
+            final String controlFile = TestCaseLM.getFullFilePath("testFASTA_NoLineBreaks.fas");
 
             DBLoader db = new SwissProtDBLoader();
             BufferedReader br = new BufferedReader(new FileReader(controlFile));
@@ -226,7 +226,7 @@ public class TestSwissProtDBLoader extends TestCaseLM {
      */
     public void testNextFilteredProtein() {
         try {
-            final String inputFile = super.getFullFilePath("test.spr");
+            final String inputFile = TestCaseLM.getFullFilePath("test.spr");
             Filter f = new SwissProtTaxonomyFilter("Homo saPiens");
             DBLoader db = new SwissProtDBLoader();
             db.load(inputFile);
@@ -249,7 +249,7 @@ public class TestSwissProtDBLoader extends TestCaseLM {
     public void testReset() {
         try {
             final String inputFile = "test.spr";
-            String input = super.getFullFilePath(inputFile);
+            String input = TestCaseLM.getFullFilePath(inputFile);
 
             DBLoader db = new SwissProtDBLoader();
             db.load(input);

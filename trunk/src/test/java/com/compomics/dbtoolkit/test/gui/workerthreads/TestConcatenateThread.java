@@ -13,8 +13,8 @@
 package com.compomics.dbtoolkit.test.gui.workerthreads;
 
 import com.compomics.dbtoolkit.gui.workerthreads.ConcatenateThread;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -35,7 +35,7 @@ import java.io.IOException;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.gui.workerthreads.ConcatenateThread
  */
-public class TestConcatenateThread extends TestCaseLM {
+public class TestConcatenateThread extends TestCase {
 
     public TestConcatenateThread() {
         this("Test scenario for the ConcatenateThread class (albeit without testing threading).");
@@ -53,7 +53,7 @@ public class TestConcatenateThread extends TestCaseLM {
         File output = null;
         try {
             // Necessary variables.
-            input = new File(super.getFullFilePath("testFASTA.fas"));
+            input = new File(TestCaseLM.getFullFilePath("testFASTA.fas"));
             output = new File(input.getParent() + "/outputOfCopyTest.fas");
 
             ConcatenateThread ct = new ConcatenateThread(input, output);
@@ -87,9 +87,9 @@ public class TestConcatenateThread extends TestCaseLM {
         File control = null;
         try {
             // Necessary variables.
-            input1 = new File(super.getFullFilePath("testFASTA.fas"));
-            input2 = new File(super.getFullFilePath("testAfter.spr"));
-            control = new File(super.getFullFilePath("controlOfConcatTest.fas"));
+            input1 = new File(TestCaseLM.getFullFilePath("testFASTA.fas"));
+            input2 = new File(TestCaseLM.getFullFilePath("testAfter.spr"));
+            control = new File(TestCaseLM.getFullFilePath("controlOfConcatTest.fas"));
             output = new File(input1.getParent() + "/outputOfConcatTest.fas");
 
             ConcatenateThread ct = new ConcatenateThread(input1, input2, output);

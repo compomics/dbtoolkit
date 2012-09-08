@@ -13,10 +13,10 @@
 package com.compomics.dbtoolkit.test.general;
 
 import com.compomics.dbtoolkit.general.NoEnzymeSimulator;
+import com.compomics.util.junit.TestCaseLM;
 import com.compomics.util.protein.Enzyme;
 import com.compomics.util.protein.Protein;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -37,7 +37,7 @@ import java.util.Comparator;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.general.NoEnzymeSimulator
  */
-public class TestNoEnzymeSimulator extends TestCaseLM {
+public class TestNoEnzymeSimulator extends TestCase {
 
     public TestNoEnzymeSimulator() {
         this("Test scenario for the NoEnzymeSimulator class.");
@@ -71,7 +71,7 @@ public class TestNoEnzymeSimulator extends TestCaseLM {
      */
     public void testNoEnzymeSimulation() {
         try {
-            final BufferedReader br = new BufferedReader(new FileReader(super.getFullFilePath("testNoEnzymeSimulator.fas")));
+            final BufferedReader br = new BufferedReader(new FileReader(TestCaseLM.getFullFilePath("testNoEnzymeSimulator.fas")));
             Protein p = new Protein(">Test Protein.\nKLMIR");
             NoEnzymeSimulator nes = new NoEnzymeSimulator("M");
             Protein[] result = nes.performRagging(p);

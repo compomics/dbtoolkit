@@ -15,8 +15,8 @@ package com.compomics.dbtoolkit.test.general;
 import com.compomics.dbtoolkit.general.PeptideSequenceRegionRetriever;
 import com.compomics.dbtoolkit.io.UnknownDBFormatException;
 import com.compomics.dbtoolkit.io.implementations.SequenceRegion;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -34,7 +34,7 @@ import java.util.Vector;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.general.PeptideSequenceRegionRetriever
  */
-public class TestPeptideSequenceRegionRetriever extends TestCaseLM {
+public class TestPeptideSequenceRegionRetriever extends TestCase {
 
     public TestPeptideSequenceRegionRetriever() {
         this("This class implements the tests for the PeptideSequenceRegionRetriever class.");
@@ -49,7 +49,7 @@ public class TestPeptideSequenceRegionRetriever extends TestCaseLM {
      */
     public void testBatchRetrieval() {
         // First get a database to load.
-        String db = super.getFullFilePath("testFASTA.fas");
+        String db = TestCaseLM.getFullFilePath("testFASTA.fas");
 
         // Create a new Retriever.
         try {
@@ -156,7 +156,7 @@ public class TestPeptideSequenceRegionRetriever extends TestCaseLM {
      */
     public void testMultipleOccurrence() {
         // First get a database to load.
-        final String db = super.getFullFilePath("testFASTA.fas");
+        final String db = TestCaseLM.getFullFilePath("testFASTA.fas");
 
         // Create a new Retriever.
         try {
@@ -249,7 +249,7 @@ public class TestPeptideSequenceRegionRetriever extends TestCaseLM {
      */
     public void testMixedVector() {
         // First get a database to load.
-        String db = super.getFullFilePath("testFASTA.fas");
+        String db = TestCaseLM.getFullFilePath("testFASTA.fas");
 
         // Create a new Retriever.
         try {
@@ -359,7 +359,7 @@ public class TestPeptideSequenceRegionRetriever extends TestCaseLM {
      */
     public void testNotFound() {
         // First get a database to load.
-        String db = super.getFullFilePath("testFASTA.fas");
+        String db = TestCaseLM.getFullFilePath("testFASTA.fas");
 
         // Create a new Retriever.
         try {
@@ -471,7 +471,7 @@ public class TestPeptideSequenceRegionRetriever extends TestCaseLM {
 
         // UnknownDBFormatException.
         try {
-            PeptideSequenceRegionRetriever psr = new PeptideSequenceRegionRetriever(super.getFullFilePath("filters.properties"));
+            PeptideSequenceRegionRetriever psr = new PeptideSequenceRegionRetriever(TestCaseLM.getFullFilePath("filters.properties"));
             fail("No UnknownDBFormatException thrown when confronting the PeptideSequenceRegionRetriever constructor with a properties file!");
         } catch(IOException ioe) {
             fail("IOException thrown when attempting to load a DB for PeptideSequenceRegionRetriever testing: " + ioe.getMessage() + "!");
@@ -486,7 +486,7 @@ public class TestPeptideSequenceRegionRetriever extends TestCaseLM {
     public void testSingleRetrieve() {
 
         // First get a database to load.
-        String db = super.getFullFilePath("testFASTA.fas");
+        String db = TestCaseLM.getFullFilePath("testFASTA.fas");
 
         // Create a new Retriever.
         try {

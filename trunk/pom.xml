@@ -10,7 +10,7 @@
 
     <!-- Set the version number for the whole project -->
     <properties>
-        <version.number>4.1.5</version.number>
+        <version.number>4.1.6</version.number>
     </properties>
 
     <!-- Licence -->
@@ -183,13 +183,6 @@
     <!-- Repositores -->
     <!-- Repositores -->
     <repositories>
-        <!-- UGent Genesis Maven 1 repository -->
-        <repository>
-            <id>genesis-maven-repository</id>
-            <name>Genesis repository</name>
-            <url>http://genesis.UGent.be/maven</url>
-            <layout>legacy</layout>
-        </repository>
 
         <!-- UGent Genesis Maven 2 repository -->
         <repository>
@@ -209,17 +202,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
-            <scope>build</scope>
-        </dependency>
-
-        <!-- This project depends on the JAR file "lmjunit-1.0.2.jar" (TestCaseLM)
-             the remote repository root of which is 'http://genesis.UGent.be/maven'.
-          -->
-        <dependency>
-            <groupId>lennart</groupId>
-            <artifactId>lmjunit</artifactId>
-            <version>1.0.2</version>
-            <type>jar</type>
+            <scope>test</scope>
         </dependency>
 
         <!-- This project depends on the utilities JAR file.
@@ -227,7 +210,7 @@
         <dependency>
             <groupId>com.compomics</groupId>
             <artifactId>utilities</artifactId>
-            <version>3.3.37</version>
+            <version>3.8.7</version>
             <type>jar</type>
         </dependency>
     </dependencies>

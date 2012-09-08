@@ -14,8 +14,7 @@ package com.compomics.dbtoolkit.test.io;
 
 import com.compomics.dbtoolkit.io.EnzymeLoader;
 import com.compomics.util.protein.Enzyme;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 import java.io.IOException;
 
@@ -33,7 +32,7 @@ import java.io.IOException;
  * @see com.compomics.dbtoolkit.io.EnzymeLoader
  *
  */
-public class TestEnzymeLoader extends TestCaseLM {
+public class TestEnzymeLoader extends TestCase {
 
     public TestEnzymeLoader() {
         this("test scenario for the EnzymeLoader class.");
