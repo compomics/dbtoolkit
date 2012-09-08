@@ -15,8 +15,7 @@ package com.compomics.dbtoolkit.test.io;
 import com.compomics.dbtoolkit.io.QueryParser;
 import com.compomics.dbtoolkit.io.interfaces.ProteinFilter;
 import com.compomics.util.protein.Protein;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 import java.text.ParseException;
 
@@ -33,7 +32,7 @@ import java.text.ParseException;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.QueryParser
  */
-public class TestQueryParser extends TestCaseLM {
+public class TestQueryParser extends TestCase {
 
     public TestQueryParser() {
         this("Test scenario for the QueryParser class.");

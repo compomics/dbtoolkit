@@ -15,8 +15,7 @@ package com.compomics.dbtoolkit.test.io.implementations;
 import com.compomics.dbtoolkit.io.implementations.ProteinMassFilter;
 import com.compomics.dbtoolkit.io.interfaces.ProteinFilter;
 import com.compomics.util.protein.Protein;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 /*
  * CVS information:
@@ -30,7 +29,7 @@ import junit.framework.Assert;
  *
  * @author Lennart Martens
  */
-public class TestProteinMassFilter extends TestCaseLM {
+public class TestProteinMassFilter extends TestCase {
 
     public TestProteinMassFilter() {
         this("The test scenario for the ProteinMassFilter.");

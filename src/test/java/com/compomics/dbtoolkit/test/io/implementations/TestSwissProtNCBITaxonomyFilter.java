@@ -6,13 +6,13 @@
  */
 package com.compomics.dbtoolkit.test.io.implementations;
 
-import junit.TestCaseLM;
-import junit.framework.Assert;
-import com.compomics.dbtoolkit.io.interfaces.DBLoader;
-import com.compomics.dbtoolkit.io.interfaces.Filter;
 import com.compomics.dbtoolkit.io.DBLoaderFactory;
 import com.compomics.dbtoolkit.io.UnknownDBFormatException;
 import com.compomics.dbtoolkit.io.implementations.SwissProtNCBITaxonomyFilter;
+import com.compomics.dbtoolkit.io.interfaces.DBLoader;
+import com.compomics.dbtoolkit.io.interfaces.Filter;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.IOException;
 /*
@@ -28,7 +28,7 @@ import java.io.IOException;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.implementations.SwissProtNCBITaxonomyFilter
  */
-public class TestSwissProtNCBITaxonomyFilter extends TestCaseLM {
+public class TestSwissProtNCBITaxonomyFilter extends TestCase {
 
     public TestSwissProtNCBITaxonomyFilter() {
         this("Test for the SwissProtNCBITaxonomyFilter class.");
@@ -45,7 +45,7 @@ public class TestSwissProtNCBITaxonomyFilter extends TestCaseLM {
         try {
             final String input = "test2.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
             Filter filter = new SwissProtNCBITaxonomyFilter("9606");
 
@@ -131,7 +131,7 @@ public class TestSwissProtNCBITaxonomyFilter extends TestCaseLM {
         try {
             final String input = "test2.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
             Filter filter = new SwissProtNCBITaxonomyFilter("9606", false);
 
@@ -218,7 +218,7 @@ public class TestSwissProtNCBITaxonomyFilter extends TestCaseLM {
         try {
             final String input = "test2.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
             Filter filter = new SwissProtNCBITaxonomyFilter("9606, 6239 ;");
 
@@ -305,7 +305,7 @@ public class TestSwissProtNCBITaxonomyFilter extends TestCaseLM {
         try {
             final String input = "test2.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
             Filter filter = new SwissProtNCBITaxonomyFilter("9606 6239", false);
 

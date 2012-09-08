@@ -18,8 +18,8 @@ import com.compomics.dbtoolkit.io.implementations.FilterCollection;
 import com.compomics.dbtoolkit.io.implementations.SwissProtKeywordFilter;
 import com.compomics.dbtoolkit.io.implementations.SwissProtTaxonomyFilter;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ import java.io.IOException;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.implementations.FilterCollection
  */
-public class TestFilterCollection extends TestCaseLM {
+public class TestFilterCollection extends TestCase {
 
     public TestFilterCollection() {
         this("Test for the FilterCollection class.");
@@ -53,7 +53,7 @@ public class TestFilterCollection extends TestCaseLM {
         try {
             final String input = "test.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
             // Test case insensitivity at the same time.
             FilterCollection filter = new FilterCollection(FilterCollection.AND);
@@ -145,7 +145,7 @@ public class TestFilterCollection extends TestCaseLM {
         try {
             final String input = "test.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
             // Test case insensitivity at the same time.
             FilterCollection filter = new FilterCollection(FilterCollection.AND, true);

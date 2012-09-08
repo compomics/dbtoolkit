@@ -15,8 +15,8 @@ package com.compomics.dbtoolkit.test.io.implementations;
 import com.compomics.dbtoolkit.io.UnknownDBFormatException;
 import com.compomics.dbtoolkit.io.implementations.*;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ import java.io.IOException;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.implementations.AutoDBLoader
  */
-public class TestAutoDBLoader extends TestCaseLM {
+public class TestAutoDBLoader extends TestCase {
 
     public TestAutoDBLoader() {
         this("Test scenario for the AutoDBLoader class.");
@@ -49,16 +49,16 @@ public class TestAutoDBLoader extends TestCaseLM {
      * functionality.
      */
     public void testAutoDetectionBehaviour() {
-        final String cleanFASTA = super.getFullFilePath("testFASTA.fas");
-        final String zippedCleanFASTA = super.getFullFilePath("testFASTA.zip");
-        final String cleanSW = super.getFullFilePath("test.spr");
-        final String zippedCleanSW = super.getFullFilePath("test_SPFormat.zip");
-        final String autoFASTA = super.getFullFilePath("testAutoFASTA.fas");
-        final String zippedAutoFASTA = super.getFullFilePath("testAutoFASTA.zip");
-        final String autoSW = super.getFullFilePath("testAutoSW.spr");
-        final String zippedAutoSW = super.getFullFilePath("testAutoSW.zip");
-        final String autoEmpty = super.getFullFilePath("testAutoEmpty.txt");
-        final String autoUnknown = super.getFullFilePath("testAutoUnknown.txt");
+        final String cleanFASTA = TestCaseLM.getFullFilePath("testFASTA.fas");
+        final String zippedCleanFASTA = TestCaseLM.getFullFilePath("testFASTA.zip");
+        final String cleanSW = TestCaseLM.getFullFilePath("test.spr");
+        final String zippedCleanSW = TestCaseLM.getFullFilePath("test_SPFormat.zip");
+        final String autoFASTA = TestCaseLM.getFullFilePath("testAutoFASTA.fas");
+        final String zippedAutoFASTA = TestCaseLM.getFullFilePath("testAutoFASTA.zip");
+        final String autoSW = TestCaseLM.getFullFilePath("testAutoSW.spr");
+        final String zippedAutoSW = TestCaseLM.getFullFilePath("testAutoSW.zip");
+        final String autoEmpty = TestCaseLM.getFullFilePath("testAutoEmpty.txt");
+        final String autoUnknown = TestCaseLM.getFullFilePath("testAutoUnknown.txt");
 
         AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader", "com.compomics.dbtoolkit.io.implementations.SwissProtDBLoader",
                                                            "com.compomics.dbtoolkit.io.implementations.ZippedFASTADBLoader", "com.compomics.dbtoolkit.io.implementations.ZippedSwissProtDBLoader"});
@@ -167,7 +167,7 @@ public class TestAutoDBLoader extends TestCaseLM {
      * detecting a suitable DBLoader.
      */
     public void testInitBehaviour() {
-        final String cleanFASTA = super.getFullFilePath("testFASTA.fas");
+        final String cleanFASTA = TestCaseLM.getFullFilePath("testFASTA.fas");
         try {
             AutoDBLoader auto = new AutoDBLoader(new String[] {"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
             DBLoader loader = auto.getLoaderForFile(cleanFASTA);

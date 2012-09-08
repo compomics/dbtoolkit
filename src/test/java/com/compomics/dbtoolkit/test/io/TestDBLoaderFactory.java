@@ -15,8 +15,7 @@ package com.compomics.dbtoolkit.test.io;
 import com.compomics.dbtoolkit.io.DBLoaderFactory;
 import com.compomics.dbtoolkit.io.UnknownDBFormatException;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 /*
  * CVS information:
@@ -31,7 +30,7 @@ import junit.framework.Assert;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.DBLoaderFactory
  */
-public class TestDBLoaderFactory extends TestCaseLM {
+public class TestDBLoaderFactory extends TestCase {
 
     public TestDBLoaderFactory() {
         this("Test for DBLoaderFactory class.");

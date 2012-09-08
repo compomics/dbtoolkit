@@ -16,8 +16,8 @@ import com.compomics.dbtoolkit.gui.workerthreads.ClearRedundancyThread;
 import com.compomics.dbtoolkit.io.UnknownDBFormatException;
 import com.compomics.dbtoolkit.io.implementations.AutoDBLoader;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,7 +38,7 @@ import java.io.IOException;
  * @author Lennart
  * @see com.compomics.dbtoolkit.gui.workerthreads.ClearRedundancyThread
  */
-public class TestClearRedundancyThread extends TestCaseLM {
+public class TestClearRedundancyThread extends TestCase {
 
     public TestClearRedundancyThread() {
         this("Test scenario for the clear redundancy thread - non threaded!");
@@ -55,12 +55,12 @@ public class TestClearRedundancyThread extends TestCaseLM {
         File temp = null;
         File output = null;
         try {
-            String input = super.getFullFilePath("redundantDB.fas");
+            String input = TestCaseLM.getFullFilePath("redundantDB.fas");
             File inputFile = new File(input);
             temp = new File(inputFile.getParent() + "/temp/");
             temp.mkdir();
             output = new File(inputFile.getParent() + "/outputOfClearRedundancyTest.fas");
-            File control = new File(super.getFullFilePath("controlOfClearRedundancyTest.fas"));
+            File control = new File(TestCaseLM.getFullFilePath("controlOfClearRedundancyTest.fas"));
 
             AutoDBLoader auto = new AutoDBLoader(new String[]{"com.compomics.dbtoolkit.io.implementations.FASTADBLoader"});
             DBLoader loader = auto.getLoaderForFile(input);

@@ -15,8 +15,7 @@ package com.compomics.dbtoolkit.test.io.implementations;
 import com.compomics.dbtoolkit.io.implementations.ProteinResiduCountFilter;
 import com.compomics.dbtoolkit.io.interfaces.ProteinFilter;
 import com.compomics.util.protein.Protein;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import junit.framework.*;
 
 /*
  * CVS information:
@@ -31,7 +30,7 @@ import junit.framework.Assert;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.implementations.ProteinResiduCountFilter
  */
-public class TestProteinResiduCountFilter extends TestCaseLM {
+public class TestProteinResiduCountFilter extends TestCase {
 
     public TestProteinResiduCountFilter() {
         this("Test scenario for the ProteinResiduCountFilter class.");

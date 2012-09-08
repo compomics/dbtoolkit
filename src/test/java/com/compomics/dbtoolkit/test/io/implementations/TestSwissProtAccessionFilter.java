@@ -1,24 +1,23 @@
 package com.compomics.dbtoolkit.test.io.implementations;
 
-import junit.TestCaseLM;
-import junit.framework.Assert;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
-
+import com.compomics.dbtoolkit.io.DBLoaderFactory;
+import com.compomics.dbtoolkit.io.UnknownDBFormatException;
+import com.compomics.dbtoolkit.io.implementations.SwissProtAccessionFilter;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
 import com.compomics.dbtoolkit.io.interfaces.Filter;
-import com.compomics.dbtoolkit.io.UnknownDBFormatException;
-import com.compomics.dbtoolkit.io.DBLoaderFactory;
-import com.compomics.dbtoolkit.io.implementations.SwissProtAccessionFilter;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Florian Reisinger
  * @version $Id: TestSwissProtAccessionFilter.java,v 1.1 2008/11/18 16:00:55 lennart Exp $
  * @since x.y
  */
-public class TestSwissProtAccessionFilter  extends TestCaseLM {
+public class TestSwissProtAccessionFilter  extends TestCase {
 
     public TestSwissProtAccessionFilter() {
         this("Test for the SwissProtAccessionFilter class.");
@@ -35,7 +34,7 @@ public class TestSwissProtAccessionFilter  extends TestCaseLM {
         try {
             final String input = "test.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
 
             List accList = new ArrayList();
@@ -216,7 +215,7 @@ public class TestSwissProtAccessionFilter  extends TestCaseLM {
         try {
             final String input = "test.spr";
 
-            String inputFile = super.getFullFilePath(input);
+            String inputFile = TestCaseLM.getFullFilePath(input);
             DBLoader db = DBLoaderFactory.getDBLoader(DBLoader.SWISSPROT);
 
             List accList = new ArrayList();

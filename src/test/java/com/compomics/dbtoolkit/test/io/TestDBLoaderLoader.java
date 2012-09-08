@@ -14,8 +14,8 @@ package com.compomics.dbtoolkit.test.io;
 
 import com.compomics.dbtoolkit.io.DBLoaderLoader;
 import com.compomics.dbtoolkit.io.interfaces.DBLoader;
-import junit.TestCaseLM;
-import junit.framework.Assert;
+import com.compomics.util.junit.TestCaseLM;
+import junit.framework.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +33,7 @@ import java.io.IOException;
  * @author Lennart Martens
  * @see com.compomics.dbtoolkit.io.DBLoaderLoader
  */
-public class TestDBLoaderLoader extends TestCaseLM {
+public class TestDBLoaderLoader extends TestCase {
 
     public TestDBLoaderLoader() {
         this("Test scenario for the DBLoaderLoader class.");
@@ -47,28 +47,28 @@ public class TestDBLoaderLoader extends TestCaseLM {
      */
     public void testLoader() {
         try {
-            DBLoader loader = DBLoaderLoader.loadDB(new File(super.getFullFilePath("testFASTA.fas")));
+            DBLoader loader = DBLoaderLoader.loadDB(new File(TestCaseLM.getFullFilePath("testFASTA.fas")));
             Assert.assertTrue(loader != null);
         } catch(IOException ioe) {
             fail("IOException thrown when testing the DBLoaderLoader class: " + ioe.getMessage());
         }
 
         try {
-            DBLoader loader = DBLoaderLoader.loadDB(new File(super.getFullFilePath("test.spr")));
+            DBLoader loader = DBLoaderLoader.loadDB(new File(TestCaseLM.getFullFilePath("test.spr")));
             Assert.assertTrue(loader != null);
         } catch(IOException ioe) {
             fail("IOException thrown when testing the DBLoaderLoader class: " + ioe.getMessage());
         }
 
         try {
-            DBLoader loader = DBLoaderLoader.loadDB(new File(super.getFullFilePath("testFASTA.fas")));
+            DBLoader loader = DBLoaderLoader.loadDB(new File(TestCaseLM.getFullFilePath("testFASTA.fas")));
             Assert.assertTrue(loader != null);
         } catch(IOException ioe) {
             fail("IOException thrown when testing the DBLoaderLoader class: " + ioe.getMessage());
         }
 
         try {
-            DBLoader loader = DBLoaderLoader.loadDB(new File(super.getFullFilePath("testAutoUnknown.txt")));
+            DBLoader loader = DBLoaderLoader.loadDB(new File(TestCaseLM.getFullFilePath("testAutoUnknown.txt")));
             fail("IOException thrown when testing the DBLoaderLoader class with an unknown DB format!");
         } catch(IOException ioe) {
             // OK.
