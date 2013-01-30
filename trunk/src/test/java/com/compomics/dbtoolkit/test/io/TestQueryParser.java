@@ -56,7 +56,7 @@ public class TestQueryParser extends TestCase {
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
 
-            pf = qp.parseQuery("^M");
+            pf = qp.parseQuery("!M");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
         } catch(ParseException pe) {
@@ -79,15 +79,15 @@ public class TestQueryParser extends TestCase {
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
 
-            pf= qp.parseQuery("^M and G");
+            pf= qp.parseQuery("!M and G");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
 
-            pf= qp.parseQuery("^M and G and ^L");
+            pf= qp.parseQuery("!M and G and !L");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
 
-            pf= qp.parseQuery("^M and G and ^L and ^K");
+            pf= qp.parseQuery("!M and G and !L and !K");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
         } catch(ParseException pe) {
@@ -112,17 +112,17 @@ public class TestQueryParser extends TestCase {
             Assert.assertFalse(pf.passesFilter(noPass));
             Assert.assertTrue(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("^M OR K");
+            pf= qp.parseQuery("!M OR K");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertFalse(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("^M OR K or RIS");
+            pf= qp.parseQuery("!M OR K or RIS");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertFalse(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("^M OR K or ^ARTMAR");
+            pf= qp.parseQuery("!M OR K or !ARTMAR");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertTrue(pf.passesFilter(noPass2));
@@ -148,17 +148,17 @@ public class TestQueryParser extends TestCase {
             Assert.assertFalse(pf.passesFilter(noPass));
             Assert.assertTrue(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("^M OR k");
+            pf= qp.parseQuery("!M OR k");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertFalse(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("^m OR k or RiS");
+            pf= qp.parseQuery("!m OR k or RiS");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertFalse(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("^m OR K or ^ArtmAR");
+            pf= qp.parseQuery("!m OR K or !ArtmAR");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertTrue(pf.passesFilter(noPass2));
@@ -183,12 +183,12 @@ public class TestQueryParser extends TestCase {
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertFalse(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("^(L and M) OR (k or G)");
+            pf= qp.parseQuery("!(L and M) OR (k or G)");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertTrue(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("(L and ^K) or ((G and S) or (V and H))");
+            pf= qp.parseQuery("(L and !K) or ((G and S) or (V and H))");
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertFalse(pf.passesFilter(noPass2));
@@ -198,7 +198,7 @@ public class TestQueryParser extends TestCase {
             Assert.assertTrue(pf.passesFilter(noPass));
             Assert.assertTrue(pf.passesFilter(noPass2));
 
-            pf= qp.parseQuery("(^K and ^R) or (^V and ^M)");
+            pf= qp.parseQuery("(!K and !R) or (!V and !M)");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
             Assert.assertFalse(pf.passesFilter(noPass2));
@@ -214,7 +214,7 @@ public class TestQueryParser extends TestCase {
     public void testException() {
         QueryParser qp = new QueryParser();
         try {
-            String wrongQuery = "^M AND G AND     ";
+            String wrongQuery = "!M AND G AND     ";
             qp.parseQuery(wrongQuery);
             fail("No ParseException thrown when the parser was confronted with '" + wrongQuery + "'!");
         } catch(ParseException pe) {
@@ -222,7 +222,7 @@ public class TestQueryParser extends TestCase {
         }
 
         try {
-            String wrongQuery = "^M OR G OR     ";
+            String wrongQuery = "!M OR G OR     ";
             qp.parseQuery(wrongQuery);
             fail("No ParseException thrown when the parser was confronted with '" + wrongQuery + "'!");
         } catch(ParseException pe) {
@@ -315,7 +315,7 @@ public class TestQueryParser extends TestCase {
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
 
-            pf= qp.parseQuery("^2A");
+            pf= qp.parseQuery("!2A");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
 
@@ -323,7 +323,7 @@ public class TestQueryParser extends TestCase {
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
 
-            pf= qp.parseQuery("^=2A");
+            pf= qp.parseQuery("!=2A");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
 
@@ -331,7 +331,7 @@ public class TestQueryParser extends TestCase {
              Assert.assertFalse(pf.passesFilter(pass));
              Assert.assertFalse(pf.passesFilter(noPass));
 
-             pf= qp.parseQuery("^25A");
+             pf= qp.parseQuery("!25A");
              Assert.assertTrue(pf.passesFilter(pass));
              Assert.assertTrue(pf.passesFilter(noPass));
 
@@ -339,7 +339,7 @@ public class TestQueryParser extends TestCase {
              Assert.assertFalse(pf.passesFilter(pass));
              Assert.assertFalse(pf.passesFilter(noPass));
 
-             pf= qp.parseQuery("^=25A");
+             pf= qp.parseQuery("!=25A");
              Assert.assertTrue(pf.passesFilter(pass));
              Assert.assertTrue(pf.passesFilter(noPass));
 
@@ -347,7 +347,7 @@ public class TestQueryParser extends TestCase {
              Assert.assertFalse(pf.passesFilter(pass));
              Assert.assertTrue(pf.passesFilter(noPass));
 
-             pf= qp.parseQuery("^<2A");
+             pf= qp.parseQuery("!<2A");
              Assert.assertTrue(pf.passesFilter(pass));
              Assert.assertFalse(pf.passesFilter(noPass));
 
@@ -355,7 +355,7 @@ public class TestQueryParser extends TestCase {
              Assert.assertTrue(pf.passesFilter(pass));
              Assert.assertTrue(pf.passesFilter(noPass));
 
-             pf= qp.parseQuery("^<25A");
+             pf= qp.parseQuery("!<25A");
              Assert.assertFalse(pf.passesFilter(pass));
              Assert.assertFalse(pf.passesFilter(noPass));
 
@@ -363,7 +363,7 @@ public class TestQueryParser extends TestCase {
              Assert.assertTrue(pf.passesFilter(pass));
              Assert.assertFalse(pf.passesFilter(noPass));
 
-             pf= qp.parseQuery("^>1A");
+             pf= qp.parseQuery("!>1A");
              Assert.assertFalse(pf.passesFilter(pass));
              Assert.assertTrue(pf.passesFilter(noPass));
 
@@ -371,7 +371,7 @@ public class TestQueryParser extends TestCase {
              Assert.assertFalse(pf.passesFilter(pass));
              Assert.assertFalse(pf.passesFilter(noPass));
 
-             pf= qp.parseQuery("^>25A");
+             pf= qp.parseQuery("!>25A");
              Assert.assertTrue(pf.passesFilter(pass));
              Assert.assertTrue(pf.passesFilter(noPass));
 
@@ -390,31 +390,31 @@ public class TestQueryParser extends TestCase {
 
             QueryParser qp = new QueryParser();
 
-            ProteinFilter pf = qp.parseQuery("^>2A and 2R");
+            ProteinFilter pf = qp.parseQuery("!>2A and 2R");
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
 
-            pf = qp.parseQuery("^>2A and 1K");
+            pf = qp.parseQuery("!>2A and 1K");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
 
-            pf = qp.parseQuery("^>2A or 2K");
+            pf = qp.parseQuery("!>2A or 2K");
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
 
-            pf = qp.parseQuery("^(^>2A or 2K)");
+            pf = qp.parseQuery("!(!>2A or 2K)");
             Assert.assertFalse(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
 
-            pf = qp.parseQuery("(^>2A or 2K) and (M and L)");
+            pf = qp.parseQuery("(!>2A or 2K) and (M and L)");
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
 
-            pf = qp.parseQuery(">1R or >1K");
+            pf = qp.parseQuery("!1R or !1K");
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertTrue(pf.passesFilter(noPass));
 
-            pf = qp.parseQuery(">0LENN or 2K");
+            pf = qp.parseQuery("!0LENN or 2K");
             Assert.assertTrue(pf.passesFilter(pass));
             Assert.assertFalse(pf.passesFilter(noPass));
 

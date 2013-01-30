@@ -107,7 +107,7 @@ public class CountEntries {
                     } else {
                         filterSettings.append("filter '" + filter + "' chosen");
                         if(filterParam != null) {
-                            filterSettings.append(" with " + ((filterParam.startsWith("^"))?"inverted":"") + " parameter '" + ((filterParam.startsWith("^"))?filterParam.substring(1):filterParam) + "'.");
+                            filterSettings.append(" with " + ((filterParam.startsWith("!"))?"inverted":"") + " parameter '" + ((filterParam.startsWith("!"))?filterParam.substring(1):filterParam) + "'.");
                         } else {
                             filterSettings.append(" without parameters.");
                         }

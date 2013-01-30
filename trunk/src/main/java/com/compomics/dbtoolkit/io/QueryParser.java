@@ -199,7 +199,7 @@ public class QueryParser {
                 // See if the subsection needs to be inverted.
                 boolean inversion = false;
                 int tempLoc = start;
-                if((start > 0) && (internal.charAt(start-1)) == '^') {
+                if((start > 0) && (internal.charAt(start-1)) == '!') {
                     inversion = true;
                     tempLoc--;
                 }
@@ -334,7 +334,7 @@ public class QueryParser {
                     }
                 }
                 // Now see if we must invert.
-                if(currentChar == '^') {
+                if(currentChar == '!') {
                     invert = true;
                 }
             }

@@ -70,6 +70,12 @@ public class TestProteinSequenceFilter extends TestCase {
         filter = new ProteinSequenceFilter("..RT...");
         Assert.assertTrue(filter.passesFilter(in));
         Assert.assertFalse(filter.passesFilter(notIn));
+
+        // Another regexp, this one to test the correct behaviour of the '^' after changing
+        // filter negation to '!'.
+        filter = new ProteinSequenceFilter("^L.*");
+        Assert.assertTrue(filter.passesFilter(in));
+        Assert.assertFalse(filter.passesFilter(notIn));
     }
 
     /**
@@ -82,24 +88,24 @@ public class TestProteinSequenceFilter extends TestCase {
         Protein notIn = new Protein(">Positive exclusieve test sequence for ProteinSequenceFilter", "KRISGEVAERT");
 
         // A filter for a single residu.
-        ProteinFilter filter = new ProteinSequenceFilter("^M");
+        ProteinFilter filter = new ProteinSequenceFilter("!M");
 
         // Assert function.
         Assert.assertFalse(filter.passesFilter(in));
         Assert.assertTrue(filter.passesFilter(notIn));
 
         // A filter for a sequence of residues.
-        filter = new ProteinSequenceFilter("^ARTMAR");
+        filter = new ProteinSequenceFilter("!ARTMAR");
         Assert.assertFalse(filter.passesFilter(in));
         Assert.assertTrue(filter.passesFilter(notIn));
 
         // A filter using a '.' (requiring regexps).
-        filter = new ProteinSequenceFilter("^NN.R");
+        filter = new ProteinSequenceFilter("!NN.R");
         Assert.assertFalse(filter.passesFilter(in));
         Assert.assertTrue(filter.passesFilter(notIn));
 
         // Another regexp one.
-        filter = new ProteinSequenceFilter("^..RT...");
+        filter = new ProteinSequenceFilter("!..RT...");
         Assert.assertFalse(filter.passesFilter(in));
         Assert.assertTrue(filter.passesFilter(notIn));
     }
@@ -127,13 +133,13 @@ public class TestProteinSequenceFilter extends TestCase {
         Assert.assertTrue(filter.passesFilter(notIn));
         Assert.assertFalse(filter.passesFilter(notIn2));
 
-        filter = new ProteinSequenceFilter("^U");
+        filter = new ProteinSequenceFilter("!U");
         Assert.assertTrue(filter.passesFilter(in));
         Assert.assertFalse(filter.passesFilter(in2));
         Assert.assertFalse(filter.passesFilter(notIn));
         Assert.assertTrue(filter.passesFilter(notIn2));
 
-        filter = new ProteinSequenceFilter("^U.");
+        filter = new ProteinSequenceFilter("!U.");
         Assert.assertTrue(filter.passesFilter(in));
         Assert.assertFalse(filter.passesFilter(in2));
         Assert.assertFalse(filter.passesFilter(notIn));
@@ -155,7 +161,7 @@ public class TestProteinSequenceFilter extends TestCase {
         Assert.assertTrue(filter.passesFilter(new Protein(">Quick one", "MMLENNART")));
         Assert.assertTrue(filter.passesFilter(new Protein(">Quick two", "MKRISMLEN")));
 
-        filter = new ProteinSequenceFilter("^ULEN");
+        filter = new ProteinSequenceFilter("!ULEN");
         Assert.assertTrue(filter.passesFilter(in));
         Assert.assertTrue(filter.passesFilter(in2));
         Assert.assertTrue(filter.passesFilter(notIn));
@@ -163,7 +169,7 @@ public class TestProteinSequenceFilter extends TestCase {
         Assert.assertFalse(filter.passesFilter(new Protein(">Quick one", "MMLENNART")));
         Assert.assertFalse(filter.passesFilter(new Protein(">Quick two", "MKRISMLEN")));
 
-        filter = new ProteinSequenceFilter("^UL.N");
+        filter = new ProteinSequenceFilter("!UL.N");
         Assert.assertTrue(filter.passesFilter(in));
         Assert.assertTrue(filter.passesFilter(in2));
         Assert.assertTrue(filter.passesFilter(notIn));

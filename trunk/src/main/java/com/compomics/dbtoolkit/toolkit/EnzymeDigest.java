@@ -224,7 +224,7 @@ public class EnzymeDigest {
                                     } catch(Exception exc) {
                                     }
                                     type = 1;
-                                } else if(filterParam.startsWith("^")) {
+                                } else if(filterParam.startsWith("!")) {
                                     try {
                                         constr = lClass.getConstructor(new Class[]{String.class, boolean.class});
                                     } catch(Exception exc) {
@@ -238,7 +238,7 @@ public class EnzymeDigest {
                                     type = 3;
                                 }
                                 if(constr == null) {
-                                    flagError("The '" + filter + "' filter does not support the " + ((filterParam != null)?"presence":"absence") + " of a" + (((filterParam != null) && (filterParam.startsWith("^")))?"n inverted ":" ") + "parameter!");
+                                    flagError("The '" + filter + "' filter does not support the " + ((filterParam != null)?"presence":"absence") + " of a" + (((filterParam != null) && (filterParam.startsWith("!")))?"n inverted ":" ") + "parameter!");
                                 } else {
                                     if(type == 1) {
                                         f = (Filter)constr.newInstance(new Object[]{});
@@ -274,7 +274,7 @@ public class EnzymeDigest {
                 } else {
                     filterSettings.append("filter '" + filter + "' chosen");
                     if(filterParam != null) {
-                        filterSettings.append(" with " + ((filterParam.startsWith("^"))?"inverted":"") + " parameter '" + ((filterParam.startsWith("^"))?filterParam.substring(1):filterParam) + "'.");
+                        filterSettings.append(" with " + ((filterParam.startsWith("!"))?"inverted":"") + " parameter '" + ((filterParam.startsWith("!"))?filterParam.substring(1):filterParam) + "'.");
                     } else {
                         filterSettings.append(" without parameters.");
                     }

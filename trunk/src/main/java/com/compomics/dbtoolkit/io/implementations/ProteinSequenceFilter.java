@@ -56,16 +56,16 @@ public class ProteinSequenceFilter implements ProteinFilter {
 
     /**
      * This constructor takes the residu(es) to match. Some parsing is done -
-     * if the sequence is prefixed with '^', a passing sequence will NOT contain the
+     * if the sequence is prefixed with '!', a passing sequence will NOT contain the
      * sequence, otherwise the sequence is required to be present in the Protein sequence
      * for a pass.
      *
      * @param   aCodedSequence  String with the sequence to match for a pass, or, when
-     *                          prefixed with a '^', to be absent for a pass
+     *                          prefixed with a '!', to be absent for a pass
      */
     public ProteinSequenceFilter(String aCodedSequence) {
         // Check for inversion flag.
-        while(aCodedSequence.startsWith("^")) {
+        while(aCodedSequence.startsWith("!")) {
             aCodedSequence = aCodedSequence.substring(1);
             iInclusive = false;
         }
