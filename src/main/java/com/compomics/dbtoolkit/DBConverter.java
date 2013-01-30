@@ -213,7 +213,7 @@ public class DBConverter {
                             } catch(Exception exc) {
                             }
                             type = 1;
-                        } else if(filterParam.startsWith("^")) {
+                        } else if(filterParam.startsWith("!")) {
                             try {
                                 constr = lClass.getConstructor(new Class[]{String.class, boolean.class});
                             } catch(Exception exc) {
@@ -227,7 +227,7 @@ public class DBConverter {
                             type = 3;
                         }
                         if(constr == null) {
-                            flagError("The '" + filterID + "' filter does not support the " + ((filterParam != null)?"presence":"absence") + " of a" + (((filterParam != null) && (filterParam.startsWith("^")))?"n inverted ":" ") + "parameter!");
+                            flagError("The '" + filterID + "' filter does not support the " + ((filterParam != null)?"presence":"absence") + " of a" + (((filterParam != null) && (filterParam.startsWith("!")))?"n inverted ":" ") + "parameter!");
                         } else {
                             if(type == 1) {
                                 f = (Filter)constr.newInstance(new Object[]{});

@@ -114,7 +114,7 @@ public class TestProteinFilterCollection extends TestCase {
 
         // A filter for a single residu.
         ProteinFilter filter1 = new ProteinSequenceFilter("M");
-        ProteinFilter filter2 = new ProteinSequenceFilter("^K");
+        ProteinFilter filter2 = new ProteinSequenceFilter("!K");
         ProteinFilter filter3 = new ProteinSequenceFilter("NN.RT");
 
 
@@ -173,7 +173,7 @@ public class TestProteinFilterCollection extends TestCase {
 
         // A filter for a single residu.
         ProteinFilter filter1 = new ProteinSequenceFilter("M");
-        ProteinFilter filter2 = new ProteinSequenceFilter("^N");
+        ProteinFilter filter2 = new ProteinSequenceFilter("!N");
 
 
         // FilterCollection.
@@ -217,7 +217,7 @@ public class TestProteinFilterCollection extends TestCase {
         Protein notIn = new Protein(">Negative inclusieve test sequence for ProteinSequenceFilter", "KRISGEVAERT");
 
         // The Filters.
-        ProteinFilter filter1 = new ProteinSequenceFilter("^M");
+        ProteinFilter filter1 = new ProteinSequenceFilter("!M");
         ProteinFilter filter2 = new ProteinSequenceFilter("ARTMAR");
 
         // First collection.
@@ -226,7 +226,7 @@ public class TestProteinFilterCollection extends TestCase {
         pfc1.add(filter2);
 
         // More filters.
-        ProteinFilter filter3 = new ProteinSequenceFilter("^S");
+        ProteinFilter filter3 = new ProteinSequenceFilter("!S");
         ProteinFilterCollection pfc2 = new ProteinFilterCollection(ProteinFilterCollection.OR, true);
         pfc2.add(filter3);
 

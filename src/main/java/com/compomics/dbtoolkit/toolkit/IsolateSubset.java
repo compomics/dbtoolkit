@@ -218,7 +218,7 @@ public class IsolateSubset {
                                 if(filterParam == null) {
                                     constr = lClass.getConstructor(new Class[]{});
                                     type = 1;
-                                } else if(filterParam.startsWith("^")) {
+                                } else if(filterParam.startsWith("!")) {
                                     constr = lClass.getConstructor(new Class[]{String.class, boolean.class});
                                     type = 2;
                                 } else {
@@ -226,7 +226,7 @@ public class IsolateSubset {
                                     type = 3;
                                 }
                                 if(constr == null) {
-                                    flagError("The filter does not support the " + ((filterParam != null)?"presence":"absence") + " of a" + ((filterParam.startsWith("^"))?"n inverted ":" ") + "parameter");
+                                    flagError("The filter does not support the " + ((filterParam != null)?"presence":"absence") + " of a" + ((filterParam.startsWith("!"))?"n inverted ":" ") + "parameter");
                                 } else {
                                     if(type == 1) {
                                         f = (Filter)constr.newInstance(new Object[]{});
@@ -273,7 +273,7 @@ public class IsolateSubset {
                 } else {
                     filterSettings.append("filter '" + filter + "' chosen");
                     if(filterParam != null) {
-                        filterSettings.append(" with " + ((filterParam.startsWith("^"))?"inverted":"") + " parameter '" + ((filterParam.startsWith("^"))?filterParam.substring(1):filterParam) + "'.");
+                        filterSettings.append(" with " + ((filterParam.startsWith("!"))?"inverted":"") + " parameter '" + ((filterParam.startsWith("!"))?filterParam.substring(1):filterParam) + "'.");
                     } else {
                         filterSettings.append(" without parameters.");
                     }

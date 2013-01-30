@@ -88,7 +88,7 @@ public class FilterLoader {
                         } catch(Exception exc) {
                         }
                         type = 1;
-                    } else if(aParam.startsWith("^")) {
+                    } else if(aParam.startsWith("!")) {
                         try {
                             constr = lClass.getConstructor(new Class[]{String.class, boolean.class});
                         } catch(Exception exc) {
@@ -102,7 +102,7 @@ public class FilterLoader {
                         type = 3;
                     }
                     if(constr == null) {
-                        throw new IOException("The '" + aFilterName + "' filter does not support the " + ((aParam != null)?"presence":"absence") + " of a" + (((aParam != null) && (aParam.startsWith("^")))?"n inverted ":" ") + "parameter!");
+                        throw new IOException("The '" + aFilterName + "' filter does not support the " + ((aParam != null)?"presence":"absence") + " of a" + (((aParam != null) && (aParam.startsWith("!")))?"n inverted ":" ") + "parameter!");
                     } else {
                         if(type == 1) {
                             f = (Filter)constr.newInstance(new Object[]{});

@@ -441,7 +441,7 @@ public class RegularExpressionFilterDialog extends JDialog {
                 JOptionPane.showMessageDialog(this, "You need to specify a filter string for use with the " + filterName + "!", "No filter string specified!", JOptionPane.ERROR_MESSAGE);
                 return null;
             } else if(filterString != null) {
-                if(filterString.startsWith("^")) {
+                if(filterString.startsWith("!")) {
                     Constructor dual = null;
                     try {
                         dual = c.getConstructor(new Class[]{"".getClass(), boolean.class});

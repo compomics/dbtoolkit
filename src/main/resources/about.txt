@@ -135,14 +135,14 @@ Notes about this text:
             Amino acid notation is the single-letter notation, extended with 'U' for methionine WITHOUT initiator methionine and
             '.' for matching any residue. Note that using a '.' in a sequence match results in the usage of Java regular expression
             matching and that this will silently enable you to use the full power of Java regular expressions.
-            DBToolkit uses a query format that supports boolean operators ('AND', 'OR' and '^' (NOT)) and is vaguely reminiscent
+            DBToolkit uses a query format that supports boolean operators ('AND', 'OR' and '!' (NOT)) and is vaguely reminiscent
             of regular expressions. It does not have the power of regular expressions, nor does it have exactly the same syntax,
             but it is only fair to say that it has a strong resemblance to it. You can specify residues or sequence stretches and
             combine these, eg.:
 
               (K and R) or (S or T)    -> selects all entries having either a K and an R, or that have an S or a T
               ((K and R) or S) and L   -> selects all entries having either an L or an S or K and R
-              ^R and ^K                -> selects all entries lacking R and lacking K
+              !R and !K                -> selects all entries lacking R and lacking K
               .SNK and L               -> selects all entries that contain the SNK motif, prefixed with at least
                                           one amino acid of choice and that also contain an L
 
@@ -849,3 +849,7 @@ http://www.proteomics.be/people/lennartmartens/index.html
 
 - Version 4.1.5
         * Updated to latest utilities (version 3.3.37) that fixes parsing of TAIR FASTA headers.
+
+- Version 4.2
+        * Changed the negation flag for all filters from '^' to '!' because the use of '^' interfered
+          with the correct interpretation of regular expression based filters.
