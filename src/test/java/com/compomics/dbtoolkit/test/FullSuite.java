@@ -61,7 +61,8 @@ public class FullSuite extends TestCase {
         ts.addTest(new TestSuite(TestFASTAHeaderFilter.class));
         ts.addTest(new TestSuite(TestFASTATaxonomyFilter.class));
         ts.addTest(new TestSuite(TestFilterCollection.class));
-        ts.addTest(new TestSuite(TestProteinSequenceLengthFilter.class));
+        ts.addTest(new TestSuite(TestFASTAProteinSequenceLengthFilter.class));
+        ts.addTest(new TestSuite(TestSwissProtProteinSequenceLengthFilter.class));
         ts.addTest(new TestSuite(TestProteinSequenceFilter.class));
         ts.addTest(new TestSuite(TestProteinResiduCountFilter.class));
         ts.addTest(new TestSuite(TestProteinMassFilter.class));

@@ -858,3 +858,7 @@ http://www.proteomics.be/people/lennartmartens/index.html
         * Added a protein sequence length filter for both FASTA and SwissProt formats. The length cutoff
           defaults to a 'larger or equal than X' cutoff, but can become a 'less than or equal to X'
           cutoff if prefixed by a '<'.
+
+- Version 4.2.2
+        * Split the sequence length filters between FASTA and SwissProt formats. Previous implementation was faulty.
+

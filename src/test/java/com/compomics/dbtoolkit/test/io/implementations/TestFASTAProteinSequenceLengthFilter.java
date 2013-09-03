@@ -1,13 +1,13 @@
 package com.compomics.dbtoolkit.test.io.implementations;
 
-import com.compomics.dbtoolkit.io.implementations.ProteinSequenceLengthFilter;
-import com.compomics.dbtoolkit.io.interfaces.ProteinFilter;
+import com.compomics.dbtoolkit.io.implementations.FASTAProteinSequenceLengthFilter;
+import com.compomics.dbtoolkit.io.interfaces.Filter;
 import com.compomics.util.protein.Protein;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
- * This class implements the test scenario for the ProteinSequenceLengthFilter class.
+ * This class implements the test scenario for the FASTAProteinSequenceLengthFilter class.
  *
  * Created with IntelliJ IDEA.
  * User: Lennart
@@ -15,13 +15,13 @@ import junit.framework.TestCase;
  * Time: 16:13
  * To change this template use File | Settings | File Templates.
  */
-public class TestProteinSequenceLengthFilter  extends TestCase {
+public class TestFASTAProteinSequenceLengthFilter extends TestCase {
 
-    public TestProteinSequenceLengthFilter() {
-        this("The test scenario for the ProteinSequenceLengthFilter.");
+    public TestFASTAProteinSequenceLengthFilter() {
+        this("The test scenario for the FASTAProteinSequenceLengthFilter.");
     }
 
-    public TestProteinSequenceLengthFilter(String aName) {
+    public TestFASTAProteinSequenceLengthFilter(String aName) {
         super(aName);
     }
 
@@ -29,60 +29,60 @@ public class TestProteinSequenceLengthFilter  extends TestCase {
      * This method tests the filter.
      */
     public void testFilter() {
-        final Protein pass = new Protein(">Protein that passes lower and upper filter.\nLENNAR");
-        final Protein noPass1 = new Protein(">Protein that does not pass upper filter.\nLENNARTMARTENS");
-        final Protein noPass2 = new Protein(">Protein that does not pass lower filter.\nL");
+        final String pass = ">FASTA header number 1: no taxonomy data\nLENNAR";
+        final String noPass1 = ">FASTA header nummer 2: incorrect taxonomy data [Mus musculus]\nLENNARTMARTENS";
+        final String noPass2 = ">FASTA header nummer 3: correct taxonomy data [Homo sapiens]\nLE";
 
         // Lower bound filter.
-        ProteinFilter pf = new ProteinSequenceLengthFilter("6");
+        Filter pf = new FASTAProteinSequenceLengthFilter("6");
         Assert.assertTrue(pf.passesFilter(pass));
         Assert.assertTrue(pf.passesFilter(noPass1));
         Assert.assertFalse(pf.passesFilter(noPass2));
 
         // Upper bound filter.
-        pf = new ProteinSequenceLengthFilter("<6");
+        pf = new FASTAProteinSequenceLengthFilter("<6");
         Assert.assertTrue(pf.passesFilter(pass));
         Assert.assertFalse(pf.passesFilter(noPass1));
         Assert.assertTrue(pf.passesFilter(noPass2));
 
         // Explicit lower bound filter.
-        pf = new ProteinSequenceLengthFilter(">6");
+        pf = new FASTAProteinSequenceLengthFilter(">6");
         Assert.assertTrue(pf.passesFilter(pass));
         Assert.assertTrue(pf.passesFilter(noPass1));
         Assert.assertFalse(pf.passesFilter(noPass2));
 
         // Filter with spaces.
-        pf = new ProteinSequenceLengthFilter("   6   ");
+        pf = new FASTAProteinSequenceLengthFilter("   6   ");
         Assert.assertTrue(pf.passesFilter(pass));
         Assert.assertTrue(pf.passesFilter(noPass1));
         Assert.assertFalse(pf.passesFilter(noPass2));
 
         // Tolerated first nonsense character.
-        pf = new ProteinSequenceLengthFilter("@6");
+        pf = new FASTAProteinSequenceLengthFilter("@6");
         Assert.assertTrue(pf.passesFilter(pass));
         Assert.assertTrue(pf.passesFilter(noPass1));
         Assert.assertFalse(pf.passesFilter(noPass2));
 
         // Two-digit implicit filter.
-        pf = new ProteinSequenceLengthFilter("10");
+        pf = new FASTAProteinSequenceLengthFilter("10");
         Assert.assertFalse(pf.passesFilter(pass));
         Assert.assertTrue(pf.passesFilter(noPass1));
         Assert.assertFalse(pf.passesFilter(noPass2));
 
         // Two-digit implicit filter.
-        pf = new ProteinSequenceLengthFilter(">10");
+        pf = new FASTAProteinSequenceLengthFilter(">10");
         Assert.assertFalse(pf.passesFilter(pass));
         Assert.assertTrue(pf.passesFilter(noPass1));
         Assert.assertFalse(pf.passesFilter(noPass2));
 
         // Two-digit upper bound filter.
-        pf = new ProteinSequenceLengthFilter("<10");
+        pf = new FASTAProteinSequenceLengthFilter("<10");
         Assert.assertTrue(pf.passesFilter(pass));
         Assert.assertFalse(pf.passesFilter(noPass1));
         Assert.assertTrue(pf.passesFilter(noPass2));
 
         // Two-digit filter with spaces.
-        pf = new ProteinSequenceLengthFilter("  >10   ");
+        pf = new FASTAProteinSequenceLengthFilter("  >10   ");
         Assert.assertFalse(pf.passesFilter(pass));
         Assert.assertTrue(pf.passesFilter(noPass1));
         Assert.assertFalse(pf.passesFilter(noPass2));
