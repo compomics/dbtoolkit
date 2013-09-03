@@ -849,3 +849,12 @@ http://www.proteomics.be/people/lennartmartens/index.html
 
 - Version 4.1.5
         * Updated to latest utilities (version 3.3.37) that fixes parsing of TAIR FASTA headers.
+
+- Version 4.2
+        * Changed the negation flag for all filters from '^' to '!' because the use of '^' interfered
+          with the correct interpretation of regular expression based filters.
+
+- Version 4.2.1
+        * Added a protein sequence length filter for both FASTA and SwissProt formats. The length cutoff
+          defaults to a 'larger or equal than X' cutoff, but can become a 'less than or equal to X'
+          cutoff if prefixed by a '<'.
