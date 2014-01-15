@@ -51,13 +51,14 @@ public class MapPeptides {
     public static void main(String[] args) {
         // First see if we should output anything useful.
         if(args == null || args.length == 0) {
-            flagError("Usage:\n\tMapPeptides [--filter <filter_name> [--filterParam <filter_parameter>]] --input <input_file_name> --peptidesFile <peptides_file_name> <CSV_output_filename>\n\n\tThe peptides file should contain one peptide sequence per line.\n\n\tNote that an existing output file will be silently overwritten!");
+            flagError("Usage:\n\tMapPeptides [--filter <filter_name> [--filterParam <filter_parameter>]] --reslength <number_of_flanking_residues> --input <input_file_name> --peptidesFile <peptides_file_name> <CSV_output_filename>\n\n\tThe peptides file should contain one peptide sequence per line.\n\n\tNote that an existing output file will be silently overwritten!");
         }
-        CommandLineParser clp = new CommandLineParser(args, new String[]{"input", "peptidesFile", "filter", "filterParam"});
+        CommandLineParser clp = new CommandLineParser(args, new String[]{"input", "peptidesFile", "filter", "filterParam", "reslength"});
         String inputFile = clp.getOptionParameter("input");
         String peptideFile = clp.getOptionParameter("peptidesFile");
         String filterString = clp.getOptionParameter("filter");
         String filterParam = clp.getOptionParameter("filterParam");
+        String resLength = clp.getOptionParameter("reslength");
         String outputFile = clp.getParameters()[0];
 
         // See if all of this is correct.
@@ -67,8 +68,25 @@ public class MapPeptides {
             flagError("You did not specify a CSV outputfile!\n\nRun program without parameters for help.");
         } else if(peptideFile == null) {
             flagError("You did not specify a peptides input file!\n\nRun program without parameters for help.");
+        } else if(resLength == null) {
+            flagError("You did not specify the number of flanking residues to retrieve!\n\nRun program without parameters for help.");
         } else {
-            // Parameters were all found. Let's see if we can access all files that should be accessed.
+            // Parameters were all found. First of all, the residue length must make sense.
+            int residueLength = -1;
+            if(!resLength.trim().equals("")) {
+                try {
+                    residueLength = Integer.parseInt(resLength.trim());
+                } catch(NumberFormatException nfe) {
+                    flagError("The number of flanking residues needs to be a positive whole number!\n\nRun program without parameters for help.");
+                }
+                if(residueLength < 0) {
+                    flagError("The number of flanking residues needs to be a positive whole number!\n\nRun program without parameters for help.");
+                }
+            } else {
+                flagError("You did not specify the number of flanking residues to retrieve!\n\nRun program without parameters for help.");
+            }
+
+            // Now, let's see if we can access all files that should be accessed.
             // Note that an existing output_file will result in clean and silent overwrite of the file!
             File output = new File(outputFile);
             File input = new File(inputFile);
@@ -110,7 +128,7 @@ public class MapPeptides {
                     DBLoader loader = DBLoaderLoader.loadDB(input);
                     // Load a filter, if necessary.
                     Filter filter = FilterLoader.loadFilter(filterString, filterParam, loader);
-                    PeptideMappingThread pmt = new PeptideMappingThread(null, loader, peptides, filter, output);
+                    PeptideMappingThread pmt = new PeptideMappingThread(null, loader, peptides, filter, residueLength, output);
                     System.out.println("\nMapping " + peptides.size() + " unique peptides to '" + inputFile + "', with output in CSV file '" + outputFile + "'...");
                     long start = System.currentTimeMillis();
                     pmt.run();

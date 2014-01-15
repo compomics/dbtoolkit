@@ -38,6 +38,7 @@ public class PeptideMappingDialog extends JDialog {
     private JComboBox cmbPrimFilter = null;
     private JTextField txtPrimFilter = null;
     private JTextArea txtPeptides = null;
+    private JTextField txtResidueLength = null;
 
     private JButton btnOK = null;
     private JButton btnCancel = null;
@@ -97,7 +98,12 @@ public class PeptideMappingDialog extends JDialog {
      * Method that constructs the screen.
      */
     private void constructScreen() {
-        JPanel top = this.getPrimaryFilterPanel();
+        JPanel top = new JPanel();
+        top.setLayout(new BoxLayout(top, BoxLayout.Y_AXIS));
+        top.add(this.getPrimaryFilterPanel());
+        top.add(Box.createVerticalStrut(5));
+        top.add(this.getResidueLengthPanel());
+
         JPanel middle = this.getMainPanel();
         JPanel bottom = this.getOptionPanel();
 
@@ -168,8 +174,33 @@ public class PeptideMappingDialog extends JDialog {
         return panel;
     }
 
+
     /**
-     * This method constructs the panel for the main input (ragging & subset query).
+     * This method constructs the panel for the residue length to retrieve on either
+     * side of a matched sequence.
+     *
+     * @return  JPanel  with the main panel.
+     */
+    private JPanel getResidueLengthPanel() {
+        txtResidueLength = new JTextField(5);
+        txtResidueLength.setText("1");
+        JLabel lblResidueLength = new JLabel("Flanking residue length to retrieve: ");
+
+        JPanel jpanResidueLength = new JPanel();
+        jpanResidueLength.setLayout(new BoxLayout(jpanResidueLength, BoxLayout.X_AXIS));
+        jpanResidueLength.setBorder(BorderFactory.createTitledBorder("Flanking residue length"));
+
+        jpanResidueLength.add(Box.createRigidArea(new Dimension(5, lblResidueLength.getHeight())));
+        jpanResidueLength.add(lblResidueLength);
+        jpanResidueLength.add(Box.createRigidArea(new Dimension(10, lblResidueLength.getHeight())));
+        jpanResidueLength.add(txtResidueLength);
+        jpanResidueLength.add(Box.createHorizontalGlue());
+
+        return jpanResidueLength;
+    }
+
+    /**
+     * This method constructs the panel for the main input (the peptide list).
      *
      * @return  JPanel  with the main panel.
      */
@@ -400,6 +431,26 @@ public class PeptideMappingDialog extends JDialog {
         } else {
             filter = null;
         }
+
+        // Check residue length.
+        String resLengthText = txtResidueLength.getText();
+        int resLength = -1;
+        if(resLengthText != null && !resLengthText.trim().equals("")) {
+            try {
+                resLength = Integer.parseInt(resLengthText.trim());
+            } catch(NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(this, "You need to specify a positive, whole number for the stretch of flanking residues to return!", "Incorrect flanking residue length provided!", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+            if(resLength < 0) {
+                JOptionPane.showMessageDialog(this, "You need to specify a positive, whole number for the stretch of flanking residues to return!", "Incorrect flanking residue length provided!", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "You need to specify a length for the stretch of flanking residues to return!", "No flanking residue length provided!", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
         // We need to create the peptide collection.
         // First get the input from the user (if any, of course).
         String peptidesText = txtPeptides.getText();
@@ -426,7 +477,7 @@ public class PeptideMappingDialog extends JDialog {
             File file = this.getProcessOutputFile();
             if(file != null) {
                 // Create a task.
-                pt = new PeptideMappingThread(this.iParent, this.iLoader, peptides, filter, file);
+                pt = new PeptideMappingThread(this.iParent, this.iLoader, peptides, filter, resLength, file);
             }
         }
 

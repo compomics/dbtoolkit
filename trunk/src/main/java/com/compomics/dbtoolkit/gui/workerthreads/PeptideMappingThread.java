@@ -58,6 +58,11 @@ public class PeptideMappingThread implements Runnable {
     private Filter iFilter = null;
 
     /**
+     * Length of stretch of flanking residues to retrieve.
+     */
+    private int iResidueLength = 0;
+
+    /**
      * The output file.
      */
     private File iOutputFile = null;
@@ -75,11 +80,12 @@ public class PeptideMappingThread implements Runnable {
      * @param   aFilter Filter for the database. Can be 'null' for no filter.
      * @param   aOutputFile File with the outputfile.
      */
-    public PeptideMappingThread(JFrame aParent, DBLoader aLoader, Collection aPeptides, Filter aFilter, File aOutputFile) {
+    public PeptideMappingThread(JFrame aParent, DBLoader aLoader, Collection aPeptides, Filter aFilter, int aResidueLength, File aOutputFile) {
         this.iParent = aParent;
         this.iLoader = aLoader;
         this.iPeptides = aPeptides;
         this.iFilter = aFilter;
+        this.iResidueLength = aResidueLength;
         this.iOutputFile = aOutputFile;
     }
 
@@ -132,11 +138,35 @@ public class PeptideMappingThread implements Runnable {
                     int start = -1;
                     if((start = proteinSequence.indexOf(pepSequence)) > -1) {
                         InnerProteinCollection proteins = (InnerProteinCollection)iMappings.get(pepSequence);
-                        String previous = null;
-                        if(start > 0) {
-                            previous = proteinSequence.substring(start-1, start);
+
+                        // Retrieve previous stretch.
+                        StringBuffer previous = new StringBuffer("");
+                        int runningIndex = start;
+                        int residueCounter = 0;
+                        while(runningIndex > 0 && residueCounter < iResidueLength) {
+                            previous.insert(0, proteinSequence.substring(runningIndex - 1, runningIndex));
+                            runningIndex--;
+                            residueCounter++;
                         }
-                        InnerMappedProtein imp = new InnerMappedProtein(proteinAccession, proteinDescription, previous, (start+1), start + pepSequence.length(), proteinScore);
+                        while(previous.length()< iResidueLength) {
+                            previous.insert(0, "-");
+                        }
+
+                        // Retrieve following stretch.
+                        StringBuffer following = new StringBuffer("");
+                        runningIndex = start+pepSequence.length();
+                        residueCounter = 0;
+                        while(runningIndex < proteinSequence.length() && residueCounter < iResidueLength) {
+                            following.append(proteinSequence.substring(runningIndex, runningIndex+1));
+                            runningIndex++;
+                            residueCounter++;
+                        }
+                        while(following.length()<iResidueLength) {
+                            following.append("-");
+                        }
+
+                        // Create mapped protein.
+                        InnerMappedProtein imp = new InnerMappedProtein(proteinAccession, proteinDescription, previous.toString(), following.toString(), (start+1), start + pepSequence.length(), proteinScore);
                         proteins.addProtein(imp);
                     }
                 }
@@ -243,7 +273,7 @@ public class PeptideMappingThread implements Runnable {
                     iMonitor.setNote("Primary accession numbers assigned. Writing output...");
                 }
                 BufferedWriter bw = new BufferedWriter(new FileWriter(iOutputFile));
-                bw.write("Accession\tStart\tStop\tPrevious (if any)\tSequence\tDescription\tIsoforms\n");
+                bw.write("Accession\tStart\tStop\tPrevious (if any)\tSequence\tFollowing (if any)\tDescription\tIsoforms\n");
                 iter = iMappings.keySet().iterator();
                 while (iter.hasNext()) {
                     String pepSeq = (String)iter.next();
@@ -299,12 +329,14 @@ public class PeptideMappingThread implements Runnable {
         private int iStop = -1;
         private int iScore = -1;
         private String iPrevious = null;
+        private String iFollowing = null;
 
 
-        public InnerMappedProtein(String aAccession, String aDescription, String aPrevious, int aStart, int aStop, int aScore) {
+        public InnerMappedProtein(String aAccession, String aDescription, String aPrevious, String aFollowing, int aStart, int aStop, int aScore) {
             iAccession = aAccession;
             iDescription = aDescription;
             iPrevious = aPrevious;
+            iFollowing = aFollowing;
             iStart = aStart;
             iStop = aStop;
             iScore = aScore;
@@ -321,6 +353,10 @@ public class PeptideMappingThread implements Runnable {
 
         public String getPrevious() {
             return iPrevious;
+        }
+
+        public String getFollowing(){
+            return iFollowing;
         }
 
         public int getStart() {
@@ -436,7 +472,7 @@ public class PeptideMappingThread implements Runnable {
             } else {
                 // OK, we have mappings. let's print them.
                 // First add the primary.
-                sb.append(iPrimary.getAccession()+"\t"+iPrimary.getStart()+"\t"+iPrimary.getStop()+"\t"+((iPrimary.getPrevious()==null)?"-":iPrimary.getPrevious())+"\t"+iPeptideSequence+"\t"+iPrimary.getDescription()+"\t");
+                sb.append(iPrimary.getAccession()+"\t"+iPrimary.getStart()+"\t"+iPrimary.getStop()+"\t"+((iPrimary.getPrevious()==null)?"-":iPrimary.getPrevious())+"\t"+iPeptideSequence+"\t"+((iPrimary.getFollowing()==null)?"-":iPrimary.getFollowing())+"\t"+iPrimary.getDescription()+"\t");
 
                 // Now add the isoforms.
                 Iterator iter = iMappedProteins.iterator();

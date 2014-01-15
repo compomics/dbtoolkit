@@ -254,8 +254,8 @@ Notes about this text:
                which you use very often, you can change the name of the file that holds them to 'enzymes.txt' and modify the
                start-up script for the program to something like:
 
-                       java -cp /my_enzyme_file/location/:$CLASSPATH be.proteomics.dbtoolkit.gui.DBTool  (for most UNIX flavours)
-                       java -cp c:\my_enzyme_file\location\;%classpath% be.proteomics.dbtoolkit.gui.DBTool  (for Windows)
+                       java -cp /my_enzyme_file/location/:$CLASSPATH com.compomics.dbtoolkit.gui.DBTool  (for most UNIX flavours)
+                       java -cp c:\my_enzyme_file\location\;%classpath% com.compomics.dbtoolkit.gui.DBTool  (for Windows)
 
             - Mass limits
                Mass limits will be applied last in any processing step. So after database entry filtering, enzymatic digestion
@@ -353,9 +353,9 @@ Notes about this text:
             will be silently overwritten if it already exists!
             The output file is formatted as a TAB ('\t') separated file, with the following headers:
 
-            Accession number (TAB) start of peptide (TAB) stop of peptide (TAB) previous residue (if any) (TAB) peptide sequence (TAB) Protein description (TAB) All isoforms
+            Accession number (TAB) start of peptide (TAB) stop of peptide (TAB) previous residue(s) (if any) (TAB) peptide sequence (TAB) following residue(s) (if any) (TAB) Protein description (TAB) All isoforms
 
-            The accession number, start and stop location, previous residue and description are all given for the primary accession number
+            The accession number, start and stop location, previous residue(s), following residue(s), and description are all given for the primary accession number
             (if more than one protein matches your peptide sequence). Primary accession numbers are chosen based on:
               (i)   their score (score is related to 'level of annotation; so SwissProt headers have a higher score than TrEMBL or EnsEMBL entries)
               (ii)  in the case of equal scores, their alphabetical sorting (and if this is equal, their location sorting; so a peptide
@@ -421,33 +421,33 @@ Notes about this text:
     I will just briefly summarize them here, since they operate in exactly the same way as their GUI counterparts, and running them without
     parameters will cause them to output their operational parameters.
 
-        be.proteomics.dbtoolkit.toolkit.ClearRedundancy       --> clears sequence-based database redundancy.
-        be.proteomics.dbtoolkit.toolkit.Concatenate           --> concatenates two DB's or copies a file (better to use the OS or cat: it will be faster ;-)).
-        be.proteomics.dbtoolkit.toolkit.CountEntries          --> counts DB entries and allows specification of residue restricting queries and filters!
-        be.proteomics.dbtoolkit.toolkit.EnzymeDigest           --> conducts only an enzymatic digest with optional mass limits for the generated peptides.
-        be.proteomics.dbtoolkit.toolkit.FASTAOutput           --> outputs the database in FASTA format.
-        be.proteomics.dbtoolkit.toolkit.ReverseFASTADB        --> outputs the database in FASTA format, but with all individual sequences reversed.
-        be.proteomics.dbtoolkit.toolkit.MapPeptides           --> maps an input list of peptides against the specified (filtered) database and
+        com.compomics.dbtoolkit.toolkit.ClearRedundancy       --> clears sequence-based database redundancy.
+        com.compomics.dbtoolkit.toolkit.Concatenate           --> concatenates two DB's or copies a file (better to use the OS or cat: it will be faster ;-)).
+        com.compomics.dbtoolkit.toolkit.CountEntries          --> counts DB entries and allows specification of residue restricting queries and filters!
+        com.compomics.dbtoolkit.toolkit.EnzymeDigest           --> conducts only an enzymatic digest with optional mass limits for the generated peptides.
+        com.compomics.dbtoolkit.toolkit.FASTAOutput           --> outputs the database in FASTA format.
+        com.compomics.dbtoolkit.toolkit.ReverseFASTADB        --> outputs the database in FASTA format, but with all individual sequences reversed.
+        com.compomics.dbtoolkit.toolkit.MapPeptides           --> maps an input list of peptides against the specified (filtered) database and
                                                                   outputs the result in a CSV file.
-        be.proteomics.dbtoolkit.toolkit.RandomizeFASTADB      --> outputs the database in FASTA format, but with all individual sequences shuffled.
-        be.proteomics.dbtoolkit.toolkit.IsolateSubset         --> isolates a sequence-based subset, using the queryformat etc. (see section 5.b (3)).
-        be.proteomics.dbtoolkit.toolkit.RagDB                 --> performs an N or C-terminal trimming on a database (see section 5.c (2)).
+        com.compomics.dbtoolkit.toolkit.RandomizeFASTADB      --> outputs the database in FASTA format, but with all individual sequences shuffled.
+        com.compomics.dbtoolkit.toolkit.IsolateSubset         --> isolates a sequence-based subset, using the queryformat etc. (see section 5.b (3)).
+        com.compomics.dbtoolkit.toolkit.RagDB                 --> performs an N or C-terminal trimming on a database (see section 5.c (2)).
 
     There are also some additional tools present:
 
-        be.proteomics.dbtoolkit.general.PeptideCoverage
+        com.compomics.dbtoolkit.general.PeptideCoverage
 
     This tool allows you to find out the coverage of proteins in the original database by the peptides in the generated peptide database.
     You simply specify the master database (e.g. a SwissProt you downloaded) and a (peptide) database you generated from this (e.g. a
     database with only tryptic peptides between 0.6 and 4 kDa and which must contain at least one methionine residue) and it will tell you
     how many proteins are represented by 0 peptides (these are the ones you'll never find), 1 peptide and more than one peptide.
 
-        be.proteomics.dbtoolkit.toolkit.ContainsPeptide
+        com.compomics.dbtoolkit.toolkit.ContainsPeptide
 
     This tool allows you to find all proteins in a given database that contain a given list of sequences. The report is a Map with
     sequences for keys and a Collection of Protein instances as keys. 
 
-        be.proteomics.dbtoolkit.toolkit.ProteinMaturationDevice
+        com.compomics.dbtoolkit.toolkit.ProteinMaturationDevice
 
     This tool allows you to in silico 'mature' proteins in the UniProt database that contain chain or pre/propeptide information.
     Run the tool without arguments to see the detailed functionality it offers.
@@ -535,8 +535,8 @@ classpath, please consult www.java.sun.com for more information.
     While you're at it, it is also very simple to have DBToolkit detect your loader automatically upon opening a file.
 
         1) Writing a custom loader:
-            The class to extend is the DefaultDBLoader (be.proteomics.dbtoolkit.io.implementations.DefaultDBLoader), which is an abstract class with some generic
-            implementations of the DBLoader (be.proteomics.dbtoolkit.io.interfaces.DBLoader) interface. See the javadoc for more information!
+            The class to extend is the DefaultDBLoader (com.compomics.dbtoolkit.io.implementations.DefaultDBLoader), which is an abstract class with some generic
+            implementations of the DBLoader (com.compomics.dbtoolkit.io.interfaces.DBLoader) interface. See the javadoc for more information!
             Don't forget to include your implementation in the classpath!
 
         2) Writing a custom loader that can load from a zipfile:
@@ -556,7 +556,7 @@ classpath, please consult www.java.sun.com for more information.
 
     5.b. Writing custom filters for databases.
     ------------------------------------------
-    A custom filter for a database can be programmed by implementing the Filter interface (be.proteomics.dbtoolkit.io.interfaces.Filter). Next, you need to specify the
+    A custom filter for a database can be programmed by implementing the Filter interface (com.compomics.dbtoolkit.io.interfaces.Filter). Next, you need to specify the
     fully qualified classname and the associated DBLoader in the 'filters.properties' file (located in the 'dbtools_props.jar' file). The database name
     is the name returned by the DBLoader (SwissProt and FASTA respectively for the built-in types).
 
@@ -655,7 +655,7 @@ http://www.proteomics.be/people/lennartmartens/index.html
 
  - Version 2.0
         * Mavenized the whole project structure.
-        * Changed packages to 'be.proteomics.dbtoolkit' and downward.
+        * Changed packages to 'com.compomics.dbtoolkit' and downward.
         * Included GNU GPL license in the root as well as reference it in every single source file.
         * Lost revision history in CVS and binaries as a result of new project structure.
 
@@ -828,7 +828,7 @@ http://www.proteomics.be/people/lennartmartens/index.html
           arguments to see new usage information.
 
  - Version 4.0
-        * Updated package names to com.compomics instead of be.proteomics.
+        * Updated package names to com.compomics instead of com.compomics.
         * Migrated project structure to Maven2.
         * Moved project hosting to Google Code.
 
