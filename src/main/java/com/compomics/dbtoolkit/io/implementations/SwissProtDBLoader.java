@@ -163,19 +163,9 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
             // If the key starts with '[', it is a subsection that can have
             // a number of repeats in its own right. We treat it separately.
             if(temp.startsWith(iSTARTSUBSECTION)) {
-                HashMap subsection = this.treatSubsection(key.substring(1), occurrances, pbr, iter);
-                // There is a good possibility that the subsection occurs more than once!
-                // So we put the individual subsection occurrences in an ArrayList after the generic key.
-                if(result.containsKey(key+iSTOPSUBSECTION)) {
-                    // Add it to the existing ArrayList.
-                    ArrayList tempList = ((ArrayList)result.get(key+iSTOPSUBSECTION));
-                    tempList.add(subsection);
-                } else {
-                    // Make new ArrayList, add subsection to it, and add it.
-                    ArrayList tempList = new ArrayList();
-                    tempList.add(subsection);
-                    result.put(key+iSTOPSUBSECTION, tempList);
-                }
+                ArrayList subsection = this.treatSubsection(key.substring(1), occurrances, pbr, iter);
+                result.put(key+iSTOPSUBSECTION, subsection);
+
                 continue;
             }
 
@@ -194,22 +184,23 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
      *
      * @param   aFirstKey   the first key in the subsection. The 'start of subsection' tag should
      *                      have been removed before passing the key, so it is immediately parseable.
-     * @param   aFirstOcc   int with the coded occurrances for the aFirstKey key.
+     * @param   aFirstOcc   int with the coded occurrences for the aFirstKey key.
      * @param   aPbr    the PushBackStringReader to read from.
      * @param   aFullKeyList    Iterator over the remaining available keys. It should be
      *                          positioned on the starting key of the subsection, so calling
      *                          'next' on it will result in returning the second key of the
      *                          subsection.
-     * @return  HashMap with the subsections occurrances as HashMaps in the HashMap, with keys
-     *                  "1", "2", "3", ... for each subsequent occurrance.
+     * @return  ArrayList with the subsections occurrences as elements in the form of HashMaps
      * @exception   IOException when reading the buffer goes wrong.
      */
-    private HashMap treatSubsection(String aFirstKey, int aFirstOcc, PushBackStringReader aPbr, Iterator aFullKeyList) throws IOException {
+    private ArrayList treatSubsection(String aFirstKey, int aFirstOcc, PushBackStringReader aPbr, Iterator aFullKeyList) throws IOException {
 
-        HashMap toReturn = new HashMap();
+        ArrayList toReturn = new ArrayList();
+
+        HashMap tempHM = new HashMap();
 
         // First we make a Vector of all the subsection keys in the current Iterator.
-        // We'll also have Vector of their occurrances codes.
+        // We'll also have Vector of their occurrences codes.
         Vector ssKeys = new Vector(5, 5);
         Vector ssOcc = new Vector(5, 5);
         // Fence-post.
@@ -223,23 +214,23 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
             int location = temp.indexOf(",");
             // Key is before the comma.
             String key = temp.substring(0, location);
-            // Occurrances number is after the comma.
-            int occurrances = Integer.parseInt(temp.replace(']', ' ').substring(location+1).trim());
+            // Occurrences number is after the comma.
+            int occurrences = Integer.parseInt(temp.replace(']', ' ').substring(location+1).trim());
 
             // First of all, see if this key is not yet another subsection.
             // If it is, recursively call this method with that key.
             // If it isn't, check for end of subsection. If it's reached, take this last key and
             // leave the iterator alone from now on.
             if(key.startsWith(iSTARTSUBSECTION)) {
-                HashMap ssWithin = this.treatSubsection(key.substring(1), occurrances, aPbr, aFullKeyList);
-                toReturn.put(key+iSTOPSUBSECTION, ssWithin);
+                ArrayList ssWithin = this.treatSubsection(key.substring(1), occurrences, aPbr, aFullKeyList);
+                tempHM.put(key+iSTOPSUBSECTION, ssWithin);
                 continue;
             } else if(temp.endsWith(iSTOPSUBSECTION)) {
                 stopReached = true;
             }
-            // Okay, key and occurrances have to be added.
+            // Okay, key and occurrences have to be added.
             ssKeys.add(key);
-            ssOcc.add(new Integer(occurrances));
+            ssOcc.add(new Integer(occurrences));
 
             // See if we should stop.
             if(stopReached) {
@@ -247,7 +238,7 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
             }
         }
 
-        // So far so good. We now have all of the keys and their occurrances we need to
+        // So far so good. We now have all of the keys and their occurrences we need to
         // look up (in order!) in the respective Vectors.
         // So let's parse them.
         int liSize = ssKeys.size();
@@ -272,8 +263,9 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
 
                 }
                 String value = this.readValue(aPbr, (String)ssKeys.get(i), ((Integer)ssOcc.get(i)).intValue());
-                toReturn.put(ssKeys.get(i), value);
+                tempHM.put(ssKeys.get(i), value);
             }
+            toReturn.add(tempHM);
         }
 
         return toReturn;
