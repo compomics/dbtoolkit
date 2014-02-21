@@ -206,6 +206,7 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
         // Fence-post.
         ssKeys.add(aFirstKey);
         ssOcc.add(new Integer(aFirstOcc));
+        int startSubsectionCounter = 0;
         boolean stopReached = false;
         // Cycle the keys...
         while(aFullKeyList.hasNext()) {
@@ -217,20 +218,27 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
             // Occurrences number is after the comma.
             int occurrences = Integer.parseInt(temp.replace(']', ' ').substring(location+1).trim());
 
-            // First of all, see if this key is not yet another subsection.
-            // If it is, recursively call this method with that key.
-            // If it isn't, check for end of subsection. If it's reached, take this last key and
-            // leave the iterator alone from now on.
-            if(key.startsWith(iSTARTSUBSECTION)) {
-                ArrayList ssWithin = this.treatSubsection(key.substring(1), occurrences, aPbr, aFullKeyList);
-                tempHM.put(key+iSTOPSUBSECTION, ssWithin);
-                continue;
-            } else if(temp.endsWith(iSTOPSUBSECTION)) {
-                stopReached = true;
-            }
             // Okay, key and occurrences have to be added.
             ssKeys.add(key);
             ssOcc.add(new Integer(occurrences));
+
+            // A subsection can contain a subsection. If so, just keep rack of the keys
+            // (they are handled downstream), and keep track of how many levels we're in,
+            // so that we remember to stop when we meet hte closing key of the main subsection we're parsing.
+            if(key.startsWith(iSTARTSUBSECTION)) {
+                startSubsectionCounter++;
+            } else if(temp.endsWith(iSTOPSUBSECTION)) {
+                // If we're at startsubsection == 0, we have reached the end of the main subsection,
+                // and we're done.
+                if(startSubsectionCounter == 0) {
+                    stopReached = true;
+                } else {
+                    // If we're at a startsubsection > 1 we're in a nested subsection.
+                    // So just note that the nested subsection is done, and then go on wth the main one.
+                    startSubsectionCounter--;
+                }
+
+            }
 
             // See if we should stop.
             if(stopReached) {
@@ -262,7 +270,20 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
                     }
 
                 }
-                String value = this.readValue(aPbr, (String)ssKeys.get(i), ((Integer)ssOcc.get(i)).intValue());
+
+                // First of all, see if this key is not yet another subsection.
+                // If it is, recursively call this method with that key.
+                // If it isn't, check for end of subsection. If it's reached, take this last key and
+                // leave the iterator alone from now on.
+                String key = (String)ssKeys.get(i);
+                int occurrences = ((Integer)ssOcc.get(i)).intValue();
+                if(key.startsWith(iSTARTSUBSECTION)) {
+                    ArrayList ssWithin = this.treatSubsection(key.substring(1), occurrences, aPbr, aFullKeyList);
+                    tempHM.put(key+iSTOPSUBSECTION, ssWithin);
+                    continue;
+                }
+
+                String value = this.readValue(aPbr, key, occurrences);
                 tempHM.put(ssKeys.get(i), value);
             }
             toReturn.add(tempHM);
