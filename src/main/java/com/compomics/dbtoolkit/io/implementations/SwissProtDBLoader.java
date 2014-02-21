@@ -197,8 +197,6 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
 
         ArrayList toReturn = new ArrayList();
 
-        HashMap tempHM = new HashMap();
-
         // First we make a Vector of all the subsection keys in the current Iterator.
         // We'll also have Vector of their occurrences codes.
         Vector ssKeys = new Vector(5, 5);
@@ -252,6 +250,7 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
         int liSize = ssKeys.size();
         boolean hasMoreSubsections = true;
         while(hasMoreSubsections) {
+            HashMap tempHM = new HashMap();
             for(int i=0;i<liSize;i++) {
                 // First check whether the first key of the subsection is in fact present.
                 if(i==0) {
