@@ -18,10 +18,7 @@ import com.compomics.dbtoolkit.io.interfaces.SwissProtLoader;
 import com.compomics.util.io.PushBackStringReader;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.*;
 
 /*
  * CVS information:
@@ -167,7 +164,18 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
             // a number of repeats in its own right. We treat it separately.
             if(temp.startsWith(iSTARTSUBSECTION)) {
                 HashMap subsection = this.treatSubsection(key.substring(1), occurrances, pbr, iter);
-                result.put(key+iSTOPSUBSECTION, subsection);
+                // There is a good possibility that the subsection occurs more than once!
+                // So we put the individual subsection occurrences in an ArrayList after the generic key.
+                if(result.containsKey(key+iSTOPSUBSECTION)) {
+                    // Add it to the existing ArrayList.
+                    ArrayList tempList = ((ArrayList)result.get(key+iSTOPSUBSECTION));
+                    tempList.add(subsection);
+                } else {
+                    // Make new ArrayList, add subsection to it, and add it.
+                    ArrayList tempList = new ArrayList();
+                    tempList.add(subsection);
+                    result.put(key+iSTOPSUBSECTION, tempList);
+                }
                 continue;
             }
 
