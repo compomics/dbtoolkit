@@ -862,7 +862,7 @@ http://www.proteomics.be/people/lennartmartens/index.html
 - Version 4.2.2
         * Split the sequence length filters between FASTA and SwissProt formats. Previous implementation was faulty.
 
-- Version 4.2.3
+- Version 4.2.4
         * Fixed an old bug that prevented all repeat occurrences of a block of format annotations (like the 'Rx'
           lines in the SwissProt 'dat' format) to be maintained. Instead, only the last block entry was maintained.
           The fixed behaviour creates an ArrayList of HashMaps as value to the block section key, and this ArrayList
