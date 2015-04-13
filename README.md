@@ -13,7 +13,7 @@ The dbtoolkit application enables easy manipulation of fasta sequence database i
 Furthermore, for more experienced users, the Java API provides a well  documented and easy-to-use environment for customized fasta database manipulations.
 
 ### Citation
-*Martens et al. DBToolkit: processing protein databases for peptide-centric proteomics. Bioinformatics (2005) vol. 21 (17) pp. 3584-5 ([http://www.ncbi.nlm.nih.gov/pubmed/16030071 pid: 16030071])*
+*Martens et al. DBToolkit: processing protein databases for peptide-centric proteomics. Bioinformatics (2005) vol. 21 (17) pp. 3584-5 ([pid: 16030071](http://www.ncbi.nlm.nih.gov/pubmed/16030071))*
 
 [Go to top of page](#dbtoolkit)
 
