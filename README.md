@@ -20,7 +20,7 @@ Furthermore, for more experienced users, the Java API provides a well  documente
 ----
 
 ## Download
-Download version 4.2.3 of dbtoolkit 2.0 as a zip file [here](http://genesis.ugent.be/uvpublicdata/dbtoolkit/dbtoolkit-4.2.3.zip).
+Download version 4.2.5 of dbtoolkit 2.0 as a zip file [here](http://genesis.ugent.be/maven2/com/compomics/dbtoolkit/4.2.5/dbtoolkit-4.2.5.zip).
 
 [Go to top of page](#dbtoolkit)
 
