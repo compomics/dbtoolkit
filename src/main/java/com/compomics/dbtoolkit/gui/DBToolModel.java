@@ -147,7 +147,7 @@ public class DBToolModel {
 
     /**
      * This method reports on the preview text, formatted for the specified number
-     * of characters available per line. <br />
+     * of characters available per line. 
      * Note that this method will re-read the file if necessary.
      *
      * @param   aCharsPerLine   int with the maximum number of characters per line.

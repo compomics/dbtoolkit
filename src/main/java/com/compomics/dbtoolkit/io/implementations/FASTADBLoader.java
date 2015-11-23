@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 
 /**
- * This class implements the DBLoader interface for any FASTA database. <br />
+ * This class implements the DBLoader interface for any FASTA database. 
  * Please note that calls to 'nextRawEntry' and 'nextFilteredRawEntry' are identical to
  * 'nextFASTAEntry' and 'nextFilteredFASTAEntry', respectively.
  *
@@ -120,7 +120,7 @@ public class FASTADBLoader extends DefaultDBLoader {
     }
 
     /**
-     * This method attempts to count the number of entries currently in the database. <br />
+     * This method attempts to count the number of entries currently in the database. 
      * <b<Note</b> that a call to this method resets the position of the underlying reader!
      *
      * @return  long    with the number of entries or DBLoader.CANCELLEDCOUNT if the count was cancelled.

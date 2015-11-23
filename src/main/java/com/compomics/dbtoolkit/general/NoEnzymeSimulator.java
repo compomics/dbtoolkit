@@ -470,11 +470,11 @@ public class NoEnzymeSimulator {
      * The main method runs this application.
      * Start-up parameters can be the following:
      *
-     * @param   args    String[] with the following parameters: <br />
-     *                   - lowMass (optional): lower mass limit. <br />
-     *                   - highMass (optional): upper mass limit. <br />
-     *                   - enzyme (optional): name of the enzyme to use. <br />
-     *                   - sequence (<b>required</b>): sequence String to center on. <br />
+     * @param   args    String[] with the following parameters: 
+     *                   - lowMass (optional): lower mass limit. 
+     *                   - highMass (optional): upper mass limit. 
+     *                   - enzyme (optional): name of the enzyme to use. 
+     *                   - sequence (<b>required</b>): sequence String to center on. 
      *                   - and the input database name.
      */
     public static void main(String[] args) {

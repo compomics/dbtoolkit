@@ -133,7 +133,7 @@ public interface DBLoader extends Monitorable {
     public abstract Protein nextFilteredProtein(Filter aFilter) throws IOException;
 
     /**
-     * This method attempts to count the number of entries currently in the database. <br />
+     * This method attempts to count the number of entries currently in the database. 
      * Performance can be quite slow, depending on the specific implementation.
      *
      * @return  long    with the number of entries.

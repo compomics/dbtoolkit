@@ -37,8 +37,8 @@ import java.util.Set;
  */
 
 /**
- * This class allows the caller to generate two seperate output files:<br />
- *  - One with the length distribution for the database <br />
+ * This class allows the caller to generate two seperate output files:
+ *  - One with the length distribution for the database 
  *  - one with the mass distribution for the database.
  *
  * @author Lennart Martens

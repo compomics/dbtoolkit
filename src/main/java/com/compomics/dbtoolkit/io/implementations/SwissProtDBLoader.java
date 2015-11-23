@@ -298,7 +298,7 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
      *
      * @param   aPbr PushBackStringReader   from which to read.
      * @param   aKey    String with the key to look for.
-     * @param   aNumberTimes    int with the coded number of possible occurances. <br />
+     * @param   aNumberTimes    int with the coded number of possible occurances. 
      *                          Coding is interpretated as follows:
      *                          <ul>
      *                            <li><b>Any number above zero:</b> There are exactly [number]
@@ -498,7 +498,7 @@ public class SwissProtDBLoader extends DefaultDBLoader implements SwissProtLoade
     }
 
     /**
-     * This method attempts to count the number of entries currently in the database. <br />
+     * This method attempts to count the number of entries currently in the database. 
      * <b<Note</b> that a call to this method resets the position of the underlying reader!
      *
      * @return  long    with the number of entries or DBLoader.CANCELLEDCOUNT if the count was cancelled.

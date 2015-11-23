@@ -56,7 +56,7 @@ public class AutoDBLoader {
      * This method attempts to determine the correct DBLoader
      * implementation for the specified file.
      * If it is successful, it returns that DBLoader,
-     * if it is unsuccessful, it will throw an UnknownDBFormatException. <br />
+     * if it is unsuccessful, it will throw an UnknownDBFormatException. 
      * Note that the DBLoader is automatically initialized with the file,
      * so the caller of this method need not call the 'load()' method on the
      * loader anymore.
