@@ -114,17 +114,17 @@ public class PeptideSequenceRegionRetriever {
                         int count = ((Integer)check).intValue();
                         // Add it to the end.
                         count++;
-                        all.put(s.getAccession() + "§" + count, s);
+                        all.put(s.getAccession() + "~" + count, s);
                         // Update the counter.
                         all.put(s.getAccession(), new Integer(count));
                     } else {
                         // First one, split it out.
                         int count = 1;
                         // Original one gets index '1'.
-                        all.put(s.getAccession() + "§" + count, check);
+                        all.put(s.getAccession() + "~" + count, check);
                         // Current one gets one more.
                         count++;
-                        all.put(s.getAccession() + "§" + count, s);
+                        all.put(s.getAccession() + "~" + count, s);
                         // Store a counter as a flag.
                         all.put(s.getAccession(), new Integer(count));
                     }
@@ -152,7 +152,7 @@ public class PeptideSequenceRegionRetriever {
                     int count = ((Integer)stored).intValue();
                     // Simply cycle them all.
                     for(int i=1;i<=count;i++) {
-                        this.processRegionInProtein((SequenceRegion)all.get(accession + "§" + i), p);
+                        this.processRegionInProtein((SequenceRegion)all.get(accession + "~" + i), p);
                     }
                 }
             }
