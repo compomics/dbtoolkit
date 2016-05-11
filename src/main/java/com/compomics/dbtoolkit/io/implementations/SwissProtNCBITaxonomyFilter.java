@@ -98,7 +98,7 @@ public class SwissProtNCBITaxonomyFilter implements Filter {
         Object ox = aEntry.get("OX");
         if(ox != null) {
             for (Iterator lIterator = iMatch.iterator(); lIterator.hasNext();) {
-                String match = "NCBI_TAXID=" + lIterator.next() + ";";
+                String match = "NCBI_TAXID=" + lIterator.next();
                 if(((String)ox).toUpperCase().indexOf(match) >= 0) {
                     passed = true;
                     break;

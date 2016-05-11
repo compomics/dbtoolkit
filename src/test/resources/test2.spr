@@ -126,7 +126,7 @@ GN   ZXDB.
 OS   Homo sapiens (Human).
 OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
 OC   Mammalia; Eutheria; Primates; Catarrhini; Hominidae; Homo.
-OX   NCBI_TaxID=9606;
+OX   NCBI_TaxID=9606 {ECO:0000312|EMBL:AAF28106.1};
 RN   [1]
 RP   SEQUENCE FROM N.A.
 RA   Wray P.;
