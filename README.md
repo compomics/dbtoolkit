@@ -26,6 +26,13 @@ Download version 4.2.5 of dbtoolkit 2.0 as a zip file [here](http://genesis.ugen
 
 ----
 
+## Usage
+See the [usage file](https://github.com/compomics/dbtoolkit/blob/master/src/main/resources/about.txt) for additional information on how to use the library.
+
+[Go to top of page](#dbtoolkit)
+
+----
+
 ## Project Support
 
 The dbtoolkit project is grateful for the support by:
